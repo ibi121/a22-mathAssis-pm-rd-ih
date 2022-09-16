@@ -8,10 +8,10 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>a22.monoposte2.tp1</groupId>
-	<artifactId>tp1</artifactId>
+	<groupId>a22.climoilou.mono2.tp1.rd_pm_ih</groupId>
+	<artifactId>math-assist-rd_pm_ih</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tp1_RD_PM_IH</name>
+	<name>math-assist-rd_pm_ih</name>
 	<description>TP1_monoposte_RD_PM_IH</description>
 	<properties>
 		<java.version>17</java.version>
