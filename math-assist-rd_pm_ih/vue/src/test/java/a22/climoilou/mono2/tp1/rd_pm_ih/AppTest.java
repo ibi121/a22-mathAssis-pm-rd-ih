@@ -1,4 +1,4 @@
-package a22.climoilou.mono2.tp1.rd_pm_ih;
+package test.java.a22.climoilou.mono2.tp1.rd_pm_ih;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

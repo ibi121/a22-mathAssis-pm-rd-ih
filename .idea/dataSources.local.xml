@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-222.3739.54">
+    <data-source name="default@H2_Serie" uuid="8f0c8dae-d71d-4849-a376-ce6b5228b9d3">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="H2" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>soleil1</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
