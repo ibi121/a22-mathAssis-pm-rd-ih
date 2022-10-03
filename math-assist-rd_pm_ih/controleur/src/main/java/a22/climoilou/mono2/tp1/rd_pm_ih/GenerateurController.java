@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class generateurController {
+public class GenerateurController {
 
     @FXML
     private Text textMinimum;
