@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AProposController">
+   <children>
+      <Text fx:id="aPropos" layoutX="126.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À propos" textAlignment="CENTER" wrappingWidth="97.6708984375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="aProposAnnee" layoutX="157.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2022" />
+      <Text fx:id="aProposProf" layoutX="115.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Martin Simoneau" />
+      <Text fx:id="aProposEquipe" layoutX="119.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'équipe" />
+      <Text fx:id="aProposProduit" layoutX="101.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assistant Mathématique" />
+      <Text fx:id="aProposCegep" layoutX="41.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cégep Limoilou, Application Monoposte II" />
+      <Text fx:id="aProposNoms" layoutX="7.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patrick Messier, Ibrahim Hamitouche &amp; Rose Duval" />
+      <Text fx:id="presenteParText" layoutX="130.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Présenté par:" />
+      <Text fx:id="presenteAText" layoutX="135.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Présenté à:" />
+   </children>
+</Pane>
