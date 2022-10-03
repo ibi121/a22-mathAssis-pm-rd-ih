@@ -1,14 +1,15 @@
-package a22.climoilou.mono2.tp1.rd_pm_ih;
+package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AProposVue implements IVue {
+public class AProposController{
 
     @FXML
     private Text aPropos;
@@ -49,10 +50,18 @@ public class AProposVue implements IVue {
         presenteParText = new Text();
     }
 
-    @Override
+    public void setStage() throws IOException {
+        Stage secondaryStage = new Stage();
+        secondaryStage.setTitle("Des propos bien meritees");
+        secondaryStage.setScene(getScene());
+        secondaryStage.show();
+    }
+
+
     public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AProposFXML.fxml"));
-        Object splitPanePrincipal = fxmlLoader.load();
-        return new Scene((Parent) splitPanePrincipal);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/AProposFXML.fxml"));
+        Parent root = fxmlLoader.load();
+        return new Scene(root);
     }
 }
+
