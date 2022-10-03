@@ -1,11 +1,31 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Serie {
+
+
+    private Long id;
+
+    public Serie() {
+
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
+    }
+
     public enum TypeCreation {ALEATOIRE, EXPRESSION_MATHEMATIQUE}
 
     private LocalDateTime dateCreation;

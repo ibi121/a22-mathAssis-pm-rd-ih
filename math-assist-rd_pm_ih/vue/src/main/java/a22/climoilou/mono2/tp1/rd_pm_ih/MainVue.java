@@ -42,4 +42,11 @@ public class MainVue {
     {
         System.out.println( "Hello World!" );
     }
+
+    @Override
+    public Scene getScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("monoposte2FXML.fxml"));
+        Parent root = fxmlLoader.load();
+        return new Scene(root);
+    }
 }
