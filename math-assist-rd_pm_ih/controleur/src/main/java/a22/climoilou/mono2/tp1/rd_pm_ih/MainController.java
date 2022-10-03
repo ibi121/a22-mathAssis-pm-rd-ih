@@ -9,29 +9,5 @@ import javafx.scene.layout.VBox;
 
 public class MainController {
 
-    @FXML
-    private VBox vBox1;
-
-    @FXML
-    private Pane paneGauche;
-
-    @FXML
-    private HBox hBox1;
-
-    @FXML
-    private Button btnAPropos;
-
-    @FXML
-    private Pane paneDroit;
-
-    @FXML
-    private SplitPane splitPanePrincipal;
-
-    @FXML
-    private Button btnValiderSerie;
-
-    @FXML
-    private Button btnRandom;
-
 }
 
