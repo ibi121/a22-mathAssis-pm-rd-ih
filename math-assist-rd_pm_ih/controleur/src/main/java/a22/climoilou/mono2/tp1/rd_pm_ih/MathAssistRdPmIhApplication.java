@@ -2,13 +2,13 @@ package a22.climoilou.mono2.tp1.rd_pm_ih;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MathAssistRdPmIhApplication extends Application {
 
-	private IMainController iMainController = null;
+	private IVue iMainController = null;
+
 
 
 
