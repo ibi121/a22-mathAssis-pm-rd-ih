@@ -9,4 +9,12 @@
     <artifactId>math-assist-rd_pm_ih-c</artifactId>
     <name>Archetype - math-assist-rd_pm_ih-c</name>
     <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>a22.climoilou.mono2.tp1.rd_pm_ih</groupId>
+            <artifactId>math-assist-rd_pm_ih-v</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
