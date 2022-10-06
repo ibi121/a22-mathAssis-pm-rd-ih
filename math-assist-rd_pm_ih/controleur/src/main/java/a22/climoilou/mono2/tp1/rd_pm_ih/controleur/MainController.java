@@ -1,5 +1,8 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController {
 

@@ -1,30 +1,12 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Entity
 public class Serie {
-
-
-    private Long id;
-
-    public Serie() {
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
-    }
 
     public enum TypeCreation {ALEATOIRE, EXPRESSION_MATHEMATIQUE}
 
@@ -34,7 +16,7 @@ public class Serie {
 
     private String nomSerie;
 
-    private List<a22.climoilou.mono2.tp1.rd_pm_ih.origine.Serie.Data> donnees;
+    private List<Data> donnees;
 
     public Serie(String nomSerie) {
 
@@ -71,17 +53,17 @@ public class Serie {
         this.nomAuteur = nomAuteur;
     }
 
-    public List<a22.climoilou.mono2.tp1.rd_pm_ih.origine.Serie.Data> getDonnees() {
+    public List<Data> getDonnees() {
         return donnees;
     }
 
-    public void setDonnees(List<a22.climoilou.mono2.tp1.rd_pm_ih.origine.Serie.Data> donnees) {
+    public void setDonnees(List<Data> donnees) {
         this.donnees = donnees;
         this.dateDerniereModification = LocalDateTime.now();
     }
 
-    public void addData(a22.climoilou.mono2.tp1.rd_pm_ih.origine.Serie.Data... donnees) {
-        for (a22.climoilou.mono2.tp1.rd_pm_ih.origine.Serie.Data donnee : donnees) {
+    public void addData(Data... donnees) {
+        for (Data donnee : donnees) {
             this.donnees.add(donnee);
         }
     }
@@ -93,4 +75,55 @@ public class Serie {
                 ", modification: " + dateDerniereModification +
                 ", nomAuteur: '" + nomAuteur;
     }
+
+    public class Data {
+        double x;
+        double y;
+
+        public Data(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public Data() {
+        }
+
+        public double getX() {
+            return x;
+        }
+
+        public void setX(double x) {
+            this.x = x;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public void setY(double y) {
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Data data)) return false;
+            return Double.compare(data.x, x) == 0 && Double.compare(data.y, y) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    '}';
+        }
+
+    }
+
 }
