@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController">
    <children>
       <TextField fx:id="inputTextMin" layoutX="159.0" layoutY="47.0" />
@@ -16,7 +15,7 @@
       <TextField fx:id="inputTextNombreValeurs" layoutX="159.0" layoutY="151.0" />
       <Text fx:id="textNombreSeries" layoutX="23.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de séries" />
       <TextField fx:id="inputTextNombreSeries" layoutX="159.0" layoutY="203.0" />
-      <Button fx:id="btnValider" layoutX="280.0" layoutY="346.0" mnemonicParsing="false" text="Valider" />
+      <Button fx:id="btnValider" layoutX="280.0" layoutY="346.0" mnemonicParsing="false" onAction="#valider" text="Valider" />
       <Text fx:id="textNomSerie" layoutX="27.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la série" />
       <TextField fx:id="inputTextNomSerie" layoutX="159.0" layoutY="264.0" />
    </children>

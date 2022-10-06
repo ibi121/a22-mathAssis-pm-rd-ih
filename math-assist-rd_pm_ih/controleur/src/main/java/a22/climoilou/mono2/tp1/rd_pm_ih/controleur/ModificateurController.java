@@ -1,5 +1,6 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +49,7 @@ public class ModificateurController {
     private Button huit;
 
     @FXML
-    private ListView<Serie.Data> listData;
+    private ListView<Data> listData;
 
     @FXML
     private Button multiplication;
@@ -200,7 +201,7 @@ public class ModificateurController {
     // ici temporairement
     @FXML
     public void initialize() {
-        ObservableList<Serie.Data> dataSerie = FXCollections.observableArrayList();
+        ObservableList<Data> dataSerie = FXCollections.observableArrayList();
         listData.setItems(dataSerie);
     }
 

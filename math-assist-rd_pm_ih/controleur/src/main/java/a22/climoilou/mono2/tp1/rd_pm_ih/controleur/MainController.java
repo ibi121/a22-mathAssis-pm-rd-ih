@@ -1,20 +1,18 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -48,22 +46,23 @@ public class MainController {
     @FXML
     private Button btnRandom;
 
-
+    @FXML
+    private ListView<Serie> listViewSeries;
 
     @FXML
-    void APropos(ActionEvent event) throws IOException {
+    void aPropos(ActionEvent event) throws IOException {
         aProposController = new AProposController();
         aProposController.setStage();
     }
 
     @FXML
-    void RandomSerie(ActionEvent event) throws IOException {
+    void randomSerie(ActionEvent event) throws IOException {
         generateurController = new GenerateurController();
         generateurController.setStage();
     }
 
     @FXML
-    void ValiderLaSerie(ActionEvent event) throws IOException {
+    void validerLaSerie(ActionEvent event) throws IOException {
         modificateurController = new ModificateurController();
         modificateurController.setStage();
     }
@@ -85,6 +84,41 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/monoposte2FXML.fxml"));
         return new Scene(fxmlLoader.load());
     }
+
+    /**
+     * todo retourne la série sélectionnée
+     * @return
+     */
+    public Serie getSelectedSerie(){
+
+
+
+        return null;
+    }
+
+    /**
+     * todo retourne toutes les séries dans la listeView.
+     * @return
+     */
+    public List<Serie> getAllSeries(){
+
+
+        return null;
+    }
+
+    public void setAProposController(AProposController aProposController) {
+        this.aProposController = aProposController;
+    }
+
+    public void setGenerateurController(GenerateurController generateurController) {
+        this.generateurController = generateurController;
+    }
+
+    public void setModificateurController(ModificateurController modificateurController) {
+        this.modificateurController = modificateurController;
+    }
+
+
 
 }
 

@@ -5,11 +5,10 @@
         <groupId>a22.climoilou.mono2.tp1.rd_pm_ih</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>math-assist-rd_pm_ih-v</artifactId>
     <packaging>jar</packaging>
-
     <name>math-assist-rd_pm_ih-v</name>
     <url>http://maven.apache.org</url>
 

@@ -75,7 +75,7 @@ public class Serie {
                 ", modification: " + dateDerniereModification +
                 ", nomAuteur: '" + nomAuteur;
     }
-
+/*
     public class Data {
         double x;
         double y;
@@ -124,6 +124,6 @@ public class Serie {
                     '}';
         }
 
-    }
+    }*/
 
 }
