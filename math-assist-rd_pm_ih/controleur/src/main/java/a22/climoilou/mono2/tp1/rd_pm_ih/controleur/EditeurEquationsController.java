@@ -4,6 +4,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.aspectj.weaver.patterns.ParserException;
 
 import java.io.IOException;
 
@@ -36,7 +38,7 @@ public class EditeurEquationsController implements Fonctionnalite {
     private Button btnModifier;
 
     @FXML
-    private ListView<?> listViewFonctions;
+    private ListView<String> listViewFonctions = new ListView<String>(); //Aller chercher en base de données;
 
     @FXML
     private HBox hbox1;
@@ -59,6 +61,10 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     void ajouterEquation(ActionEvent event) {
+        String equation = inputEquation.getText();
+        System.out.println(equation);
+        listViewFonctions.getItems().add(equation);
+        listViewFonctions.setOrientation(Orientation.VERTICAL);
 
     }
 
