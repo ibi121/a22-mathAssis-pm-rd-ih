@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="paneBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.EditeurEquationsController">
+   <children>
+      <HBox fx:id="hbox1" layoutX="2.0" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <ListView prefHeight="400.0" prefWidth="239.0" />
+            <VBox fx:id="vbox1" prefHeight="400.0" prefWidth="361.0">
+               <children>
+                  <TextField fx:id="inputEquation" prefHeight="65.0" prefWidth="361.0" />
+                  <Text fx:id="textSaisie" strokeType="OUTSIDE" strokeWidth="0.0" text="Saisir un fonction f(x)" textAlignment="CENTER" wrappingWidth="361.27734375" />
+                  <VBox alignment="CENTER" prefHeight="305.0" prefWidth="362.0" spacing="25.0">
+                     <children>
+                        <Button fx:id="btnAjout" mnemonicParsing="false" onMouseClicked="#ajouterEquation" text="Ajouter l'equation" />
+                        <Button fx:id="btnEffacer" mnemonicParsing="false" onMouseClicked="#effacerEquation" text="Effacer l'equation" />
+                        <Button fx:id="btnModifier" mnemonicParsing="false" onMouseClicked="#modifierEquation" text="Modifier l'equation" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</Pane>

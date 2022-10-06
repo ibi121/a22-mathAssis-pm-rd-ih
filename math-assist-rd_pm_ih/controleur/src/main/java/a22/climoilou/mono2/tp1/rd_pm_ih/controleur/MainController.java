@@ -21,6 +21,7 @@ public class MainController {
     private GenerateurController generateurController;
     private ModificateurController modificateurController;
 
+    private EditeurEquationsController editeurEquationsController;
 
     @FXML
     private VBox vBox1;
@@ -47,6 +48,9 @@ public class MainController {
     private Button btnRandom;
 
     @FXML
+    private Button btnFonctions;
+
+    @FXML
     private ListView<Serie> listViewSeries;
 
     @FXML
@@ -65,6 +69,12 @@ public class MainController {
     void validerLaSerie(ActionEvent event) throws IOException {
         modificateurController = new ModificateurController();
         modificateurController.setStage();
+    }
+
+    @FXML
+    void editeurEquations(ActionEvent event) throws IOException {
+        editeurEquationsController = new EditeurEquationsController();
+        editeurEquationsController.setStage();
     }
 
 

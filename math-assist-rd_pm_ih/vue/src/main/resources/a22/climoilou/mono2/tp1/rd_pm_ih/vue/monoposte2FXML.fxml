@@ -25,22 +25,27 @@
       </Pane>
       <Pane fx:id="paneDroit" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
          <children>
-            <VBox fx:id="vBox1" layoutX="-1.0" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: yellow; -fx-border-color: darkblue;" />
-            <HBox fx:id="hBox1" layoutY="285.0" prefHeight="114.0" prefWidth="296.0" style="-fx-background-color: red; -fx-border-color: brown;">
+            <VBox fx:id="vBox1" layoutX="-1.0" prefHeight="153.0" prefWidth="303.0" style="-fx-background-color: yellow; -fx-border-color: darkblue;" />
+            <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="25.0" style="-fx-background-color: red; -fx-border-color: brown;">
                <children>
-                  <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Valider">
+                  <Button fx:id="btnValiderSerie" alignment="CENTER" mnemonicParsing="false" onAction="#validerLaSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Valider">
                      <HBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Random">
-                     <HBox.margin>
-                        <Insets left="25.0" top="50.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: purple;" text="A Propos">
                      <HBox.margin>
-                        <Insets left="25.0" top="50.0" />
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="153.0" prefHeight="147.0" prefWidth="296.0" spacing="25.0" style="-fx-background-color: green;">
+               <children>
+                  <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple;" text="Fonctions" />
+                  <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Random">
+                     <HBox.margin>
+                        <Insets />
                      </HBox.margin>
                   </Button>
                </children>
