@@ -185,12 +185,12 @@ public class ModificateurController {
 
     @FXML
     void onClickX(ActionEvent event) {
-
+        textPanneau.setText(textPanneau.getText() + "x");
     }
 
     @FXML
     void onClickY(ActionEvent event) {
-
+        textPanneau.setText(textPanneau.getText() + "y");
     }
 
     @FXML
@@ -201,7 +201,7 @@ public class ModificateurController {
     // ici temporairement
     @FXML
     public void initialize() {
-        ObservableList<Data> dataSerie = FXCollections.observableArrayList();
+        ObservableList<Data> dataSerie = FXCollections.observableArrayList(new Data(1, 1), new Data(2, 2), new Data (3, 3));
         listData.setItems(dataSerie);
     }
 

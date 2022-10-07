@@ -51,6 +51,12 @@ public class MainController {
     private Button btnFonctions;
 
     @FXML
+    private Button btnConservation;
+
+    @FXML
+    private Button btnTraceur;
+
+    @FXML
     private ListView<Serie> listViewSeries;
 
     @FXML
@@ -77,6 +83,15 @@ public class MainController {
         editeurEquationsController.setStage();
     }
 
+    @FXML
+    void conservationSerie(ActionEvent event) {
+
+    }
+
+    @FXML
+    void traceurSerie(ActionEvent event) {
+
+    }
 
     @FXML
     private void initialize(){

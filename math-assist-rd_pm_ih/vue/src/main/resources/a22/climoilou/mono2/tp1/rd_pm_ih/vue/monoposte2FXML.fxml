@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -11,8 +7,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<SplitPane fx:id="splitPanePrincipal" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
+<SplitPane fx:id="splitPanePrincipal" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
    <items>
       <Pane fx:id="paneGauche" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
          <children>
@@ -25,25 +23,66 @@
       </Pane>
       <Pane fx:id="paneDroit" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
          <children>
-            <VBox fx:id="vBox1" layoutX="-1.0" prefHeight="153.0" prefWidth="303.0" style="-fx-background-color: yellow; -fx-border-color: darkblue;" />
-            <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="25.0" style="-fx-background-color: red; -fx-border-color: brown;">
+            <VBox fx:id="vBox1" alignment="TOP_CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="100.0" prefWidth="297.0" style="-fx-background-color: yellow; -fx-border-color: darkblue;">
                <children>
-                  <Button fx:id="btnValiderSerie" alignment="CENTER" mnemonicParsing="false" onAction="#validerLaSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Valider">
-                     <HBox.margin>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Générateurs de série">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="50.0">
+                     <children>
+                        <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" style="-fx-background-color: purple;" text="Aléatoire" />
+                        <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple;" text="Expression" />
+                     </children>
+                     <opaqueInsets>
                         <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: purple;" text="A Propos">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
+                     </opaqueInsets>
+                  </HBox>
+               </children></VBox>
+            <VBox alignment="TOP_CENTER" layoutY="99.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: green;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des séries">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="25.0">
+                     <children>
+                        <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" style="-fx-background-color: purple;" text="Modificateur" />
+                        <Button fx:id="btnTraceur" mnemonicParsing="false" onAction="#traceurSerie" style="-fx-background-color: purple;" text="Traceur">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnConservation" alignment="CENTER" mnemonicParsing="false" onAction="#conservationSerie" style="-fx-background-color: purple;" text="Conservation">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="153.0" prefHeight="147.0" prefWidth="296.0" spacing="25.0" style="-fx-background-color: green;">
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutY="199.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: blue;">
                <children>
-                  <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple;" text="Fonctions" />
-                  <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" prefHeight="30.0" prefWidth="61.0" style="-fx-background-color: purple;" text="Random">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fonctions personelles">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="RD" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="PM" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="IH" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="50.0" style="-fx-background-color: red; -fx-border-color: brown;">
+               <children>
+                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" style="-fx-background-color: purple;" text="A Propos">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
