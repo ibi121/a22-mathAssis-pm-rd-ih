@@ -1,5 +1,8 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
+import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.BD;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.DataRepository;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,9 +17,6 @@ public class MathAssistRdPmIhApplication extends Application implements CommandL
 	private MainController iMainController = null;
 
 	private DataRepository dataRepository;
-
-
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(MathAssistRdPmIhApplication.class, args);
