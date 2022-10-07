@@ -2,16 +2,29 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.repositories;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BD {
-     DataRepository dataRepository;
+    private DataRepository dataRepository;
+    private SerieRepository serieRepository;
+
 
      public void SauvegarderData(Data data) {
-          dataRepository.save(data);
+          this.dataRepository.save(data);
      }
 
      public void FindDataById(Data data){
-          dataRepository.findById(data.getId());
+          this.dataRepository.findById(data.getId());
+     }
+
+     public void SaveSerie(Serie serie){
+          this.serieRepository.save(serie);
+     }
+
+     public void FindSerieById(Serie serie){
+          this.serieRepository.findById(serie.getId());
      }
 
 

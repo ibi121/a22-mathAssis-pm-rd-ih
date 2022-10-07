@@ -6,13 +6,14 @@ BD :
  */
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Component
 @Entity
+@Table(name = "Data")
 public class Data {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
