@@ -19,7 +19,9 @@ public class Data {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     Long id;
+    @Column(name = "valeurX")
     double x;
+    @Column(name = "valeurY")
     double y;
 
     public Data(double x, double y) {
@@ -29,6 +31,7 @@ public class Data {
 
     public Data() {
     }
+
 
     public double getX() {
         return x;
