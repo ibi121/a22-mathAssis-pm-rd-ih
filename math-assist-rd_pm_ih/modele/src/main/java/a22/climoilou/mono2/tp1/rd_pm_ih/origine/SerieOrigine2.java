@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Serie {
+public class SerieOrigine2 {
 
     public enum TypeCreation {ALEATOIRE, EXPRESSION_MATHEMATIQUE}
 
@@ -18,7 +18,7 @@ public class Serie {
 
     private List<Data> donnees;
 
-    public Serie(String nomSerie) {
+    public SerieOrigine2(String nomSerie) {
 
         this.nomSerie = nomSerie;
 

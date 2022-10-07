@@ -1,8 +1,17 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Data {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    Long id;
     double x;
     double y;
 
@@ -24,6 +33,10 @@ public class Data {
 
     public double getY() {
         return y;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setY(double y) {

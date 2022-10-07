@@ -1,39 +1,24 @@
-package a22.climoilou.mono2.tp1.rd_pm_ih;
+package a22.climoilou.mono2.tp1.rd_pm_ih.origine;
 
 
-import org.springframework.context.annotation.Bean;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-public class Serie {
+public class SerieOrigine {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    public enum TypeCreation {ALEATOIRE, EXPRESSION_MATHEMATIQUE}
 
-    @Enumerated(EnumType.STRING)
-    public TypeCreation typeCreation;
-
-    
     private LocalDateTime dateCreation;
     private LocalDateTime dateDerniereModification;
     private String nomAuteur;
 
     private String nomSerie;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Data")
-    @CollectionTable
     private List<Data> donnees;
 
-    public Serie() {
-    }
-
-    public Serie(String nomSerie) {
+    public SerieOrigine(String nomSerie) {
 
         this.nomSerie = nomSerie;
 
@@ -90,7 +75,7 @@ public class Serie {
                 ", modification: " + dateDerniereModification +
                 ", nomAuteur: '" + nomAuteur;
     }
-/*
+
     public class Data {
         double x;
         double y;
@@ -139,6 +124,6 @@ public class Serie {
                     '}';
         }
 
-    }*/
+    }
 
 }
