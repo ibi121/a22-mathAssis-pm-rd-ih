@@ -32,8 +32,8 @@
                   </Text>
                   <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" style="-fx-background-color: purple;" text="Aléatoire" />
-                        <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple;" text="Expression" />
+                        <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Aléatoire" />
+                        <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple; -fx-text-fill: white;" text="Expression" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -49,13 +49,13 @@
                   </Text>
                   <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="25.0">
                      <children>
-                        <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" style="-fx-background-color: purple;" text="Modificateur" />
-                        <Button fx:id="btnTraceur" mnemonicParsing="false" onAction="#traceurSerie" style="-fx-background-color: purple;" text="Traceur">
+                        <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Modificateur" />
+                        <Button fx:id="btnTraceur" mnemonicParsing="false" onAction="#traceurSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Traceur">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnConservation" alignment="CENTER" mnemonicParsing="false" onAction="#conservationSerie" style="-fx-background-color: purple;" text="Conservation">
+                        <Button fx:id="btnConservation" alignment="CENTER" mnemonicParsing="false" onAction="#conservationSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Conservation">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -73,16 +73,16 @@
                   </Text>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="RD" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="PM" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: purple;" text="IH" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple; -fx-text-fill: white;" text="RD" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple; -fx-text-fill: white;" text="PM" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: purple; -fx-text-fill: white;" text="IH" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="50.0" style="-fx-background-color: red; -fx-border-color: brown;">
                <children>
-                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" style="-fx-background-color: purple;" text="A Propos">
+                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" style="-fx-background-color: purple; -fx-text-fill: white;" text="A Propos">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
