@@ -1,22 +1,20 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.aspectj.weaver.patterns.ParserException;
 
 import java.io.IOException;
 
@@ -38,7 +36,7 @@ public class EditeurEquationsController implements Fonctionnalite {
     private Button btnModifier;
 
     @FXML
-    private ListView<String> listViewFonctions = new ListView<String>(); //Aller chercher en base de données;
+    private ListView<String> listViewFonctions; //Aller chercher en base de données;
 
     @FXML
     private HBox hbox1;
@@ -54,27 +52,31 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     private void initialize(){
-        btnAjout = new Button();
-        btnEffacer = new Button();
-        btnModifier = new Button();
+        //get
     }
 
     @FXML
     void ajouterEquation(ActionEvent event) {
         String equation = inputEquation.getText();
-        System.out.println(equation);
         listViewFonctions.getItems().add(equation);
-        listViewFonctions.setOrientation(Orientation.VERTICAL);
+
+        System.out.println(equation);
+        //listViewFonctions.setOrientation(Orientation.VERTICAL);
 
     }
 
     @FXML
     void effacerEquation(ActionEvent event) {
-
+        String itemDelete = listViewFonctions.getSelectionModel().getSelectedItem();
+        listViewFonctions.getItems().remove(itemDelete);
     }
 
     @FXML
     void modifierEquation(ActionEvent event) {
+        String item = listViewFonctions.getSelectionModel().getSelectedItem();
+        inputEquation.setText(item);
+
+
 
     }
 
