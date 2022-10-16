@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,8 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ModificateurController {
-
-
 
     @FXML
     private Button addition;
@@ -120,7 +119,10 @@ public class ModificateurController {
 
     @FXML
     void onClickEntrer(ActionEvent event) {
-
+        // test de changement des y selectionner dans les Datas
+        listData.getSelectionModel().getSelectedItems().forEach((data -> {
+            data.setY(Double.parseDouble(textPanneau.getText()));
+        }));
     }
 
     @FXML
@@ -201,15 +203,17 @@ public class ModificateurController {
     // ici temporairement
     @FXML
     public void initialize() {
-        ObservableList<Data> dataSerie = FXCollections.observableArrayList(new Data(1, 1), new Data(2, 2), new Data (3, 3));
+        ObservableList<Data> dataSerie = FXCollections.observableArrayList(new Data(0, 0), new Data(1, 1), new Data(2, 2), new Data (3, 3));
         listData.setItems(dataSerie);
+
+        // Selection multiple
+        listData.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void setStage() throws IOException {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Modification de séries");
         secondaryStage.setScene(getScene());
-
         secondaryStage.show();
     }
 
