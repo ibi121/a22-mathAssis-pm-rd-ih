@@ -4,6 +4,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.BD;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
@@ -24,7 +26,8 @@ public class GenerateurController implements Fonctionnalite {
 
     Generateur generateur;
 
-    private BD bd = new BD();
+    @Autowired
+    BD bd;
     @FXML
     private Text textMinimum;
 
@@ -61,11 +64,6 @@ public class GenerateurController implements Fonctionnalite {
     @FXML
     private TextField inputTextNomSerie;
 
-    public void setBd(BD bd) {
-        this.bd = bd;
-    }
-
-
 
     @FXML
     void valider(ActionEvent event) throws IOException {
@@ -76,10 +74,12 @@ public class GenerateurController implements Fonctionnalite {
         generateur.creationValeurs();
         System.out.println(generateur.getValeurs());
         generateur.creationSeries();
+
         for (Serie serie : generateur.getSeriesCrees()) {
             bd.SaveSerie(serie);
+            System.out.println(serie);
         }
-//        System.out.println(generateur.getSeriesCrees());
+        System.out.println(generateur.getSeriesCrees());
     }
 
     public void setStage() throws IOException {

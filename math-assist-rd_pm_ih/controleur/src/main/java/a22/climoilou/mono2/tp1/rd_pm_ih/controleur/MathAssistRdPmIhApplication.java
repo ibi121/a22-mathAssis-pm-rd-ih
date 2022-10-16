@@ -23,14 +23,6 @@ public class MathAssistRdPmIhApplication extends Application implements CommandL
 
 	private MainController iMainController = null;
 
-	private BD bd;
-
-	@Autowired
-	public void setBd(BD bd) {
-		this.bd = bd;
-	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(MathAssistRdPmIhApplication.class, args);
 	}

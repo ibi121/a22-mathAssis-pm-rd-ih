@@ -14,20 +14,8 @@ public class BD {
 
     private DataRepository dataRepository;
 
+    @Autowired
     private SerieRepository serieRepository;
-
-
-
-    @Autowired
-    public void setDataRepository(DataRepository dataRepository) {
-        this.dataRepository = dataRepository;
-    }
-
-
-    @Autowired
-    public void setSerieRepository(SerieRepository serieRepository) {
-        this.serieRepository = serieRepository;
-    }
 
 
     public void SauvegarderData(Data data) {
