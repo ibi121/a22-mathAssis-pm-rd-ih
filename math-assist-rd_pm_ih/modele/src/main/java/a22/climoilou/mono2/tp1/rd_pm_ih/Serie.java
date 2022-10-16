@@ -17,28 +17,22 @@ import java.util.Objects;
 
 @Component
 @Entity
-@Table(name = "Serie")
 public class Serie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @Column(name = "TYPECREATION")
     @Enumerated(EnumType.STRING)
     public TypeCreation typeCreation;
 
 
-    @Column(name = "DATECREATION")
     private LocalDateTime dateCreation;
 
-    @Column(name = "DATEDERNIEREMODIF")
     private LocalDateTime dateDerniereModification;
 
-    @Column(name = "NOMAUTEUR")
     private String nomAuteur;
 
-    @Column(name = "NOMSERIE")
     private String nomSerie;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Data")

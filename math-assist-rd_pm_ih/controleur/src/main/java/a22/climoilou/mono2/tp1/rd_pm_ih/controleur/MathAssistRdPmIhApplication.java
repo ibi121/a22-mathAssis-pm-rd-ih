@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 
-@SpringBootApplication()
-@PropertySource("classpath:math-assist.properties")
+@SpringBootApplication
 public class MathAssistRdPmIhApplication extends Application implements CommandLineRunner {
 
 	private MainController iMainController = null;
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(MathAssistRdPmIhApplication.class, args);
 	}
 

@@ -13,15 +13,12 @@ import java.util.Objects;
 
 @Component
 @Entity
-@Table(name = "Data")
 public class Data {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     Long id;
-    @Column(name = "valeurX")
     double x;
-    @Column(name = "valeurY")
     double y;
 
     public Data(double x, double y) {
