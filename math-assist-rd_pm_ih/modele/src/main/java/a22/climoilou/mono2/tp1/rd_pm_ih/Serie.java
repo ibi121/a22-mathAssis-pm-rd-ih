@@ -6,6 +6,7 @@ BD :
  mdp : abc123
  */
 
+import lombok.Builder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -15,20 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Component
 @Entity
 public class Serie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "id", nullable = false)
     private Long Id;
 
     @Enumerated(EnumType.STRING)
     public TypeCreation typeCreation;
 
 
+    @Builder.Default
     private LocalDateTime dateCreation;
 
+    @Builder.Default
     private LocalDateTime dateDerniereModification;
 
     private String nomAuteur;

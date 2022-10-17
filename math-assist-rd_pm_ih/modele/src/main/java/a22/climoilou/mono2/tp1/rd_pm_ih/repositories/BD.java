@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,52 +16,38 @@ public class BD {
 
 //    private DataRepository dataRepository;
 
-    @Autowired
     private SerieRepository serieRepository;
 
 
-
-//    @Autowired
-//    public void setDataRepository(DataRepository dataRepository) {
-//        this.dataRepository = dataRepository;
-//    }
+    public BD(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
 
 
-//    @Autowired
-//    public void setSerieRepository(SerieRepository serieRepository) {
-//        this.serieRepository = serieRepository;
-//    }
-
-
-//    public void SauvegarderData(Data data) {
-//        this.dataRepository.save(data);
-//    }
-//
-//    public void FindDataById(Data data) {
-//        this.dataRepository.findById(data.getId());
-//    }
-//
-//    public void SupprimeData(Data data) {
-//        this.dataRepository.delete(data);
-//    }
-//
-//
     /**
      * Gere les transaction des series.
      *
      * @param serie
      */
+
+    @Transactional
     public void SaveSerie(Serie serie) {
         this.serieRepository.save(serie);
     }
+
+    @Transactional
 
     public Serie FindSerieById(long id) {
         return this.serieRepository.findById(id).get();
     }
 
+    @Transactional
+
     public void SupprimerSerie(Serie serie) {
         this.serieRepository.delete(serie);
     }
+
+    @Transactional
 
     public List<Serie> GetAllSerie(){
         List<Serie> listeDeSerieTemp = new ArrayList<>();

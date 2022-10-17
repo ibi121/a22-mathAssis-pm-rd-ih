@@ -17,6 +17,7 @@ public class Data {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "id", nullable = false)
     Long id;
     double x;
     double y;

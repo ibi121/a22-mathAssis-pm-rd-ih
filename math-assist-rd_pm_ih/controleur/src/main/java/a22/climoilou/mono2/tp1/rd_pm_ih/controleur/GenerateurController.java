@@ -26,7 +26,6 @@ public class GenerateurController implements Fonctionnalite {
 
     Generateur generateur;
 
-    @Autowired
     BD bd;
     @FXML
     private Text textMinimum;
@@ -64,6 +63,10 @@ public class GenerateurController implements Fonctionnalite {
     @FXML
     private TextField inputTextNomSerie;
 
+    @Autowired
+    public void setBd(BD bd) {
+        this.bd = bd;
+    }
 
     @FXML
     void valider(ActionEvent event) throws IOException {
