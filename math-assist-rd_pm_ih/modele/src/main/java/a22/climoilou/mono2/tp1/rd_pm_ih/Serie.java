@@ -38,7 +38,7 @@ public class Serie {
 
     private String nomSerie;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Data")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @CollectionTable
     private List<Data> donnees;
 

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class Generateur {
 
     private int nombreMinimum;
@@ -20,6 +19,7 @@ public class Generateur {
     private List<Serie> seriesCrees;
 
     private List<Data> valeurs;
+
 
     public Generateur(int nombreMinimum, int nombreMaximum, int nombreValeurs, int nbrSeries, String nomSerie) {
         this.nombreMinimum = nombreMinimum;

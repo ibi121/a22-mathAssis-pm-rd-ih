@@ -19,14 +19,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
 public class GenerateurController implements Fonctionnalite {
 
     Generateur generateur;
 
-    BD bd;
+    private BD bd;
     @FXML
     private Text textMinimum;
 

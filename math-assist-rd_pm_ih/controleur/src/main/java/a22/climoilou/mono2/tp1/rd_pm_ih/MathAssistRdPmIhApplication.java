@@ -1,24 +1,25 @@
-package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
+package a22.climoilou.mono2.tp1.rd_pm_ih;
 
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController;
+import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
+@EntityScan("a22.climoilou.mono2.tp1.rd_pm_ih")
 public class MathAssistRdPmIhApplication extends Application implements CommandLineRunner {
 
 //	private MainController iMainController = null;
 	private MainController iMainController = null;
+	private GenerateurController generateurController = new GenerateurController();
 
 	private ApplicationContext context;
 
@@ -39,6 +40,7 @@ public class MathAssistRdPmIhApplication extends Application implements CommandL
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.iMainController = new MainController();
+		this.iMainController.setGenerateurController(generateurController);
 		primaryStage.setTitle("Des singeries");
 		primaryStage.setScene(iMainController.getScene());
 		primaryStage.show();

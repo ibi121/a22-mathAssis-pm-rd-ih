@@ -11,10 +11,13 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class MainController {
 
     private AProposController aProposController;
@@ -67,8 +70,7 @@ public class MainController {
 
     @FXML
     void randomSerie(ActionEvent event) throws IOException {
-        generateurController = new GenerateurController();
-        generateurController.setStage();
+        this.generateurController.setStage();
     }
 
     @FXML
@@ -135,6 +137,7 @@ public class MainController {
         this.aProposController = aProposController;
     }
 
+    @Autowired
     public void setGenerateurController(GenerateurController generateurController) {
         this.generateurController = generateurController;
     }
