@@ -17,7 +17,6 @@ public class BD {
 
     private SerieRepository serieRepository;
 
-    
     @Autowired
     public void setSerieRepository(SerieRepository serieRepository) {
         this.serieRepository = serieRepository;

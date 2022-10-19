@@ -17,11 +17,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxControllerAndView;
+import net.rgielen.fxweaver.core.FxWeaver;
+import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 @Component
+@Scope("prototype")
+@FxmlView("../vue/generateur.fxml")
 public class GenerateurController implements Fonctionnalite {
 
     private Generateur generateur;
@@ -73,30 +80,24 @@ public class GenerateurController implements Fonctionnalite {
         generateur = new Generateur(Integer.parseInt(inputTextMin.getText()), Integer.parseInt(inputTextMax.getText()),
                 Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText());
 
-        System.out.println(generateur.toString());
         generateur.creationValeurs();
-        System.out.println(generateur.getValeurs());
         generateur.creationSeries();
 
         for (Serie serie : generateur.getSeriesCrees()) {
             bd.SaveSerie(serie);
-            System.out.println(serie);
+            System.out.println(bd.GetAllSerie());
         }
-        System.out.println(generateur.getSeriesCrees());
     }
 
-    public void setStage() throws IOException {
+    public void setStage(ConfigurableApplicationContext context) throws IOException {
+        FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
+        FxControllerAndView controllerAndView2 = fxWeaver2.load(GenerateurController.class);
+        Parent root2 = (Pane) controllerAndView2.getView().get();
+        Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Generation de series");
-        secondaryStage.setScene(getScene());
+        secondaryStage.setScene(scene2);
         secondaryStage.show();
-    }
-
-
-    public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/generateur.fxml"));
-        Parent root = fxmlLoader.load();
-        return new Scene(root);
     }
 
 

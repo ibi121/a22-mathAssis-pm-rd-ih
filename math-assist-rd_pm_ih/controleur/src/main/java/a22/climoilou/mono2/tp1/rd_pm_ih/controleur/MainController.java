@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -25,12 +26,17 @@ import java.util.List;
 @FxmlView("../vue/monoposte2FXML.fxml")
 public class MainController {
 
+    private ConfigurableApplicationContext context;
     private AProposController aProposController;
     private GenerateurController generateurController;
     private ModificateurController modificateurController;
 
     private EditeurEquationsController editeurEquationsController;
 
+
+    public void setContext(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
 
     @FXML
     private VBox vBox1;
@@ -75,7 +81,7 @@ public class MainController {
 
     @FXML
     void randomSerie(ActionEvent event) throws IOException {
-        this.generateurController.setStage();
+        this.generateurController.setStage(context);
     }
 
     @FXML

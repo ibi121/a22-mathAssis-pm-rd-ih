@@ -1,11 +1,13 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController;
 import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -34,9 +36,9 @@ public class ApplicationFX extends Application {
         FxControllerAndView controllerAndView = fxWeaver.load(MainController.class);
         Parent root = (SplitPane) controllerAndView.getView().get();
         MainController fxController = (MainController) controllerAndView.getController();
+        fxController.setContext(this.context);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 }
