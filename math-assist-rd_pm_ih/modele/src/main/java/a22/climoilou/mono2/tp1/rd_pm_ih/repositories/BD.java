@@ -36,19 +36,16 @@ public class BD {
     }
 
     @Transactional
-
     public Serie FindSerieById(long id) {
         return this.serieRepository.findById(id).get();
     }
 
     @Transactional
-
     public void SupprimerSerie(Serie serie) {
         this.serieRepository.delete(serie);
     }
 
     @Transactional
-
     public List<Serie> GetAllSerie(){
         List<Serie> listeDeSerieTemp = new ArrayList<>();
         serieRepository.findAll().forEach(serie -> listeDeSerieTemp.add(serie));
