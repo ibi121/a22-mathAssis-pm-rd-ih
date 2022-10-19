@@ -15,9 +15,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
 public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
