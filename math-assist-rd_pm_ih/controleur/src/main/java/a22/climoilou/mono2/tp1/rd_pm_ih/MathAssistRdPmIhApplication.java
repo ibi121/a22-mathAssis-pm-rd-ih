@@ -15,36 +15,14 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @EntityScan("a22.climoilou.mono2.tp1.rd_pm_ih")
-public class MathAssistRdPmIhApplication extends Application implements CommandLineRunner {
-
-//	private MainController iMainController = null;
-	private MainController iMainController = null;
-	private GenerateurController generateurController = new GenerateurController();
-
-	private ApplicationContext context;
-
-	@Autowired
-	public void setContext(ApplicationContext context) {
-		this.context = context;
-	}
+public class MathAssistRdPmIhApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MathAssistRdPmIhApplication.class, args);
+		Application.launch(FXController.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		launch(args);
+
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		this.iMainController = new MainController();
-		this.iMainController.setGenerateurController(generateurController);
-		primaryStage.setTitle("Des singeries");
-		primaryStage.setScene(iMainController.getScene());
-		primaryStage.show();
-	}
-
-
 }
