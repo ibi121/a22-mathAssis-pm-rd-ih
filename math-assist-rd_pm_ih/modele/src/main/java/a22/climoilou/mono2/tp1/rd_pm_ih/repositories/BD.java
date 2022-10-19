@@ -14,15 +14,14 @@ import java.util.List;
 @Service
 public class BD {
 
-//    private DataRepository dataRepository;
 
     private SerieRepository serieRepository;
 
-
-    public BD(SerieRepository serieRepository) {
+    
+    @Autowired
+    public void setSerieRepository(SerieRepository serieRepository) {
         this.serieRepository = serieRepository;
     }
-
 
     /**
      * Gere les transaction des series.
@@ -51,6 +50,7 @@ public class BD {
         serieRepository.findAll().forEach(serie -> listeDeSerieTemp.add(serie));
         return listeDeSerieTemp;
     }
+
 
     public void SupprimerToutesLesSeries(){
         this.serieRepository.deleteAll();
