@@ -4,7 +4,6 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.BD;
-import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,7 @@ import java.io.IOException;
 @Component
 public class GenerateurController implements Fonctionnalite {
 
-    Generateur generateur;
+    private Generateur generateur;
 
     private BD bd;
     @FXML

@@ -1,6 +1,7 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class MainController {
     private ModificateurController modificateurController;
 
     private EditeurEquationsController editeurEquationsController;
+
 
     @FXML
     private VBox vBox1;
@@ -68,7 +70,6 @@ public class MainController {
 
     @FXML
     void aPropos(ActionEvent event) throws IOException {
-        aProposController = new AProposController();
         aProposController.setStage();
     }
 
@@ -79,13 +80,11 @@ public class MainController {
 
     @FXML
     void validerLaSerie(ActionEvent event) throws IOException {
-        modificateurController = new ModificateurController();
         modificateurController.setStage();
     }
 
     @FXML
     void editeurEquations(ActionEvent event) throws IOException {
-        editeurEquationsController = new EditeurEquationsController();
         editeurEquationsController.setStage();
     }
 
@@ -137,6 +136,7 @@ public class MainController {
         return null;
     }
 
+    @Autowired
     public void setAProposController(AProposController aProposController) {
         this.aProposController = aProposController;
     }
@@ -146,6 +146,7 @@ public class MainController {
         this.generateurController = generateurController;
     }
 
+    @Autowired
     public void setModificateurController(ModificateurController modificateurController) {
         this.modificateurController = modificateurController;
     }
