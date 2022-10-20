@@ -1,26 +1,27 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurGraphique;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurI;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
+@Component
 public class TraceurController implements TraceurI {
-
     private TraceurGraphique traceurGraphique;
 
-    public TraceurController() {
-        traceurGraphique = new TraceurGraphique();
-        traceurGraphique.setTraceurI(this);
+    @Autowired
+    public void setTraceurGraphique(TraceurGraphique traceurGraphique) {
+        this.traceurGraphique = traceurGraphique;
     }
 
-    public TraceurGraphique getTraceurGraphique() {
-        return traceurGraphique;
-    }
-
-    public void setStage() throws IOException {
+    public void setStage(ConfigurableApplicationContext context) throws IOException {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Traceur de séries");
         secondaryStage.setScene(traceurGraphique.getScene());

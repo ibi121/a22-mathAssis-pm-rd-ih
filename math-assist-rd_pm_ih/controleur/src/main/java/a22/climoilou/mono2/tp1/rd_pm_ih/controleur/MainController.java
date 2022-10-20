@@ -6,12 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -33,6 +28,8 @@ public class MainController {
 
     private EditeurEquationsController editeurEquationsController;
 
+    private TraceurController traceurController;
+
     private SerieService bd;
     @Autowired
     public void setBd(SerieService bd) {
@@ -42,38 +39,10 @@ public class MainController {
         this.context = context;
     }
 
-    @FXML
-    private VBox vBox1;
-
-    @FXML
-    private Pane paneGauche;
-
-    @FXML
-    private HBox hBox1;
-
-    @FXML
-    private Button btnAPropos;
-
-    @FXML
-    private Pane paneDroit;
-
-    @FXML
-    private SplitPane splitPanePrincipal;
-
-    @FXML
-    private Button btnValiderSerie;
-
-    @FXML
-    private Button btnRandom;
-
-    @FXML
-    private Button btnFonctions;
-
-    @FXML
-    private Button btnConservation;
-
-    @FXML
-    private Button btnTraceur;
+    @Autowired
+    public void setTraceurController(TraceurController traceurController) {
+        this.traceurController = traceurController;
+    }
 
     @FXML
     private ListView<Serie> listViewSeries;
@@ -90,7 +59,9 @@ public class MainController {
 
     @FXML
     void validerLaSerie(ActionEvent event) throws IOException {
-        modificateurController.setStage();
+        if (getSelectedSerie() != null) {
+            modificateurController.setStage(context);
+        }
     }
 
     @FXML
@@ -104,18 +75,17 @@ public class MainController {
     }
 
     @FXML
-    void traceurSerie(ActionEvent event) {
-
+    void traceurSerie(ActionEvent event) throws IOException {
+        if (getAllSeries().size() > 0) {
+            traceurController.setStage(context);
+        }
     }
 
     @FXML
-    private void initialize(){
-
-        for (Serie s: bd.GetAllSerie()
-             ) {
+    private void initialize() {
+        for (Serie s: bd.GetAllSerie()) {
             this.listViewSeries.getItems().add(s);
         }
-
     }
 
     public Scene getScene() throws IOException {
@@ -124,24 +94,21 @@ public class MainController {
     }
 
     /**
-     * todo retourne la série sélectionnée
-     * @return
+     * Prend toutes les séries sélectionnée
+     * @return la premiere des séries sélectionnées
      */
     public Serie getSelectedSerie(){
-
-
-
-        return null;
+        return listViewSeries.getSelectionModel().getSelectedItems().size() != 0
+                ? listViewSeries.getSelectionModel().getSelectedItems().get(0) : null;
     }
 
     /**
-     * todo retourne toutes les séries dans la listeView.
-     * @return
+     * Prend toutes les séries sélectionnés
+     * @return toutes les séries.
      */
     public List<Serie> getAllSeries(){
-
-
-        return null;
+        return listViewSeries.getSelectionModel().getSelectedItems().size() != 0
+                ? listViewSeries.getSelectionModel().getSelectedItems() : null;
     }
 
     @Autowired

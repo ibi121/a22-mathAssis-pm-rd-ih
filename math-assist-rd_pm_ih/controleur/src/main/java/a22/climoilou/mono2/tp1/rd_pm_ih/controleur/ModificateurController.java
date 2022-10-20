@@ -15,85 +15,34 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxControllerAndView;
+import net.rgielen.fxweaver.core.FxWeaver;
+import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 @Component
+@FxmlView("../vue/Modificateur.fxml")
 public class ModificateurController {
-
-    @FXML
-    private Button addition;
-
-    @FXML
-    private Button cinq;
-
-    @FXML
-    private Button clear;
-
-    @FXML
-    private Button dataX;
-
-    @FXML
-    private Button dataY;
-
-    @FXML
-    private Button deux;
-
-    @FXML
-    private Button division;
-
-    @FXML
-    private Button entrer;
-
-    @FXML
-    private Button huit;
 
     @FXML
     private ListView<Data> listData;
 
     @FXML
-    private Button multiplication;
-
-    @FXML
-    private Button neuf;
-
-    @FXML
-    private Pane panneau;
-
-    @FXML
-    private Button parentaiseFermante;
-
-    @FXML
-    private Button parentaiseOuvrante;
-
-    @FXML
-    private Button point;
-
-    @FXML
-    private Button quatre;
-
-    @FXML
-    private Button sept;
-
-    @FXML
-    private Button six;
-
-    @FXML
-    private Button soustraction;
-
-    @FXML
     private TextField textPanneau;
 
-    @FXML
-    private Button trois;
+    private MainController mainController;
 
-    @FXML
-    private Button un;
-
-    @FXML
-    private Button zero;
-
+    @Autowired
+    public void setMainController(@Lazy MainController mainController) {
+        this.mainController = mainController;
+    }
 
     @FXML
     void onClickAddition(ActionEvent event) {
@@ -118,14 +67,6 @@ public class ModificateurController {
     @FXML
     void onClickDivision(ActionEvent event) {
         textPanneau.setText(textPanneau.getText() + "/");
-    }
-
-    @FXML
-    void onClickEntrer(ActionEvent event) {
-        // test de changement des y selectionner dans les Datas
-        listData.getSelectionModel().getSelectedItems().forEach((data -> {
-            data.setY(Double.parseDouble(textPanneau.getText()));
-        }));
     }
 
     @FXML
@@ -203,26 +144,26 @@ public class ModificateurController {
         textPanneau.setText(textPanneau.getText() + "0");
     }
 
-    // ici temporairement
+    @FXML
+    void onClickEntrer(ActionEvent event) {
+        // test de changement des y selectionner dans les Datas
+        listData.getSelectionModel().getSelectedItems().forEach((data -> {
+            data.setY(Double.parseDouble(textPanneau.getText()));
+        }));
+    }
+
     @FXML
     public void initialize() {
-        ObservableList<Data> dataSerie = FXCollections.observableArrayList(new Data(0, 0), new Data(1, 1), new Data(2, 2), new Data (3, 3));
-        listData.setItems(dataSerie);
-
-        // Selection multiple
         listData.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void setStage() throws IOException {
+    public void setStage(ConfigurableApplicationContext context) throws IOException {
+        FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+        FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
+        Parent root = (Pane) controllerAndView.getView().get();
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Modification de séries");
-        secondaryStage.setScene(getScene());
+        secondaryStage.setScene(new Scene(root));
         secondaryStage.show();
-    }
-
-    public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/Modificateur.fxml"));
-        Parent root = fxmlLoader.load();
-        return new Scene(root);
     }
 }
