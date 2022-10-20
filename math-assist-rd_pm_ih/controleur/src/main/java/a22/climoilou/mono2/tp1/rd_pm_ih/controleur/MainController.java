@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.List;
 @FxmlView("../vue/monoposte2FXML.fxml")
 public class MainController {
 
+    public Button btnFonctionRD;
     private ConfigurableApplicationContext context;
     private AProposController aProposController;
     private GenerateurController generateurController;
@@ -30,6 +32,8 @@ public class MainController {
 
     private TraceurController traceurController;
 
+    private TableauDesValeursController graphiqueBandesController;
+
     private SerieService bd;
     @Autowired
     public void setBd(SerieService bd) {
@@ -37,11 +41,6 @@ public class MainController {
     }
     public void setContext(ConfigurableApplicationContext context) {
         this.context = context;
-    }
-
-    @Autowired
-    public void setTraceurController(TraceurController traceurController) {
-        this.traceurController = traceurController;
     }
 
     @FXML
@@ -79,6 +78,11 @@ public class MainController {
         if (getAllSeries().size() > 0) {
             traceurController.setStage(context);
         }
+    }
+
+    @FXML
+    void creationGraphiqueABandes(ActionEvent actionEvent) {
+        this.graphiqueBandesController.setStage(context);
     }
 
     @FXML
@@ -131,5 +135,14 @@ public class MainController {
         this.editeurEquationsController = editeurEquationsController;
     }
 
+    @Autowired
+    public void setTraceurController(TraceurController traceurController) {
+        this.traceurController = traceurController;
+    }
+
+    @Autowired
+    public void setGraphiqueBandesController(TableauDesValeursController graphiqueBandesController){
+        this.graphiqueBandesController = graphiqueBandesController;
+    }
 }
 

@@ -1,15 +1,18 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Equations;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -21,18 +24,33 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.mariuszgromada.math.mxparser.Argument;
+import org.mariuszgromada.math.mxparser.Expression;
+import org.mariuszgromada.math.mxparser.Function;
+import org.mariuszgromada.math.mxparser.mXparser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 @Scope("prototype")
 @FxmlView("../vue/EditeurEquations.fxml")
 public class EditeurEquationsController implements Fonctionnalite {
 
+    public TextField nbrData;
+    public TextField inputA;
+    public TextField inputOpe1;
+    public TextField inputX;
+    public TextField inputOp2;
+    public TextField inputB;
+    public Button btnAjoutSerie;
     private EquationService equationService;
+
+    private SerieService serieService;
     @FXML
     private Text textSaisie;
 
@@ -60,8 +78,14 @@ public class EditeurEquationsController implements Fonctionnalite {
     @FXML
     private Pane paneBase;
 
-    @FXML
-    private TextField inputEquation;
+
+    @Autowired
+    public void setEquationService(EquationService equationService) {
+        this.equationService = equationService;
+    }
+
+    @Autowired
+    public void setSerieService(SerieService serieService) { this.equationService = equationService; }
 
     @FXML
     private void initialize() {
@@ -70,17 +94,40 @@ public class EditeurEquationsController implements Fonctionnalite {
         ) {
             this.listViewFonctions.getItems().add(e.toString());
         }
-
-
     }
 
     @FXML
     void ajouterEquation(ActionEvent event) {
-        String equation = inputEquation.getText();
+        String equation = inputA.getText() + inputOpe1.getText() + inputX.getText() + inputOp2.getText() + inputB.getText();
+
+        Equations equations = new Equations(inputA.getText(), inputOpe1.getText(),
+                inputX.getText(), inputOp2.getText(), inputB.getText());
         listViewFonctions.getItems().add(equation);
 
+        int nombreData = Integer.parseInt(nbrData.getText());
+
         System.out.println(equation);
-        //listViewFonctions.setOrientation(Orientation.VERTICAL);
+        System.out.println(nombreData);
+
+        Serie s = null;
+
+        double y = calculerEquation(equation + " - y");
+
+        if(inputA.getText().equals("") || inputX.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Champs incomplets!!!");
+            alert.setContentText("Veuilles remplir TOUS les champs.");
+            alert.show();
+        }else{
+            s = new Serie();
+            s.setDonnees(new ArrayList<>());
+            s.addData(new Data(Double.parseDouble(inputX.getText()), y));
+            equationService.SaveEquation(equations);
+            serieService.SaveSerie(s);
+        }
+
+
+        System.out.println(s.getDonnees());
 
     }
 
@@ -93,7 +140,7 @@ public class EditeurEquationsController implements Fonctionnalite {
     @FXML
     void modifierEquation(ActionEvent event) {
         String item = listViewFonctions.getSelectionModel().getSelectedItem();
-        inputEquation.setText(item);
+        //inputEquation.setText(item);
 
 
     }
@@ -113,6 +160,13 @@ public class EditeurEquationsController implements Fonctionnalite {
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 
+    }
+
+    private double calculerEquation(String expression){
+        Expression e1 = new Expression("solve( " + expression + ", y, -10000, 10000 )");
+
+        mXparser.consolePrint(e1.calculate());
+        return e1.calculate();
     }
 
 }
