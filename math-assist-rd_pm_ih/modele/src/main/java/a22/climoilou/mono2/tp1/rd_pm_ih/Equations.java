@@ -11,8 +11,17 @@ public class Equations {
     @Id
     private Long id;
 
+    private String equationString;
+
+    private int x;
+
+    private int y;
+    private int a;
+    private int b;
 
 
     public Equations() {
     }
+
+    
 }

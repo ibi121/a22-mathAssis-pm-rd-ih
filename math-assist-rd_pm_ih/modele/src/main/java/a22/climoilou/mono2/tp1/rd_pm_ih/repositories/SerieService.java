@@ -1,10 +1,7 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.repositories;
 
-import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BD {
+public class SerieService {
 
 
     private SerieRepository serieRepository;

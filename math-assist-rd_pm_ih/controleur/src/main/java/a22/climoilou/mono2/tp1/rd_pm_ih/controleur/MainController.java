@@ -1,7 +1,7 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
-import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +33,11 @@ public class MainController {
 
     private EditeurEquationsController editeurEquationsController;
 
-
+    private SerieService bd;
+    @Autowired
+    public void setBd(SerieService bd) {
+        this.bd = bd;
+    }
     public void setContext(ConfigurableApplicationContext context) {
         this.context = context;
     }
@@ -76,7 +80,7 @@ public class MainController {
 
     @FXML
     void aPropos(ActionEvent event) throws IOException {
-        aProposController.setStage();
+        aProposController.setStage(this.context);
     }
 
     @FXML
@@ -91,7 +95,7 @@ public class MainController {
 
     @FXML
     void editeurEquations(ActionEvent event) throws IOException {
-        editeurEquationsController.setStage();
+        this.editeurEquationsController.setStage(context);
     }
 
     @FXML
@@ -106,14 +110,12 @@ public class MainController {
 
     @FXML
     private void initialize(){
-        vBox1 = new VBox();
-        paneGauche = new Pane();
-        hBox1 = new HBox();
-        btnAPropos = new Button();
-        paneDroit = new Pane();
-        splitPanePrincipal = new SplitPane();
-        btnValiderSerie = new Button();
-        btnRandom = new Button();
+
+        for (Serie s: bd.GetAllSerie()
+             ) {
+            this.listViewSeries.getItems().add(s);
+        }
+
     }
 
     public Scene getScene() throws IOException {
@@ -157,7 +159,10 @@ public class MainController {
         this.modificateurController = modificateurController;
     }
 
-
+    @Autowired
+    public void setEditeurController(EditeurEquationsController editeurEquationsController) {
+        this.editeurEquationsController = editeurEquationsController;
+    }
 
 }
 

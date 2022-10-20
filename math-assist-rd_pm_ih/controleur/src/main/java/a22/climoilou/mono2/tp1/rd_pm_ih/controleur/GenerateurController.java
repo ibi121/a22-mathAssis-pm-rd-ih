@@ -3,18 +3,14 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
-import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.BD;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -32,8 +28,7 @@ import java.io.IOException;
 public class GenerateurController implements Fonctionnalite {
 
     private Generateur generateur;
-
-    private BD bd;
+    private SerieService bd;
     @FXML
     private Text textMinimum;
 
@@ -71,39 +66,50 @@ public class GenerateurController implements Fonctionnalite {
     private TextField inputTextNomSerie;
 
     @Autowired
-    public void setBd(BD bd) {
+    public void setBd(SerieService bd) {
         this.bd = bd;
     }
 
     @FXML
+    private void initialize(){
+        this.inputTextMin.setText("1");
+        this.inputTextMax.setText("100");
+        this.inputTextNombreValeurs.setText("6");
+        this.inputTextNombreSeries.setText("1");
+        this.inputTextNomSerie.setText("Série aléatoire avec valeurs par défaut");
+    }
+    @FXML
     void valider(ActionEvent event) throws IOException {
         generateur = new Generateur(Integer.parseInt(inputTextMin.getText()), Integer.parseInt(inputTextMax.getText()),
-                Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText());
+                    Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText());
+
 
         generateur.creationValeurs();
         generateur.creationSeries();
 
         for (Serie serie : generateur.getSeriesCrees()) {
             bd.SaveSerie(serie);
-            System.out.println(bd.GetAllSerie());
         }
-    }
 
+
+
+    }
     public void setStage(ConfigurableApplicationContext context) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(GenerateurController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();
         Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Generation de series");
+        secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
-    }
 
+    }
 
     @Override
     public String getNom() {
         return "Génerateur aleatoire";
     }
+
 }
 

@@ -4,13 +4,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxControllerAndView;
+import net.rgielen.fxweaver.core.FxWeaver;
+import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
+@Scope("prototype")
+@FxmlView("../vue/AProposFXML.fxml")
 public class AProposController{
 
     @FXML
@@ -52,18 +60,16 @@ public class AProposController{
         presenteParText = new Text();
     }
 
-    public void setStage() throws IOException {
+    public void setStage(ConfigurableApplicationContext context) throws IOException {
+        FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
+        FxControllerAndView controllerAndView2 = fxWeaver2.load(AProposController.class);
+        Parent root2 = (Pane) controllerAndView2.getView().get();
+        Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Des propos bien meritees");
-        secondaryStage.setScene(getScene());
+        secondaryStage.setTitle("A Propos");
+        secondaryStage.setScene(scene2);
         secondaryStage.show();
     }
 
-
-    public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/AProposFXML.fxml"));
-        Parent root = fxmlLoader.load();
-        return new Scene(root);
-    }
 }
 
