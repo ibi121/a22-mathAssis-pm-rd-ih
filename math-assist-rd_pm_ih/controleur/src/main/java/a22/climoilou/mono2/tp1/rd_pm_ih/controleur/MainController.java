@@ -6,12 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.query.JSqlParserUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class MainController {
 
     private TraceurController traceurController;
 
-    private TableauDesValeursController graphiqueBandesController;
+    private TableauDesValeursController tableauDesValeursController;
 
     private SerieService bd;
     @Autowired
@@ -81,8 +83,15 @@ public class MainController {
     }
 
     @FXML
-    void creationGraphiqueABandes(ActionEvent actionEvent) {
-        this.graphiqueBandesController.setStage(context);
+    void creationTableauValeurs(ActionEvent actionEvent) {
+        if(getSelectedSerie() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Vous devez choisir un série pour visionner ses données.");
+            alert.show();
+        }else{
+            this.tableauDesValeursController.setStage(context);
+        }
+
     }
 
     @FXML
@@ -141,8 +150,8 @@ public class MainController {
     }
 
     @Autowired
-    public void setGraphiqueBandesController(TableauDesValeursController graphiqueBandesController){
-        this.graphiqueBandesController = graphiqueBandesController;
+    public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController){
+        this.tableauDesValeursController = tableauDesValeursController;
     }
 }
 

@@ -100,6 +100,26 @@ public class Serie {
         }
     }
 
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public TypeCreation getTypeCreation() {
+        return typeCreation;
+    }
+
+    public void setTypeCreation(TypeCreation typeCreation) {
+        this.typeCreation = typeCreation;
+    }
+
+    public String getNomSerie() {
+        return nomSerie;
+    }
+
+    public void setNomSerie(String nomSerie) {
+        this.nomSerie = nomSerie;
+    }
+
     @Override
     public String toString() {
         return nomSerie +"--"+

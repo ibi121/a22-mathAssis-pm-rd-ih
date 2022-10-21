@@ -73,7 +73,7 @@
                   </Text>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button fx:id="btnFonctionRD" mnemonicParsing="false" onAction="#creationGraphiqueABandes" style="-fx-background-color: purple; -fx-text-fill: white;" text="RD" />
+                        <Button fx:id="btnFonctionRD" mnemonicParsing="false" onAction="#creationTableauValeurs" style="-fx-background-color: purple; -fx-text-fill: white;" text="RD" />
                         <Button mnemonicParsing="false" style="-fx-background-color: purple; -fx-text-fill: white;" text="PM" />
                         <Button mnemonicParsing="false" style="-fx-background-color: purple; -fx-text-fill: white;" text="IH" />
                      </children>

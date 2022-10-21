@@ -128,7 +128,6 @@ public class EditeurEquationsController implements Fonctionnalite {
 
 
         System.out.println(s.getDonnees());
-
     }
 
     @FXML

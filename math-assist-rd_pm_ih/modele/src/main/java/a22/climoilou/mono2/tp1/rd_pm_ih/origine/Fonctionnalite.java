@@ -8,5 +8,4 @@ import java.util.List;
 public interface Fonctionnalite {
     public String getNom();
 
-    public void setStage(ConfigurableApplicationContext context)throws IOException;
 }

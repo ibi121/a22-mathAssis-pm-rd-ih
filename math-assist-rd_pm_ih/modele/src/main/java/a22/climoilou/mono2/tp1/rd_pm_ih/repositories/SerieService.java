@@ -32,7 +32,7 @@ public class SerieService {
 
     @Transactional
     public Serie FindSerieById(long id) {
-        return this.serieRepository.findById(id).get();
+        return serieRepository.findById(id).get();
     }
 
     @Transactional
