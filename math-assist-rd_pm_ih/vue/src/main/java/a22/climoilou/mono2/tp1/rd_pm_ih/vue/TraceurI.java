@@ -7,6 +7,6 @@ public interface TraceurI {
     /**
      * //HashMap en attendant d'avoir les modeles
      */
-    public List<HashMap<String, Double>> getSeries();
+    public List<HashMap<Double, Double>> getSeries();
     public List<String> getNomSeries();
 }

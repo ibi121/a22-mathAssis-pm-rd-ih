@@ -23,7 +23,7 @@ import java.util.List;
 public class TraceurController implements TraceurI {
     private Serie serie;
     private List<String> nomSeries;
-    private List<HashMap<String, Double>> serieGraphique;
+    private List<HashMap<Double, Double>> serieGraphique;
     private TraceurGraphique traceurGraphique;
 
     @Autowired
@@ -43,7 +43,7 @@ public class TraceurController implements TraceurI {
         secondaryStage.show();
 
     }
-    public List<HashMap<String, Double>> getSeries() {
+    public List<HashMap<Double, Double>> getSeries() {
         return serieGraphique;
     }
 
@@ -55,9 +55,9 @@ public class TraceurController implements TraceurI {
     public void setSerieGraphique(List<Serie> series) {
         serieGraphique = new ArrayList<>();
         for (Serie serie : series) {
-            HashMap<String, Double> map = new HashMap<>();
+            HashMap<Double, Double> map = new HashMap<>();
             for (Data data : serie.getDonnees()) {
-                map.put(data.getX() + "", data.getY());
+                map.put(data.getX(), data.getY());
             }
             serieGraphique.add(map);
         }
