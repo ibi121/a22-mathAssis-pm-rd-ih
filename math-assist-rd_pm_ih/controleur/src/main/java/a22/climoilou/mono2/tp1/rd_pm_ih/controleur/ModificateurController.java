@@ -157,7 +157,14 @@ public class ModificateurController {
         listData.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void fillList(Serie serie) {
+        for (Data data:
+             serie.getDonnees()) {
+            listData.getItems().add(data);
+        }
+    }
+
+    public void setStage(ConfigurableApplicationContext context, Serie serie) throws IOException {
         FxWeaver fxWeaver = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
         Parent root = (Pane) controllerAndView.getView().get();
@@ -165,5 +172,6 @@ public class ModificateurController {
         secondaryStage.setTitle("Modification de séries");
         secondaryStage.setScene(new Scene(root));
         secondaryStage.show();
+        fillList(serie);
     }
 }

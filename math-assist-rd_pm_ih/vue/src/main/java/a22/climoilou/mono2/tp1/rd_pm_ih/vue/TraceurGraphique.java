@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -32,14 +33,15 @@ public class TraceurGraphique {
 
     private TraceurI traceurI;
 
-    public void setTraceurI(TraceurI traceurI) {
+    @Autowired
+    public void setTraceurI(@Lazy TraceurI traceurI) {
         this.traceurI = traceurI;
     }
 
     @FXML
     public void initialize() {
-        seriesTest();
-        //ajoutSeries();
+        //seriesTest();
+        ajoutSeries();
     }
 
     /**
@@ -47,16 +49,17 @@ public class TraceurGraphique {
      */
     public void ajoutSeries() {
         if (this.traceurI != null) {
-            HashMap<String, Integer> serieRecu = this.traceurI.getSeries();
+            List<HashMap<String, Double>> serieRecu = this.traceurI.getSeries();
 
-            XYChart.Series series = new XYChart.Series();
-            series.setName("Serie recu sans dependance :o)");
-
-            for (Map.Entry<String, Integer> set : serieRecu.entrySet()) {
-                series.getData().add(new XYChart.Data<String, Number>(set.getKey(), set.getValue()));
+            for (HashMap<String, Double> serie : serieRecu) {
+                XYChart.Series series = new XYChart.Series();
+                series.setName(series.getName());
+                for (Map.Entry<String, Double> set : serie.entrySet()) {
+                    series.getData().add(new XYChart.Data<String, Number>(set.getKey(), set.getValue()));
+                }
+                graphiqueSerie.getData().add(series);
             }
 
-            graphiqueSerie.getData().add(series);
         }
     }
 
@@ -85,11 +88,5 @@ public class TraceurGraphique {
         series2.getData().add(new XYChart.Data("4", 4));
 
         graphiqueSerie.getData().add(series2);
-    }
-
-    public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/Traceur.fxml"));
-        Parent root = fxmlLoader.load();
-        return new Scene(root);
     }
 }
