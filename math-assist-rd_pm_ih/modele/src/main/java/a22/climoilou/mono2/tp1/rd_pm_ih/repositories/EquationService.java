@@ -19,7 +19,7 @@ public class EquationService {
     }
 
     /**
-     * Gere les transaction des series.
+     * Gere les transaction des equations.
      *
      * @param equations
      */

@@ -116,6 +116,10 @@ public class Serie {
         this.typeCreation = typeCreation;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 434d5d94003e2cc87434f28f096a8a1cc0ad2956
     public void setNomSerie(String nomSerie) {
         this.nomSerie = nomSerie;
     }
@@ -126,6 +130,19 @@ public class Serie {
                 " création: " + dateCreation +
                 ", modification: " + dateDerniereModification +
                 ", nomAuteur: '" + nomAuteur;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Serie serie = (Serie) o;
+        return Objects.equals(Id, serie.Id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id);
     }
 
 

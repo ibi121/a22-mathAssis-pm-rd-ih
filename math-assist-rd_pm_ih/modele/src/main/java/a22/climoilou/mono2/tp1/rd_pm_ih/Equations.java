@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.mariuszgromada.math.mxparser.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Component
@@ -13,20 +14,14 @@ public class Equations {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
-    @Column(name = "variableA")
     private String a;
 
-    @Column(name = "variableB")
     private String b;
 
-    @Column(name = "variableX")
     private String x;
 
-    @Column(name = "operationUn")
     private String operation1;
 
-    @Column(name = "operationDeux")
     private String operation2;
 
     public Equations() {
@@ -40,22 +35,10 @@ public class Equations {
         this.operation2 = operation2;
     }
 
-    public Equations(Long id, String a, String b, String x, String operation1, String operation2) {
-        this.id = id;
-        this.a = a;
-        this.b = b;
-        this.x = x;
-        this.operation1 = operation1;
-        this.operation2 = operation2;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getA() {
         return a;
@@ -95,5 +78,18 @@ public class Equations {
 
     public void setOperation2(String operation2) {
         this.operation2 = operation2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equations equations = (Equations) o;
+        return Objects.equals(id, equations.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
