@@ -94,10 +94,7 @@ public class MainController {
         this.editeurEquationsController.setStage(context);
     }
 
-    @FXML
-    void conservationSerie(ActionEvent event) {
 
-    }
 
     @FXML
     void traceurSerie(ActionEvent event) throws IOException {
@@ -127,6 +124,21 @@ public class MainController {
         }
         listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
+
+
+    /**
+     * Supprime la serie choisis :o). 
+     * @param actionEvent
+     */
+
+    @FXML
+    public void supprimerSerie(ActionEvent actionEvent) {
+         Serie serieChoisi = (Serie) this.listViewSeries.getSelectionModel().getSelectedItems();
+         bd.SupprimerSerie(serieChoisi);
+
+    }
+
+
 
     /**
      * Prend toutes les séries sélectionnée
@@ -175,5 +187,6 @@ public class MainController {
     public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController){
         this.tableauDesValeursController = tableauDesValeursController;
     }
+
 }
 
