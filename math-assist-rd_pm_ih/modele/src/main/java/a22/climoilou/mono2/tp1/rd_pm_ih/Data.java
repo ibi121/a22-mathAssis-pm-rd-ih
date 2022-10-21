@@ -18,9 +18,9 @@ public class Data {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id", nullable = false)
-    Long id;
-    double x;
-    double y;
+    private Long id;
+    private double x;
+    private double y;
 
     public Data(double x, double y) {
         this.x = x;
@@ -54,13 +54,14 @@ public class Data {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Data data)) return false;
-        return Double.compare(data.x, x) == 0 && Double.compare(data.y, y) == 0;
+        if (o == null || getClass() != o.getClass()) return false;
+        Data data = (Data) o;
+        return Objects.equals(id, data.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(id);
     }
 
     @Override
