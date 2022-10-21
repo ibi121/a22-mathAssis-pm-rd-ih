@@ -92,7 +92,8 @@ public class MainController {
             alert.setContentText("Vous devez choisir un série pour visionner ses données.");
             alert.show();
         }else{
-            this.tableauDesValeursController.setStage(context);
+            Serie serie = getSelectedSerie();
+            this.tableauDesValeursController.setStage(context, serie);
         }
 
     }

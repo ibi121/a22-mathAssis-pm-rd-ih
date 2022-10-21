@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("prototype")
 @FxmlView("../vue/TableauValeurs.fxml")
 public class TableauDesValeursController implements Fonctionnalite {
 
@@ -35,31 +34,10 @@ public class TableauDesValeursController implements Fonctionnalite {
     private Text serieChoisie;
 
 
-    private SerieService serieService;
-
-    private long serieSelectionnee = 88;
-
-    @Autowired
-    public void setSerieService(SerieService serieService) {
-        this.serieService = serieService;
-    }
-
     @FXML
     private void initialize(){
-       serieChoisie.setText(serieService.FindSerieById(serieSelectionnee).getNomSerie());
 
-        System.out.println(serieService.FindSerieById(serieSelectionnee));
 
-    /*    for(int i = 0; i < serieService.FindSerieById(serieSelectionnee).getDonnees().size(); i++){
-            Text dataX = new Text();
-            Text dataY = new Text();
-            dataX.setText(String.valueOf(serieService.FindSerieById(serieSelectionnee).getDonnees().get(i).getX()));
-            dataY.setText(String.valueOf(serieService.FindSerieById(serieSelectionnee).getDonnees().get(i).getY()));
-            tableau.addColumn(i+1);
-            tableau.add(dataX, i+1, 0);
-            tableau.add(dataY, i+1, 1);
-        }
-*/
     }
     @FXML
     void changeData(ActionEvent event) {
@@ -71,7 +49,7 @@ public class TableauDesValeursController implements Fonctionnalite {
         return "Tableau des valeurs";
     }
 
-    public void setStage(ConfigurableApplicationContext context) {
+    public void setStage(ConfigurableApplicationContext context, Serie serie) {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(TableauDesValeursController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();
@@ -80,5 +58,16 @@ public class TableauDesValeursController implements Fonctionnalite {
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
+        serieChoisie.setText(serie.getNomSerie());
+
+            for(int i = 0; i < serie.getNomSerie().length(); i++){
+            Text dataX = new Text();
+            Text dataY = new Text();
+            dataX.setText(String.valueOf(serie.getDonnees().get(i).getX()));
+            dataY.setText(String.valueOf(serie.getDonnees().get(i).getY()));
+            tableau.addColumn(i+1);
+            tableau.add(dataX, i+1, 0);
+            tableau.add(dataY, i+1, 1);
+        }
     }
 }

@@ -43,8 +43,6 @@ public class TraceurController implements TraceurI {
         secondaryStage.show();
 
     }
-
-    @Override
     public List<HashMap<String, Double>> getSeries() {
         return serieGraphique;
     }
@@ -65,7 +63,6 @@ public class TraceurController implements TraceurI {
         }
     }
 
-    @Override
     public List<String> getNomSeries() {
         return nomSeries;
     }
