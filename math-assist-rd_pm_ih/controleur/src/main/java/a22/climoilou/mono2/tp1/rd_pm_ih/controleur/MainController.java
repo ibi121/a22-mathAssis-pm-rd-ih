@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -61,7 +62,8 @@ public class MainController {
     @FXML
     void validerLaSerie(ActionEvent event) throws IOException {
         if (getSelectedSerie() != null) {
-            modificateurController.setStage(context);
+            Serie serie = getSelectedSerie();
+            modificateurController.setStage(context, serie);
         }
     }
 
@@ -77,8 +79,9 @@ public class MainController {
 
     @FXML
     void traceurSerie(ActionEvent event) throws IOException {
-        if (getAllSeries().size() > 0) {
-            traceurController.setStage(context);
+        if (getAllSeries() != null) {
+            List<Serie> series = getAllSeries();
+            traceurController.setStage(context, series);
         }
     }
 
@@ -99,6 +102,7 @@ public class MainController {
         for (Serie s: bd.GetAllSerie()) {
             this.listViewSeries.getItems().add(s);
         }
+        listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public Scene getScene() throws IOException {

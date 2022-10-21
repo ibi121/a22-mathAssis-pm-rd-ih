@@ -77,6 +77,10 @@ public class Serie {
         this.dateDerniereModification = dateDerniereModification;
     }
 
+    public String getNomSerie() {
+        return nomSerie;
+    }
+
     public String getNomAuteur() {
         return nomAuteur;
     }
