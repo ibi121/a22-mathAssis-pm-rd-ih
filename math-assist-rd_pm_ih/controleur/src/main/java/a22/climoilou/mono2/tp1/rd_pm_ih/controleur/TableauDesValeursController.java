@@ -60,7 +60,7 @@ public class TableauDesValeursController implements Fonctionnalite {
         secondaryStage.show();
         serieChoisie.setText(serie.getNomSerie());
 
-            for(int i = 0; i < serie.getNomSerie().length(); i++){
+            for(int i = 0; i < serie.getDonnees().size(); i++){
             Text dataX = new Text();
             Text dataY = new Text();
             dataX.setText(String.valueOf(serie.getDonnees().get(i).getX()));

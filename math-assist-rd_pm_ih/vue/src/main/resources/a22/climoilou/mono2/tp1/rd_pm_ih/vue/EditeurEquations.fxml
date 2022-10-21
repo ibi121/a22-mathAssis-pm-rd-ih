@@ -17,40 +17,7 @@
             <VBox fx:id="vbox1" prefHeight="400.0" prefWidth="361.0">
                <children>
                   <Text fx:id="textSaisie" strokeType="OUTSIDE" strokeWidth="0.0" text="Saisir un fonction f(x)" textAlignment="CENTER" wrappingWidth="361.27734375" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="inputA" prefHeight="65.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="a" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="inputOpe1" prefHeight="65.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="opérateur" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="inputX" prefHeight="65.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="x" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="inputOp2" prefHeight="65.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="opérateur" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="inputB" prefHeight="65.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="b" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  <TextField fx:id="inputEquation" prefHeight="68.0" prefWidth="362.0" />
                   <VBox alignment="CENTER" prefHeight="305.0" prefWidth="362.0" spacing="25.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
