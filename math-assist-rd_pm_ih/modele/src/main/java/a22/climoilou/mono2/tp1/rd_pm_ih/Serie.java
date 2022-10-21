@@ -116,10 +116,6 @@ public class Serie {
         this.typeCreation = typeCreation;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 434d5d94003e2cc87434f28f096a8a1cc0ad2956
     public void setNomSerie(String nomSerie) {
         this.nomSerie = nomSerie;
     }

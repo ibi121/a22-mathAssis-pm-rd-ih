@@ -22,6 +22,7 @@ import java.util.Map;
 @FxmlView("../vue/Traceur.fxml")
 public class TraceurGraphique {
 
+
     @FXML
     private LineChart graphiqueSerie;
 
@@ -50,10 +51,11 @@ public class TraceurGraphique {
     public void ajoutSeries() {
         if (this.traceurI != null) {
             List<HashMap<String, Double>> serieRecu = this.traceurI.getSeries();
-
+            int i = 0;
             for (HashMap<String, Double> serie : serieRecu) {
                 XYChart.Series series = new XYChart.Series();
-                series.setName(series.getName());
+                series.setName(traceurI.getNomSeries().get(i));
+                i++;
                 for (Map.Entry<String, Double> set : serie.entrySet()) {
                     series.getData().add(new XYChart.Data<String, Number>(set.getKey(), set.getValue()));
                 }

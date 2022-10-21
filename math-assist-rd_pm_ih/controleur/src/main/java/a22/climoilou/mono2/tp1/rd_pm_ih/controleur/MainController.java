@@ -25,7 +25,27 @@ import java.util.List;
 @FxmlView("../vue/monoposte2FXML.fxml")
 public class MainController {
 
-    public Button btnFonctionRD;
+    @FXML
+    private Button btnAPropos;
+
+    @FXML
+    private Button btnConservation;
+
+    @FXML
+    private Button btnFonctionRD;
+
+    @FXML
+    private Button btnFonctions;
+
+    @FXML
+    private Button btnRandom;
+
+    @FXML
+    private Button btnTraceur;
+
+    @FXML
+    private Button btnValiderSerie;
+
     private ConfigurableApplicationContext context;
     private AProposController aProposController;
     private GenerateurController generateurController;
@@ -42,6 +62,7 @@ public class MainController {
     public void setBd(SerieService bd) {
         this.bd = bd;
     }
+
     public void setContext(ConfigurableApplicationContext context) {
         this.context = context;
     }
@@ -51,6 +72,7 @@ public class MainController {
 
     @FXML
     void aPropos(ActionEvent event) throws IOException {
+        btnAPropos.setText(aProposController.getNom());
         aProposController.setStage(this.context);
     }
 
@@ -104,11 +126,6 @@ public class MainController {
             this.listViewSeries.getItems().add(s);
         }
         listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    }
-
-    public Scene getScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vue/monoposte2FXML.fxml"));
-        return new Scene(fxmlLoader.load());
     }
 
     /**

@@ -89,7 +89,7 @@ public class Generateur {
         for(int i = 0; i < this.nombreValeurs; i++){
             yAleatoire = (int) (Math.random() * (this.nombreMaximum - this.nombreMinimum)) + this.nombreMinimum;
 
-            this.valeurs.add(new Data(i + 1, yAleatoire));
+            this.valeurs.add(new Data(i, yAleatoire));
 
         }
     }

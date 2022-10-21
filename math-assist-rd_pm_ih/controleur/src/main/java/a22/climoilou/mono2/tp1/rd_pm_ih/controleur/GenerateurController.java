@@ -2,7 +2,6 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
-import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
