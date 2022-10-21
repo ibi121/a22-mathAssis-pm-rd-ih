@@ -22,6 +22,7 @@ import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.mariuszgromada.math.mxparser.Expression;
+import org.mariuszgromada.math.mxparser.Function;
 import org.mariuszgromada.math.mxparser.mXparser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -36,13 +37,14 @@ import java.util.ArrayList;
 @FxmlView("../vue/EditeurEquations.fxml")
 public class EditeurEquationsController implements Fonctionnalite {
 
+    @FXML
     public TextField nbrData;
-    public TextField inputA;
-    public TextField inputOpe1;
-    public TextField inputX;
-    public TextField inputOp2;
-    public TextField inputB;
+
+    @FXML
     public Button btnAjoutSerie;
+
+    @FXML
+    public TextField inputEquation;
     private EquationService equationService;
 
     private SerieService serieService;
@@ -93,10 +95,9 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     void ajouterEquation(ActionEvent event) {
-        String equation = inputA.getText() + inputOpe1.getText() + inputX.getText() + inputOp2.getText() + inputB.getText();
+        String equation = inputEquation.getText();
 
-        Equations equations = new Equations(inputA.getText(), inputOpe1.getText(),
-                inputX.getText(), inputOp2.getText(), inputB.getText());
+        Equations equations = new Equations(equation);
         listViewFonctions.getItems().add(equation);
 
         int nombreData = Integer.parseInt(nbrData.getText());
@@ -106,23 +107,23 @@ public class EditeurEquationsController implements Fonctionnalite {
 
         Serie s = null;
 
-        double y = calculerEquation(equation + " - y");
+        double y = calculerEquation(equation);
+        System.out.println(y);
+//        if(/*inputA.getText().equals("") || inputX.getText().equals("")*/false){
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("Champs incomplets!!!");
+//            alert.setContentText("Veuilles remplir TOUS les champs.");
+//            alert.show();
+//        }else{
+//            s = new Serie();
+//            s.setDonnees(new ArrayList<>());
+//            s.addData(new Data(Double.parseDouble(inputEquation.getText()), y));
+//            equationService.SaveEquation(equations);
+//            serieService.SaveSerie(s);
+//        }
 
-        if(inputA.getText().equals("") || inputX.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champs incomplets!!!");
-            alert.setContentText("Veuilles remplir TOUS les champs.");
-            alert.show();
-        }else{
-            s = new Serie();
-            s.setDonnees(new ArrayList<>());
-            s.addData(new Data(Double.parseDouble(inputX.getText()), y));
-            equationService.SaveEquation(equations);
-            serieService.SaveSerie(s);
-        }
 
-
-        System.out.println(s.getDonnees());
+        //System.out.println(s.getDonnees());
     }
 
     @FXML
@@ -157,7 +158,9 @@ public class EditeurEquationsController implements Fonctionnalite {
     }
 
     private double calculerEquation(String expression){
-        Expression e1 = new Expression("solve( " + expression + ", y, -10000, 10000 )");
+        Function function = new Function(expression);
+        //Expression e1 = new Expression("solve( " + expression + ", y, -10000, 10000 )");
+        Expression e1 = new Expression("f(3)", function);
 
         mXparser.consolePrint(e1.calculate());
         return e1.calculate();

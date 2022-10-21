@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-public class TraceurController implements TraceurI {
+public class TraceurController implements TraceurI, Fonctionnalite {
     private Serie serie;
     private List<String> nomSeries;
     private List<HashMap<Double, Double>> serieGraphique;
@@ -48,7 +48,6 @@ public class TraceurController implements TraceurI {
     }
 
     /**
-     * //HashMap en attendant d'avoir les modeles
      *
      * @return
      */
@@ -72,6 +71,11 @@ public class TraceurController implements TraceurI {
         for (Serie serie : series) {
             this.nomSeries.add(serie.getNomSerie());
         }
+    }
+
+    @Override
+    public String getNom() {
+        return "Traceur";
     }
 }
 

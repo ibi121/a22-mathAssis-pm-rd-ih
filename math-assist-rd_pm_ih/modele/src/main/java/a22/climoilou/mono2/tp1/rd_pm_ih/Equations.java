@@ -27,12 +27,8 @@ public class Equations {
     public Equations() {
     }
 
-    public Equations(String a, String b, String x, String operation1, String operation2) {
+    public Equations(String a) {
         this.a = a;
-        this.b = b;
-        this.x = x;
-        this.operation1 = operation1;
-        this.operation2 = operation2;
     }
 
     public Long getId() {

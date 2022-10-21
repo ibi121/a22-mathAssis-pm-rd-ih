@@ -18,18 +18,22 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.mariuszgromada.math.mxparser.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Component
 @FxmlView("../vue/Modificateur.fxml")
-public class ModificateurController {
+public class ModificateurController implements Fonctionnalite {
 
     @FXML
     private ListView<Data> listData;
@@ -137,8 +141,18 @@ public class ModificateurController {
         textPanneau.setText(textPanneau.getText() + "0");
     }
 
+    //"g(x)=x^2"
     @FXML
     void onClickEntrer(ActionEvent event) {
+        Function g1 = new Function(textPanneau.getText());
+        List<Long> idData = new ArrayList<>();
+
+        for(Data data : listData.getSelectionModel().getSelectedItems()) {
+            idData.add(data.getId());
+        }
+
+
+
         listData.getSelectionModel().getSelectedItems().forEach((data -> {
             data.setY(Double.parseDouble(textPanneau.getText()));
         }));
@@ -151,8 +165,8 @@ public class ModificateurController {
     }
 
     public void fillList(Serie serie) {
-        for (Data data:
-             serie.getDonnees()) {
+        for (Data data :
+                serie.getDonnees()) {
             listData.getItems().add(data);
         }
     }
@@ -166,5 +180,10 @@ public class ModificateurController {
         secondaryStage.setScene(new Scene(root));
         secondaryStage.show();
         fillList(serie);
+    }
+
+    @Override
+    public String getNom() {
+        return "Modificateur";
     }
 }
