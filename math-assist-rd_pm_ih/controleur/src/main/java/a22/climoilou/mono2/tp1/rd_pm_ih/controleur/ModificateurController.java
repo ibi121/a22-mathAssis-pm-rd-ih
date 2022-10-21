@@ -37,13 +37,6 @@ public class ModificateurController {
     @FXML
     private TextField textPanneau;
 
-    private MainController mainController;
-
-    @Autowired
-    public void setMainController(@Lazy MainController mainController) {
-        this.mainController = mainController;
-    }
-
     @FXML
     void onClickAddition(ActionEvent event) {
         textPanneau.setText(textPanneau.getText() + "+");
@@ -146,10 +139,10 @@ public class ModificateurController {
 
     @FXML
     void onClickEntrer(ActionEvent event) {
-        // test de changement des y selectionner dans les Datas
         listData.getSelectionModel().getSelectedItems().forEach((data -> {
             data.setY(Double.parseDouble(textPanneau.getText()));
         }));
+        listData.setItems(listData.getItems());
     }
 
     @FXML

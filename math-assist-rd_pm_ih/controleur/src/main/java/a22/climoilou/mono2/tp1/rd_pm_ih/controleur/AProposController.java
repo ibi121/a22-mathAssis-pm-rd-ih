@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 @Scope("prototype")
 @FxmlView("../vue/AProposFXML.fxml")
-public class AProposController{
+public class AProposController implements Fonctionnalite{
 
     @FXML
     private Text aPropos;
@@ -71,5 +71,9 @@ public class AProposController{
         secondaryStage.show();
     }
 
+    @Override
+    public String getNom() {
+        return "A Propos";
+    }
 }
 
