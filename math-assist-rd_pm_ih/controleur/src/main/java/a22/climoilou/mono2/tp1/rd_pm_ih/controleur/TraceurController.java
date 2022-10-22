@@ -40,6 +40,7 @@ public class TraceurController implements TraceurI, Fonctionnalite {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Traceur de séries");
         secondaryStage.setScene(new Scene(root));
+        secondaryStage.setResizable(false);
         secondaryStage.show();
 
     }

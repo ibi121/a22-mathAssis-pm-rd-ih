@@ -39,6 +39,7 @@ public class ApplicationFX extends Application {
         fxController.setContext(this.context);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }
