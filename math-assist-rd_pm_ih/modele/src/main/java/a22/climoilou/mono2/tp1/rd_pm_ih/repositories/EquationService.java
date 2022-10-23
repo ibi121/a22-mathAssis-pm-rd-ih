@@ -47,6 +47,7 @@ public class EquationService {
     }
 
 
+    @Transactional
     public void SupprimerToutesLesEquations(){
         this.equationRepository.deleteAll();
     }

@@ -1,5 +1,6 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+//import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,7 @@ import java.io.IOException;
 @Component
 @Scope("prototype")
 @FxmlView("../vue/AProposFXML.fxml")
-public class AProposController implements Fonctionnalite{
+public class AProposController{
 
     @FXML
     private Text aPropos;
@@ -71,7 +72,6 @@ public class AProposController implements Fonctionnalite{
         secondaryStage.show();
     }
 
-    @Override
     public String getNom() {
         return "A Propos";
     }

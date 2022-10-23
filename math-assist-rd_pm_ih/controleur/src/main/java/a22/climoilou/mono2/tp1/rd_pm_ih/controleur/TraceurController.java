@@ -20,10 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-public class TraceurController implements TraceurI {
+public class TraceurController implements TraceurI, Fonctionnalite {
     private Serie serie;
     private List<String> nomSeries;
-    private List<HashMap<String, Double>> serieGraphique;
+    private List<HashMap<Double, Double>> serieGraphique;
     private TraceurGraphique traceurGraphique;
 
     @Autowired
@@ -40,24 +40,24 @@ public class TraceurController implements TraceurI {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Traceur de séries");
         secondaryStage.setScene(new Scene(root));
+        secondaryStage.setResizable(false);
         secondaryStage.show();
 
     }
-    public List<HashMap<String, Double>> getSeries() {
+    public List<HashMap<Double, Double>> getSeries() {
         return serieGraphique;
     }
 
     /**
-     * //HashMap en attendant d'avoir les modeles
      *
      * @return
      */
     public void setSerieGraphique(List<Serie> series) {
         serieGraphique = new ArrayList<>();
         for (Serie serie : series) {
-            HashMap<String, Double> map = new HashMap<>();
+            HashMap<Double, Double> map = new HashMap<>();
             for (Data data : serie.getDonnees()) {
-                map.put(data.getX() + "", data.getY());
+                map.put(data.getX(), data.getY());
             }
             serieGraphique.add(map);
         }
@@ -72,6 +72,11 @@ public class TraceurController implements TraceurI {
         for (Serie serie : series) {
             this.nomSeries.add(serie.getNomSerie());
         }
+    }
+
+    @Override
+    public String getNom() {
+        return "Traceur";
     }
 }
 

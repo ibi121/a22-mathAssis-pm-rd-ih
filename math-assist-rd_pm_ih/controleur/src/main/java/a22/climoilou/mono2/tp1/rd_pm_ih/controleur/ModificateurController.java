@@ -2,14 +2,13 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.DataService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -18,24 +17,39 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.mariuszgromada.math.mxparser.Argument;
+import org.mariuszgromada.math.mxparser.Expression;
+import org.mariuszgromada.math.mxparser.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Component
 @FxmlView("../vue/Modificateur.fxml")
-public class ModificateurController {
+public class ModificateurController implements Fonctionnalite {
 
     @FXML
     private ListView<Data> listData;
 
     @FXML
     private TextField textPanneau;
+
+    private Serie serie;
+    private SerieService serieService;
+    private DataService dataService;
+
+    @Autowired
+    public void setSerieService(SerieService serieService) {
+        this.serieService = serieService;
+    }
+
+    @Autowired
+    public void setDataService(DataService dataService) {
+        this.dataService = dataService;
+    }
 
     @FXML
     void onClickAddition(ActionEvent event) {
@@ -139,10 +153,95 @@ public class ModificateurController {
 
     @FXML
     void onClickEntrer(ActionEvent event) {
-        listData.getSelectionModel().getSelectedItems().forEach((data -> {
-            data.setY(Double.parseDouble(textPanneau.getText()));
-        }));
-        listData.setItems(listData.getItems());
+        if(listData.getSelectionModel().getSelectedItems().size() > 0) {
+            String modif = textPanneau.getText();
+            Function f1 = valideFonction(modif);
+            Expression expression = new Expression(modif);
+            Expression expressionX = expressionX(modif, listData.getSelectionModel().getSelectedItems().get(0).getX());
+            Expression expressionY = expressionY(modif, listData.getSelectionModel().getSelectedItems().get(0).getY());
+            Expression expressionXY = expressionXY(modif,
+                    listData.getSelectionModel().getSelectedItems().get(0).getX(),
+                    listData.getSelectionModel().getSelectedItems().get(0).getY());
+
+            if (f1 != null) {
+                listData.getSelectionModel().getSelectedItems().forEach((data -> {
+                    data.setY(expressionFonction(f1, data.getX()));
+                    dataService.saveData(data);
+                    serie.setDateDerniereModification(LocalDateTime.now());
+                    serieService.SaveSerie(serie);
+                }));
+                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+            } else if (expressionXY != null) {
+                listData.getSelectionModel().getSelectedItems().forEach((data -> {
+                    data.setY(expressionXY(modif, data.getX(), data.getY()).calculate());
+                    dataService.saveData(data);
+                    serie.setDateDerniereModification(LocalDateTime.now());
+                    serieService.SaveSerie(serie);
+                }));
+                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+            } else if (expressionX != null) {
+                listData.getSelectionModel().getSelectedItems().forEach((data -> {
+                    data.setY(expressionX(modif, data.getX()).calculate());
+                    dataService.saveData(data);
+                    serie.setDateDerniereModification(LocalDateTime.now());
+                    serieService.SaveSerie(serie);
+                }));
+                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+            } else if (expressionY != null) {
+                listData.getSelectionModel().getSelectedItems().forEach((data -> {
+                    data.setY(expressionY(modif, data.getY()).calculate());
+                    dataService.saveData(data);
+                    serie.setDateDerniereModification(LocalDateTime.now());
+                    serieService.SaveSerie(serie);
+                }));
+                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+            } else if (expression.checkSyntax()) {
+                listData.getSelectionModel().getSelectedItems().forEach((data -> {
+                    data.setY(expression.calculate());
+                    dataService.saveData(data);
+                    serie.setDateDerniereModification(LocalDateTime.now());
+                    serieService.SaveSerie(serie);
+                }));
+                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Expression non valide");
+                alert.setContentText("Veuillez entrer un chiffre, une expression ou une fonction[f(x)=...]");
+                alert.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Aucune selection");
+            alert.setContentText("Veuillez sellectionner un ou plusieurs champs de la liste");
+            alert.show();
+        }
+    }
+
+    private Expression expressionX (String modif, double x) {
+        Argument argX = new Argument("x", x);
+        Expression e = new Expression(modif, argX);
+        return e.checkSyntax() ? e : null;
+    }
+    private Expression expressionY (String modif, double y) {
+        Argument argY = new Argument("y", y);
+        Expression e = new Expression(modif, argY);
+        return e.checkSyntax() ? e : null;
+    }
+    private Expression expressionXY (String modif, double x, double y) {
+        Argument argX = new Argument("x", x);
+        Argument argY = new Argument("y", y);
+        Expression e = new Expression(modif, argX, argY);
+        return e.checkSyntax() ? e : null;
+    }
+
+    private double expressionFonction(Function f1, double x) {
+        Expression expression = new Expression(f1.getFunctionName() + "(" + x + ")", f1);
+        return expression.calculate();
+    }
+
+    public Function valideFonction(String fonction) {
+        Function function = new Function(fonction);
+        return function.checkSyntax() ? function : null;
     }
 
     @FXML
@@ -150,11 +249,8 @@ public class ModificateurController {
         listData.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void fillList(Serie serie) {
-        for (Data data:
-             serie.getDonnees()) {
-            listData.getItems().add(data);
-        }
+    public void remplirList(Serie serie) {
+        listData.getItems().addAll(serie.getDonnees());
     }
 
     public void setStage(ConfigurableApplicationContext context, Serie serie) throws IOException {
@@ -164,7 +260,14 @@ public class ModificateurController {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Modification de séries");
         secondaryStage.setScene(new Scene(root));
+        secondaryStage.setResizable(false);
         secondaryStage.show();
-        fillList(serie);
+        this.serie = serie;
+        remplirList(serie);
+    }
+
+    @Override
+    public String getNom() {
+        return "Modificateur";
     }
 }
