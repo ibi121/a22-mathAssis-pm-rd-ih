@@ -2,14 +2,12 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -25,6 +23,8 @@ import java.util.List;
 @FxmlView("../vue/monoposte2FXML.fxml")
 public class MainController {
 
+    @FXML
+    public Button btnSupprimer;
     @FXML
     private Button btnAPropos;
 
@@ -46,6 +46,7 @@ public class MainController {
     @FXML
     private Button btnValiderSerie;
 
+
     private ConfigurableApplicationContext context;
     private AProposController aProposController;
     private GenerateurController generateurController;
@@ -58,6 +59,7 @@ public class MainController {
     private TableauDesValeursController tableauDesValeursController;
 
     private SerieService bd;
+
     @Autowired
     public void setBd(SerieService bd) {
         this.bd = bd;
@@ -95,7 +97,6 @@ public class MainController {
     }
 
 
-
     @FXML
     void traceurSerie(ActionEvent event) throws IOException {
         if (getAllSeries() != null) {
@@ -106,11 +107,11 @@ public class MainController {
 
     @FXML
     void creationTableauValeurs(ActionEvent actionEvent) {
-        if(getSelectedSerie() == null){
+        if (getSelectedSerie() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Vous devez choisir un série pour visionner ses données.");
             alert.show();
-        }else{
+        } else {
             Serie serie = getSelectedSerie();
             this.tableauDesValeursController.setStage(context, serie);
         }
@@ -119,7 +120,7 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        for (Serie s: bd.GetAllSerie()) {
+        for (Serie s : bd.GetAllSerie()) {
             this.listViewSeries.getItems().add(s);
         }
         listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -127,33 +128,52 @@ public class MainController {
 
 
     /**
-     * Supprime la serie choisis :o). 
+     * Prends un ou des elements de la liste de serie et les supprime de ls BD
+     *
      * @param actionEvent
      */
 
     @FXML
-    public void supprimerSerie(ActionEvent actionEvent) {
-         Serie serieChoisi = (Serie) this.listViewSeries.getSelectionModel().getSelectedItems();
-         bd.SupprimerSerie(serieChoisi);
+    public void supprimerSerie(ActionEvent actionEvent) throws IOException {
 
+        Alert alert = new Alert(Alert.AlertType.NONE);
+
+        ObservableList<Serie> listeDeSerie = this.listViewSeries.getSelectionModel().getSelectedItems();
+
+        if (listeDeSerie.isEmpty()) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("attention vous n'avez pas selectionner de Serie!");
+            alert.show();
+        } else {
+            alert.setAlertType(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("etes vous sure de vouloir supprimer la serie : ");
+            alert.showAndWait().ifPresent(reponse -> {
+                if (reponse == ButtonType.OK) {
+                    for (Serie serie : listeDeSerie) {
+                        bd.SupprimerSerie(serie);
+                    }
+                }
+            });
+        }
     }
-
 
 
     /**
      * Prend toutes les séries sélectionnée
+     *
      * @return la premiere des séries sélectionnées
      */
-    public Serie getSelectedSerie(){
+    public Serie getSelectedSerie() {
         return listViewSeries.getSelectionModel().getSelectedItems().size() != 0
                 ? listViewSeries.getSelectionModel().getSelectedItems().get(0) : null;
     }
 
     /**
      * Prend toutes les séries sélectionnés
+     *
      * @return toutes les séries.
      */
-    public List<Serie> getAllSeries(){
+    public List<Serie> getAllSeries() {
         return listViewSeries.getSelectionModel().getSelectedItems().size() != 0
                 ? listViewSeries.getSelectionModel().getSelectedItems() : null;
     }
@@ -184,7 +204,7 @@ public class MainController {
     }
 
     @Autowired
-    public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController){
+    public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController) {
         this.tableauDesValeursController = tableauDesValeursController;
     }
 
