@@ -67,6 +67,8 @@ public class TableauDesValeursController implements Fonctionnalite {
         Parent root2 = (Pane) controllerAndView2.getView().get();
         Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
+        secondaryStage.sizeToScene();
+        secondaryStage.setResizable(false);
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
@@ -76,11 +78,11 @@ public class TableauDesValeursController implements Fonctionnalite {
             Text dataX = new Text();
             TextField dataY = new TextField();
             dataX.setText(String.valueOf(serie.getDonnees().get(i).getX()));
-            dataX.setId("x" + String.valueOf(i));
             dataY.setText(String.valueOf(serie.getDonnees().get(i).getY()));
-            dataY.setId("y" + String.valueOf(i));
+
             textFieldsDataX.add(dataX.getText());
             textFieldsDataY.add(dataY.getText());
+
             tableau.addColumn(i + 1);
             tableau.add(dataY, i + 1, 0);
             tableau.add(dataX, i + 1, 1);
@@ -97,7 +99,6 @@ public class TableauDesValeursController implements Fonctionnalite {
 
         for (int i = 0, j = 0; i < textFieldsDataX.size() && j < textFieldsDataY.size(); i++,j++) {
             donneesSerieInput.add(new Data(Double.parseDouble(textFieldsDataX.get(i)), Double.parseDouble(textFieldsDataY.get(j))));
-
         }
 
         serie.setDonnees(donneesSerieInput);

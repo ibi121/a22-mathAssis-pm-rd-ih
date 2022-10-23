@@ -26,7 +26,11 @@ import java.io.IOException;
 @FxmlView("../vue/Generateur.fxml")
 public class GenerateurController implements Fonctionnalite {
 
+    @FXML
+    public TextField inputTextNomAuteur;
+    @FXML
     private Generateur generateur;
+    @FXML
     private SerieService bd;
     @FXML
     private Text textMinimum;
@@ -76,11 +80,12 @@ public class GenerateurController implements Fonctionnalite {
         this.inputTextNombreValeurs.setText("6");
         this.inputTextNombreSeries.setText("1");
         this.inputTextNomSerie.setText("Série aléatoire avec valeurs par défaut");
+        this.inputTextNomAuteur.setText("inconnue");
     }
     @FXML
     void valider(ActionEvent event) throws IOException {
         generateur = new Generateur(Integer.parseInt(inputTextMin.getText()), Integer.parseInt(inputTextMax.getText()),
-                    Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText());
+                    Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText(), inputTextNomAuteur.getText());
 
 
         generateur.creationValeurs();
@@ -100,6 +105,8 @@ public class GenerateurController implements Fonctionnalite {
         Parent root2 = (Pane) controllerAndView2.getView().get();
         Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
+        secondaryStage.sizeToScene();
+        secondaryStage.resizableProperty().set(false);
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();

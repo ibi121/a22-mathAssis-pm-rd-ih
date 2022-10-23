@@ -69,6 +69,8 @@ public class AProposController{
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("A Propos");
         secondaryStage.setScene(scene2);
+        secondaryStage.sizeToScene();
+        secondaryStage.resizableProperty().set(false);
         secondaryStage.show();
     }
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.repository.query.JSqlParserUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -103,13 +105,14 @@ public class MainController {
             List<Serie> series = getAllSeries();
             traceurController.setStage(context, series);
         }
+
     }
 
     @FXML
     void creationTableauValeurs(ActionEvent actionEvent) {
         if (getSelectedSerie() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Vous devez choisir un série pour visionner ses données.");
+            alert.setContentText("Vous devez choisir un série pour visionner ces données.");
             alert.show();
         } else {
             Serie serie = getSelectedSerie();
@@ -142,11 +145,11 @@ public class MainController {
 
         if (listeDeSerie.isEmpty()) {
             alert.setAlertType(Alert.AlertType.WARNING);
-            alert.setContentText("attention vous n'avez pas selectionner de Serie!");
+            alert.setContentText("attention vous n'avez pas selectionné de Serie!");
             alert.show();
         } else {
             alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("etes vous sure de vouloir supprimer la serie : ");
+            alert.setContentText("Etes vous sure de vouloir supprimer la serie : ");
             alert.showAndWait().ifPresent(reponse -> {
                 if (reponse == ButtonType.OK) {
                     for (Serie serie : listeDeSerie) {
@@ -155,6 +158,39 @@ public class MainController {
                 }
             });
         }
+
+        List<Serie> listView = new ArrayList<>();
+        listView.addAll(listViewSeries.getItems());
+
+        List<Serie> seriesBd = new ArrayList<>();
+        seriesBd.addAll(bd.GetAllSerie());
+
+        if (!seriesBd.containsAll(listView)) {
+            this.listViewSeries.getItems().removeAll(listView);
+            for (Serie s : bd.GetAllSerie()) {
+                this.listViewSeries.getItems().add(s);
+            }
+
+        }
+
+    }
+
+    @FXML
+    public void refreshTable(MouseEvent mouseEvent) {
+        List<Serie> listView = new ArrayList<>();
+        listView.addAll(listViewSeries.getItems());
+
+        List<Serie> seriesBd = new ArrayList<>();
+        seriesBd.addAll(bd.GetAllSerie());
+
+        if (!listView.containsAll(seriesBd)) {
+            this.listViewSeries.getItems().removeAll(listView);
+            for (Serie s : bd.GetAllSerie()) {
+                this.listViewSeries.getItems().add(s);
+            }
+
+        }
+
     }
 
 
@@ -207,6 +243,7 @@ public class MainController {
     public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController) {
         this.tableauDesValeursController = tableauDesValeursController;
     }
+
 
 }
 

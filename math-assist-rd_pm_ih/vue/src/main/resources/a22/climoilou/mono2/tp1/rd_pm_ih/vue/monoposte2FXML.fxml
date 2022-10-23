@@ -16,7 +16,7 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="296.0">
                <children>
-                  <ListView id="listViewSerie" fx:id="listViewSeries" prefHeight="754.0" prefWidth="296.0" />
+                  <ListView id="listViewSerie" fx:id="listViewSeries" onMouseClicked="#refreshTable" prefHeight="754.0" prefWidth="296.0" />
                </children>
             </VBox>
          </children>

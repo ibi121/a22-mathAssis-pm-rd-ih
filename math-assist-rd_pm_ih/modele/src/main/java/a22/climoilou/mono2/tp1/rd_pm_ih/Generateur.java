@@ -13,17 +13,20 @@ public class Generateur {
     private int nbrSeries;
     private String nomSerie;
 
+    private String nomAuteur;
+
     private List<Serie> seriesCrees;
 
     private List<Data> valeurs;
 
 
-    public Generateur(int nombreMinimum, int nombreMaximum, int nombreValeurs, int nbrSeries, String nomSerie) {
+    public Generateur(int nombreMinimum, int nombreMaximum, int nombreValeurs, int nbrSeries, String nomSerie, String nomAuteur) {
         this.nombreMinimum = nombreMinimum;
         this.nombreMaximum = nombreMaximum;
         this.nombreValeurs = nombreValeurs;
         this.nbrSeries = nbrSeries;
         this.nomSerie = nomSerie;
+        this.nomAuteur = nomAuteur;
         this.seriesCrees = new ArrayList<>();
         this.valeurs = new ArrayList<>();
     }
@@ -89,13 +92,14 @@ public class Generateur {
         for(int i = 0; i < this.nombreValeurs; i++){
             yAleatoire = (int) (Math.random() * (this.nombreMaximum - this.nombreMinimum)) + this.nombreMinimum;
 
-            this.valeurs.add(new Data(i, yAleatoire));
+            this.valeurs.add(new Data(i + 1, yAleatoire));
 
         }
     }
 
     public void creationSeries(){
         Serie s = new Serie(this.nomSerie);
+        s.setNomAuteur(this.nomAuteur);
         s.setDonnees(this.valeurs);
 
         this.seriesCrees.add(s);

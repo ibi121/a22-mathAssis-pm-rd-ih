@@ -7,6 +7,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Scope("prototype")
@@ -39,42 +41,13 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     public TextField nbrData;
-
-    @FXML
-    public Button btnAjoutSerie;
-
     @FXML
     public TextField inputEquation;
+
+    @FXML
     private EquationService equationService;
-
-    private SerieService serieService;
     @FXML
-    private Text textSaisie;
-
-    @FXML
-    private VBox vbox2;
-
-    @FXML
-    private Button btnEffacer;
-
-    @FXML
-    private VBox vbox1;
-
-    @FXML
-    private Button btnModifier;
-
-    @FXML
-    private ListView<String> listViewFonctions; //Aller chercher en base de données;
-
-    @FXML
-    private HBox hbox1;
-
-    @FXML
-    private Button btnAjout;
-
-    @FXML
-    private Pane paneBase;
-
+    private ListView<String> listViewFonctions;
 
     @Autowired
     public void setEquationService(EquationService equationService) {
@@ -82,92 +55,98 @@ public class EditeurEquationsController implements Fonctionnalite {
     }
 
     @Autowired
-    public void setSerieService(SerieService serieService) { this.equationService = equationService; }
+    public void setSerieService(SerieService serieService) {
+        this.equationService = equationService;
+    }
 
     @FXML
     private void initialize() {
 
         for (Equations e : equationService.GetAllEquations()
         ) {
-            this.listViewFonctions.getItems().add(e.toString());
+            this.listViewFonctions.getItems().add(e.getEquation());
         }
     }
 
     @FXML
     void ajouterEquation(ActionEvent event) {
         String equation = inputEquation.getText();
+        List<String> listeViewTemp = new ArrayList<>();
 
-        Equations equations = new Equations(equation);
-        listViewFonctions.getItems().add(equation);
-
-        int nombreData = Integer.parseInt(nbrData.getText());
-
-        System.out.println(equation);
-        System.out.println(nombreData);
-
-        Serie s = null;
-
-        double y = calculerEquation(equation);
-        System.out.println(y);
-//        if(/*inputA.getText().equals("") || inputX.getText().equals("")*/false){
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Champs incomplets!!!");
-//            alert.setContentText("Veuilles remplir TOUS les champs.");
-//            alert.show();
-//        }else{
-//            s = new Serie();
-//            s.setDonnees(new ArrayList<>());
-//            s.addData(new Data(Double.parseDouble(inputEquation.getText()), y));
-//            equationService.SaveEquation(equations);
-//            serieService.SaveSerie(s);
-//        }
+        listeViewTemp.addAll(listViewFonctions.getItems());
 
 
-        //System.out.println(s.getDonnees());
+        if (listeViewTemp.contains(equation)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Impossible d'ajouter la fontion à la liste!");
+            alert.setContentText("La fonction que vous voulez ajouter existe déjà! Veuillez en faire une autre.");
+            alert.show();
+        } else {
+            Equations equations = new Equations(equation);
+            listViewFonctions.getItems().add(equation);
+
+            equationService.SaveEquation(equations);
+
+            System.out.println(equationService.GetAllEquations());
+        }
+
     }
 
     @FXML
     void effacerEquation(ActionEvent event) {
         String itemDelete = listViewFonctions.getSelectionModel().getSelectedItem();
-        listViewFonctions.getItems().remove(itemDelete);
+
+        if(itemDelete == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune equation selectionnee");
+            alert.setContentText("Pour supprimer une fonction, vous devez la sélectionner!");
+            alert.show();
+        }else{
+            listViewFonctions.getItems().remove(itemDelete);
+            for (Equations e : equationService.GetAllEquations()
+            ) {
+                if (itemDelete.equals(e.getEquation())) {
+                    equationService.SupprimerEquations(e);
+                }
+            }
+        }
+
+
+
     }
 
     @FXML
     void modifierEquation(ActionEvent event) {
         String item = listViewFonctions.getSelectionModel().getSelectedItem();
-        //inputEquation.setText(item);
-
-
+        inputEquation.setText(item);
     }
 
     @FXML
     public void ajouterSerie(ActionEvent actionEvent) {
-        String equation = inputA.getText() + inputOpe1.getText() + inputX.getText() + inputOp2.getText() + inputB.getText();
-
-        Equations equations = new Equations(inputA.getText(), inputOpe1.getText(),
-                inputX.getText(), inputOp2.getText(), inputB.getText());
-        listViewFonctions.getItems().add(equation);
+        String equation = inputEquation.getText();
+        Equations equationsTemp = new Equations(equation);
 
         int nombreData = Integer.parseInt(nbrData.getText());
 
-        System.out.println(equation);
-        System.out.println(nombreData);
-
         Serie s = null;
 
-        double y = calculerEquation(equation + " - y");
-
-        if(inputA.getText().equals("") || inputX.getText().equals("")){
+        if (inputEquation.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champs incomplets!!!");
-            alert.setContentText("Veuilles remplir TOUS les champs.");
+            alert.setTitle("Champ incomplet!!!");
+            alert.setContentText("Veuillez entrer une fonction au format f(x)=a*x+b");
             alert.show();
-        }else{
+        } else {
             s = new Serie();
-            s.setDonnees(new ArrayList<>());
-            s.addData(new Data(Double.parseDouble(inputX.getText()), y));
-            equationService.SaveEquation(equations);
-            serieService.SaveSerie(s);
+            ArrayList<Data> donnesAjouter = new ArrayList<>();
+
+            for (int i = 0; i < nombreData; i++) {
+                double y = equationsTemp.calculerEquation(equation, i + 1);
+
+                donnesAjouter.add(new Data(i + 1, y));
+
+            }
+
+            s.setDonnees(donnesAjouter);
         }
 
 
@@ -185,19 +164,12 @@ public class EditeurEquationsController implements Fonctionnalite {
         Parent root2 = (Pane) controllerAndView2.getView().get();
         Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
+        secondaryStage.sizeToScene();
+        secondaryStage.resizableProperty().set(false);
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 
-    }
-
-    private double calculerEquation(String expression){
-        Function function = new Function(expression);
-        //Expression e1 = new Expression("solve( " + expression + ", y, -10000, 10000 )");
-        Expression e1 = new Expression("f(3)", function);
-
-        mXparser.consolePrint(e1.calculate());
-        return e1.calculate();
     }
 
 

@@ -14,66 +14,34 @@ public class Equations {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String a;
-
-    private String b;
-
-    private String x;
-
-    private String operation1;
-
-    private String operation2;
+    private String equation;
 
     public Equations() {
     }
 
-    public Equations(String a) {
-        this.a = a;
+    public Equations(String equation) {
+        this.equation = equation;
+    }
+
+    public Equations(Long id, String equation) {
+        this.id = id;
+        this.equation = equation;
     }
 
     public Long getId() {
         return id;
     }
 
-
-    public String getA() {
-        return a;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setA(String a) {
-        this.a = a;
+    public String getEquation() {
+        return equation;
     }
 
-    public String getB() {
-        return b;
-    }
-
-    public void setB(String b) {
-        this.b = b;
-    }
-
-    public String getX() {
-        return x;
-    }
-
-    public void setX(String x) {
-        this.x = x;
-    }
-
-    public String getOperation1() {
-        return operation1;
-    }
-
-    public void setOperation1(String operation1) {
-        this.operation1 = operation1;
-    }
-
-    public String getOperation2() {
-        return operation2;
-    }
-
-    public void setOperation2(String operation2) {
-        this.operation2 = operation2;
+    public void setEquation(String equation) {
+        this.equation = equation;
     }
 
     @Override
@@ -82,6 +50,14 @@ public class Equations {
         if (o == null || getClass() != o.getClass()) return false;
         Equations equations = (Equations) o;
         return Objects.equals(id, equations.id);
+    }
+
+    public double calculerEquation(String expression, int x) {
+        Function function = new Function(expression);
+        Expression e1 = new Expression("f(" + x + ")", function);
+
+        mXparser.consolePrint(e1.calculate());
+        return e1.calculate();
     }
 
     @Override
