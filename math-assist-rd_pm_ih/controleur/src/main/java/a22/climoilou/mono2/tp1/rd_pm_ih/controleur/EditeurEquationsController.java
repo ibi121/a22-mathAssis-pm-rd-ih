@@ -139,6 +139,40 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     }
 
+    @FXML
+    public void ajouterSerie(ActionEvent actionEvent) {
+        String equation = inputA.getText() + inputOpe1.getText() + inputX.getText() + inputOp2.getText() + inputB.getText();
+
+        Equations equations = new Equations(inputA.getText(), inputOpe1.getText(),
+                inputX.getText(), inputOp2.getText(), inputB.getText());
+        listViewFonctions.getItems().add(equation);
+
+        int nombreData = Integer.parseInt(nbrData.getText());
+
+        System.out.println(equation);
+        System.out.println(nombreData);
+
+        Serie s = null;
+
+        double y = calculerEquation(equation + " - y");
+
+        if(inputA.getText().equals("") || inputX.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Champs incomplets!!!");
+            alert.setContentText("Veuilles remplir TOUS les champs.");
+            alert.show();
+        }else{
+            s = new Serie();
+            s.setDonnees(new ArrayList<>());
+            s.addData(new Data(Double.parseDouble(inputX.getText()), y));
+            equationService.SaveEquation(equations);
+            serieService.SaveSerie(s);
+        }
+
+
+        System.out.println(s.getDonnees());
+    }
+
     @Override
     public String getNom() {
         return "Editeur  de fonctions";
@@ -162,5 +196,6 @@ public class EditeurEquationsController implements Fonctionnalite {
         mXparser.consolePrint(e1.calculate());
         return e1.calculate();
     }
+
 
 }

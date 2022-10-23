@@ -31,10 +31,10 @@
                         </HBox>
                         <VBox alignment="CENTER" prefHeight="335.0" prefWidth="362.0" spacing="25.0">
                            <children>
-                              <Button fx:id="btnAjout" mnemonicParsing="false" onAction="#ajouterEquation" text="Ajouter l'equation" />
-                              <Button fx:id="btnEffacer" mnemonicParsing="false" onAction="#effacerEquation" text="Effacer l'equation" />
-                              <Button fx:id="btnModifier" mnemonicParsing="false" onAction="#modifierEquation" text="Modifier l'equation" />
-                              <Button fx:id="btnAjoutSerie" mnemonicParsing="false" text="Ajouter une série" />
+                              <Button fx:id="btnAjout" mnemonicParsing="false" onAction="#ajouterEquation" text="Ajouter l'equation dans la liste" />
+                              <Button fx:id="btnEffacer" mnemonicParsing="false" onAction="#effacerEquation" text="Effacer l'equation de la liste" />
+                              <Button fx:id="btnModifier" mnemonicParsing="false" onAction="#modifierEquation" text="Modifier l'equation de la liste" />
+                              <Button fx:id="btnAjoutSerie" mnemonicParsing="false" onAction="#ajouterSerie" text="Créer une série à partir de l'équation" />
                            </children>
                         </VBox>
                      </children>

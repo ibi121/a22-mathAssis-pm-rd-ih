@@ -6,10 +6,12 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -22,26 +24,36 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @FxmlView("../vue/TableauValeurs.fxml")
 public class TableauDesValeursController implements Fonctionnalite {
 
+    @FXML
     public GridPane tableau;
+
+    @FXML
+    public TextField nomSerie;
     @FXML
     private Button btnChangeData;
 
-    @FXML
-    private Text serieChoisie;
+    private SerieService serieService;
+
+    private ArrayList<String> textFieldsDataX = new ArrayList<>();
+
+    private ArrayList<String> textFieldsDataY = new ArrayList<>();
 
 
-    @FXML
-    private void initialize(){
-
-
+    @Autowired
+    public void setSerieService(SerieService serieService) {
+        this.serieService = serieService;
     }
-    @FXML
-    void changeData(ActionEvent event) {
 
+    @FXML
+    private void initialize() {
     }
 
     @Override
@@ -58,16 +70,38 @@ public class TableauDesValeursController implements Fonctionnalite {
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
-        serieChoisie.setText(serie.getNomSerie());
+        nomSerie.setText(serie.getNomSerie());
 
-            for(int i = 0; i < serie.getDonnees().size(); i++){
+        for (int i = 0; i < serie.getDonnees().size(); i++) {
             Text dataX = new Text();
-            Text dataY = new Text();
+            TextField dataY = new TextField();
             dataX.setText(String.valueOf(serie.getDonnees().get(i).getX()));
+            dataX.setId("x" + String.valueOf(i));
             dataY.setText(String.valueOf(serie.getDonnees().get(i).getY()));
-            tableau.addColumn(i+1);
-            tableau.add(dataX, i+1, 0);
-            tableau.add(dataY, i+1, 1);
+            dataY.setId("y" + String.valueOf(i));
+            textFieldsDataX.add(dataX.getText());
+            textFieldsDataY.add(dataY.getText());
+            tableau.addColumn(i + 1);
+            tableau.add(dataY, i + 1, 0);
+            tableau.add(dataX, i + 1, 1);
         }
+
+    }
+
+    @FXML
+    public void creationSerie(ActionEvent actionEvent) {
+        Serie serie = new Serie();
+        List<Data> donneesSerieInput = new ArrayList<Data>();
+
+        serie.setNomSerie(nomSerie.getText());
+
+        for (int i = 0, j = 0; i < textFieldsDataX.size() && j < textFieldsDataY.size(); i++,j++) {
+            donneesSerieInput.add(new Data(Double.parseDouble(textFieldsDataX.get(i)), Double.parseDouble(textFieldsDataY.get(j))));
+
+        }
+
+        serie.setDonnees(donneesSerieInput);
+        serieService.SaveSerie(serie);
+        System.out.println(serie);
     }
 }
