@@ -29,7 +29,7 @@ public class AvisController {
 
 
     @FXML
-    public ListView listViewComments;
+    public ListView<Utilisateur> listViewComments;
     private UtilisateurService BD;
 
     @Autowired
@@ -86,6 +86,11 @@ public class AvisController {
     @FXML
     void initialize(){
 
+        for (Utilisateur util:BD.GetAllUtilisateur()) {
+            this.listViewComments.getItems().add(util);
+        }
+        this.listViewComments.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 
 
@@ -96,6 +101,7 @@ public class AvisController {
         Parent root2 = (SplitPane) controllerAndView2.getView().get();
         Scene scene2 = new Scene(root2);
         Stage secondaryStage = new Stage();
+        secondaryStage.setTitle("Avis d'utilisateurs");
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 

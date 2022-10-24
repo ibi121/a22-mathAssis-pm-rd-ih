@@ -10,27 +10,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AvisController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AvisController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <VBox layoutX="3.0" layoutY="1.0" prefHeight="400.0" prefWidth="175.0">
                <children>
-                  <ListView fx:id="listViewComments" prefHeight="402.0" prefWidth="175.0" />
+                  <ListView fx:id="listViewComments" prefHeight="402.0" prefWidth="175.0" style="-fx-background-color: aquamarine;" />
                </children>
             </VBox>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="334.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="334.0" style="-fx-background-color: aqua;">
          <children>
-            <TextField fx:id="fieldPrenom" layoutX="126.0" layoutY="94.0" />
-            <TextField fx:id="fieldNom" layoutX="126.0" layoutY="129.0" />
-            <TextField fx:id="fieldCourriel" layoutX="126.0" layoutY="174.0" />
-            <Text layoutX="49.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez laisser une commentaire sur notre application :o)" />
+            <TextField fx:id="fieldPrenom" layoutX="126.0" layoutY="85.0" />
+            <TextField fx:id="fieldNom" layoutX="126.0" layoutY="121.0" />
+            <TextField fx:id="fieldCourriel" layoutX="126.0" layoutY="162.0" />
+            <Text layoutX="49.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez laisser une commentaire sur notre application :o)" />
             <TextArea fx:id="fieldCommentaire" layoutX="42.0" layoutY="241.0" prefHeight="84.0" prefWidth="351.0" />
             <Button fx:id="bouttonSauvegarderAvis" layoutX="142.0" layoutY="344.0" mnemonicParsing="false" onAction="#SauvegarderAvis" text="Sauvegarder mon avis" />
             <Label layoutX="60.0" layoutY="89.0" text="Prenom" />
-            <Label layoutX="81.0" layoutY="133.0" text="Nom" />
-            <Label layoutX="69.0" layoutY="174.0" text="Courriel" />
+            <Label layoutX="77.0" layoutY="125.0" text="Nom" />
+            <Label layoutX="70.0" layoutY="166.0" text="Courriel" />
             <Label layoutX="42.0" layoutY="210.0" text="Commentaire :" />
          </children></AnchorPane>
   </items>

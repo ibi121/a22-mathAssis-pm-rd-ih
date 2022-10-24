@@ -78,7 +78,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return recommendationl + "De  : " + nom;
+        return recommendationl + "De : " + Prenom + "-" +nom;
     }
 
 
