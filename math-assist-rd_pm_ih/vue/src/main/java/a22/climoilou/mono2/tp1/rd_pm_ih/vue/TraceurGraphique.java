@@ -17,7 +17,6 @@ import java.util.Map;
 @FxmlView("../vue/Traceur.fxml")
 public class TraceurGraphique {
 
-
     @FXML
     private LineChart graphiqueSerie;
 

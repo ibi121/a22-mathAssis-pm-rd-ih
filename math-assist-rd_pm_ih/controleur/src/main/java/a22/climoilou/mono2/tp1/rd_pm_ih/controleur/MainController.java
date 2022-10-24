@@ -60,6 +60,8 @@ public class MainController {
 
     private TraceurController traceurController;
 
+    private TronqueurController tronqueurController;
+
     private TableauDesValeursController tableauDesValeursController;
 
     private AvisController avisController;
@@ -99,6 +101,12 @@ public class MainController {
         if (getSelectedSerie() != null) {
             Serie serie = getSelectedSerie();
             modificateurController.setStage(context, serie);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificateur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une serie de la liste.");
+            alert.show();
         }
     }
 
@@ -113,8 +121,13 @@ public class MainController {
         if (getAllSeries() != null) {
             List<Serie> series = getAllSeries();
             traceurController.setStage(context, series);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Traceur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une ou plusieurs series de la liste.");
+            alert.show();
         }
-
     }
 
     @FXML
@@ -128,6 +141,20 @@ public class MainController {
             this.tableauDesValeursController.setStage(context, serie);
         }
 
+    }
+
+    @FXML
+    void tronqueur(ActionEvent event) throws IOException {
+        if (getAllSeries() != null && getAllSeries().size() == 2) {
+            List<Serie> series = getAllSeries();
+            tronqueurController.setStage(context, series);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Tronqueur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner deux series de la liste.");
+            alert.show();
+        }
     }
 
     @FXML
@@ -252,6 +279,11 @@ public class MainController {
     @Autowired
     public void setTraceurController(TraceurController traceurController) {
         this.traceurController = traceurController;
+    }
+
+    @Autowired
+    public void setTronqueurController(TronqueurController tronqueurController) {
+        this.tronqueurController = tronqueurController;
     }
 
     @Autowired

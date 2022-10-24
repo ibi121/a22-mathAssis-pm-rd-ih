@@ -87,17 +87,16 @@ public class Generateur {
         this.valeurs = valeurs;
     }
 
-    public void creationValeurs(){
+    public void creationValeurs() {
         int yAleatoire = 0;
-        for(int i = 0; i < this.nombreValeurs; i++){
+        for (int i = 0; i < this.nombreValeurs; i++) {
             yAleatoire = (int) (Math.random() * (this.nombreMaximum - this.nombreMinimum)) + this.nombreMinimum;
 
-            this.valeurs.add(new Data(i + 1, yAleatoire));
-
+            this.valeurs.add(new Data(i, yAleatoire));
         }
     }
 
-    public void creationSeries(){
+    public void creationSeries() {
         Serie s = new Serie(this.nomSerie);
         s.setNomAuteur(this.nomAuteur);
         s.setDonnees(this.valeurs);
