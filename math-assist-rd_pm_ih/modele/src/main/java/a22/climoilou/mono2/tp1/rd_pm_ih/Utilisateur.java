@@ -1,19 +1,14 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Utilisateur {
-    
-    @Id
+
+
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Id
     private Long id;
     private String Prenom;
     private String nom;
@@ -46,10 +41,6 @@ public class Utilisateur {
         this.recommendationl = recommendationl;
     }
 
-    @javax.persistence.Id
-    public Long getId() {
-        return id;
-    }
 
     public String getPrenom() {
         return Prenom;
@@ -67,8 +58,9 @@ public class Utilisateur {
         return recommendationl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -83,4 +75,12 @@ public class Utilisateur {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return recommendationl + "De : " + Prenom + "-" +nom;
+    }
+
+
+
 }

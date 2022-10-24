@@ -27,6 +27,7 @@ public class MainController {
 
     @FXML
     public Button btnSupprimer;
+    public Button FunctionIbrahim;
     @FXML
     private Button btnAPropos;
 
@@ -54,11 +55,16 @@ public class MainController {
     private GenerateurController generateurController;
     private ModificateurController modificateurController;
 
+
     private EditeurEquationsController editeurEquationsController;
 
     private TraceurController traceurController;
 
+    private TronqueurController tronqueurController;
+
     private TableauDesValeursController tableauDesValeursController;
+
+    private AvisController avisController;
 
     private SerieService bd;
 
@@ -73,6 +79,11 @@ public class MainController {
 
     @FXML
     private ListView<Serie> listViewSeries;
+
+    @FXML
+    public void OuvrirCommentaire(ActionEvent actionEvent) throws IOException {
+        avisController.setStage(this.context);
+    }
 
     @FXML
     void aPropos(ActionEvent event) throws IOException {
@@ -90,6 +101,12 @@ public class MainController {
         if (getSelectedSerie() != null) {
             Serie serie = getSelectedSerie();
             modificateurController.setStage(context, serie);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificateur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une serie de la liste.");
+            alert.show();
         }
     }
 
@@ -104,8 +121,13 @@ public class MainController {
         if (getAllSeries() != null) {
             List<Serie> series = getAllSeries();
             traceurController.setStage(context, series);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Traceur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une ou plusieurs series de la liste.");
+            alert.show();
         }
-
     }
 
     @FXML
@@ -122,6 +144,20 @@ public class MainController {
     }
 
     @FXML
+    void tronqueur(ActionEvent event) throws IOException {
+        if (getAllSeries() != null && getAllSeries().size() == 2) {
+            List<Serie> series = getAllSeries();
+            tronqueurController.setStage(context, series);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Tronqueur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner deux series de la liste.");
+            alert.show();
+        }
+    }
+
+    @FXML
     private void initialize() {
         for (Serie s : bd.GetAllSerie()) {
             this.listViewSeries.getItems().add(s);
@@ -129,6 +165,12 @@ public class MainController {
         listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+
+
+    @Autowired
+    public void setAvisController(AvisController avisController) {
+        this.avisController = avisController;
+    }
 
     /**
      * Prends un ou des elements de la liste de serie et les supprime de ls BD
@@ -240,9 +282,15 @@ public class MainController {
     }
 
     @Autowired
+    public void setTronqueurController(TronqueurController tronqueurController) {
+        this.tronqueurController = tronqueurController;
+    }
+
+    @Autowired
     public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController) {
         this.tableauDesValeursController = tableauDesValeursController;
     }
+
 
 
 }
