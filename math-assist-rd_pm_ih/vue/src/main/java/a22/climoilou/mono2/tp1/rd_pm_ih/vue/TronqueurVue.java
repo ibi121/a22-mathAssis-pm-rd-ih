@@ -3,6 +3,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.vue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -59,11 +60,22 @@ public class TronqueurVue {
 
     @FXML
     void creerNouvelleSerie(ActionEvent event) {
-        if (!nouvelleSerie.isEmpty() && !nomNouvelleSerie.getText().isEmpty()) {
-            tronqueurVueI.envoieNouvelleSerie(nomNouvelleSerie.getText(), nouvelleSerie);
-            System.out.println("Bonjour");
-        } else {
-            System.out.println(":o(");
+        try {
+            if (!nouvelleSerie.isEmpty() && !nomNouvelleSerie.getText().isEmpty()) {
+                tronqueurVueI.envoieNouvelleSerie(nomNouvelleSerie.getText(), nouvelleSerie);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Tronqueur information");
+                alert.setHeaderText("Information");
+                alert.setContentText("Veuillez ajouter un nom a la nouvelle série.");
+                alert.show();
+            }
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Tronqueur information");
+            alert.setHeaderText("Information");
+            alert.setContentText("Veuillez tronquer les séries.");
+            alert.show();
         }
     }
 
@@ -80,6 +92,7 @@ public class TronqueurVue {
 
     private void ajoutSerie(ListView<String> listSerie, HashMap<Double, Double> series) {
         if (this.tronqueurVueI != null) {
+            listSerie.getItems().clear();
             for (Map.Entry<Double, Double> set : series.entrySet()) {
                 listSerie.getItems().add("x = " + set.getKey() + " : y = " + set.getValue());
             }
