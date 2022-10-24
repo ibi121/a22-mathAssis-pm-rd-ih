@@ -85,6 +85,7 @@ public class TronqueurVue {
         nomSerie2.setText(tronqueurVueI.getNomSeries().get(1));
         ajoutSerie(listSerie1, tronqueurVueI.getSeries().get(0));
         ajoutSerie(listSerie2, tronqueurVueI.getSeries().get(1));
+        listNouvelleSerie.getItems().clear();
         listSerie1.setMouseTransparent(true);
         listSerie2.setMouseTransparent(true);
         listNouvelleSerie.setMouseTransparent(true);

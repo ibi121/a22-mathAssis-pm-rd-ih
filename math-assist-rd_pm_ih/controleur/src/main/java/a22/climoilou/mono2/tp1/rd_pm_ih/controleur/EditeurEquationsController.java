@@ -145,9 +145,9 @@ public class EditeurEquationsController implements Fonctionnalite {
             ArrayList<Data> donnesAjouter = new ArrayList<>();
 
             for (int i = 0; i < nombreData; i++) {
-                double y = equationsTemp.calculerEquation(equation, i + 1);
+                double y = equationsTemp.calculerEquation(equation, i);
 
-                donnesAjouter.add(new Data(i + 1, y));
+                donnesAjouter.add(new Data(i, y));
 
             }
 
