@@ -27,6 +27,7 @@ public class MainController {
 
     @FXML
     public Button btnSupprimer;
+    public Button FunctionIbrahim;
     @FXML
     private Button btnAPropos;
 
@@ -54,11 +55,14 @@ public class MainController {
     private GenerateurController generateurController;
     private ModificateurController modificateurController;
 
+
     private EditeurEquationsController editeurEquationsController;
 
     private TraceurController traceurController;
 
     private TableauDesValeursController tableauDesValeursController;
+
+    private AvisController avisController;
 
     private SerieService bd;
 
@@ -73,6 +77,11 @@ public class MainController {
 
     @FXML
     private ListView<Serie> listViewSeries;
+
+    @FXML
+    public void OuvrirCommentaire(ActionEvent actionEvent) throws IOException {
+        avisController.setStage(this.context);
+    }
 
     @FXML
     void aPropos(ActionEvent event) throws IOException {
@@ -129,6 +138,12 @@ public class MainController {
         listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+
+
+    @Autowired
+    public void setAvisController(AvisController avisController) {
+        this.avisController = avisController;
+    }
 
     /**
      * Prends un ou des elements de la liste de serie et les supprime de ls BD
@@ -243,6 +258,7 @@ public class MainController {
     public void setTableauDesValeursController(TableauDesValeursController tableauDesValeursController) {
         this.tableauDesValeursController = tableauDesValeursController;
     }
+
 
 
 }
