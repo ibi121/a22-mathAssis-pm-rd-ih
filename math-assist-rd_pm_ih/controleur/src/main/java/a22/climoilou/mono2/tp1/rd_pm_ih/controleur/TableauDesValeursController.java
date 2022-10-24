@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.sound.midi.Soundbank;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,8 @@ public class TableauDesValeursController implements Fonctionnalite {
         }
 
         serie.setDonnees(donneesSerieInput);
+        serie.setNomAuteur("inconnue");
+        serie.setDateCreation(LocalDateTime.now());
         serieService.SaveSerie(serie);
-        System.out.println(serie);
     }
 }
