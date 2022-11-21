@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -16,6 +19,9 @@ import java.util.Map;
 @Component
 @FxmlView("../vue/Traceur.fxml")
 public class TraceurGraphique {
+
+    @FXML
+    private AnchorPane iAmGroot;
 
     @FXML
     private LineChart graphiqueSerie;
@@ -35,6 +41,8 @@ public class TraceurGraphique {
 
     @FXML
     public void initialize() {
+        graphiqueSerie.prefWidthProperty().bind(iAmGroot.widthProperty());
+        graphiqueSerie.prefHeightProperty().bind(iAmGroot.heightProperty());
         ajoutSeries();
     }
 
@@ -54,7 +62,6 @@ public class TraceurGraphique {
                 }
                 graphiqueSerie.getData().add(series);
             }
-
         }
     }
 }
