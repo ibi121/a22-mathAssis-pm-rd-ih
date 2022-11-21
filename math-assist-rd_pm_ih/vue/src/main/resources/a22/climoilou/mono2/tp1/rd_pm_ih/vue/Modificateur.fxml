@@ -4,31 +4,95 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="592.0" style="-fx-background-color: #FF1493;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.ModificateurController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="592.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.ModificateurController">
    <children>
-      <ListView fx:id="listData" layoutX="14.0" layoutY="14.0" prefHeight="383.0" prefWidth="248.0" />
-      <Button fx:id="dataX" layoutX="472.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickX" prefHeight="47.0" prefWidth="49.0" text="X" />
-      <Button fx:id="dataY" layoutX="525.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickY" prefHeight="47.0" prefWidth="49.0" text="Y" />
-      <Button fx:id="parentaiseOuvrante" layoutX="274.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickParentaiseOuvrante" prefHeight="59.0" prefWidth="68.0" text="(" />
-      <Button fx:id="parentaiseFermante" layoutX="351.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickParenthaiseFermante" prefHeight="59.0" prefWidth="68.0" text=")" />
-      <Button fx:id="division" layoutX="428.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickDivision" prefHeight="59.0" prefWidth="68.0" text="/" />
-      <Button fx:id="multiplication" layoutX="506.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickMultiplication" prefHeight="59.0" prefWidth="68.0" text="*" />
-      <Button fx:id="sept" layoutX="274.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickSept" prefHeight="59.0" prefWidth="68.0" text="7" />
-      <Button fx:id="huit" layoutX="353.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickHuit" prefHeight="59.0" prefWidth="68.0" text="8" />
-      <Button fx:id="neuf" layoutX="428.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickNeuf" prefHeight="59.0" prefWidth="68.0" text="9" />
-      <Button fx:id="soustraction" layoutX="506.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickSoustraction" prefHeight="59.0" prefWidth="68.0" text="-" />
-      <Button fx:id="quatre" layoutX="274.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickQuatre" prefHeight="59.0" prefWidth="68.0" text="4" />
-      <Button fx:id="cinq" layoutX="353.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickCinq" prefHeight="59.0" prefWidth="68.0" text="5" />
-      <Button fx:id="six" layoutX="428.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickSix" prefHeight="59.0" prefWidth="68.0" text="6" />
-      <Button fx:id="addition" layoutX="506.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickAddition" prefHeight="59.0" prefWidth="68.0" text="+" />
-      <Button fx:id="un" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickUn" prefHeight="59.0" prefWidth="68.0" text="1" />
-      <Button fx:id="deux" layoutX="351.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickDeux" prefHeight="59.0" prefWidth="68.0" text="2" />
-      <Button fx:id="trois" layoutX="428.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickTrois" prefHeight="59.0" prefWidth="68.0" text="3" />
-      <Button fx:id="entrer" layoutX="506.0" layoutY="269.0" mnemonicParsing="false" onAction="#onClickEntrer" prefHeight="125.0" prefWidth="68.0" text="Entrer" />
-      <Button fx:id="zero" layoutX="351.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickZero" prefHeight="59.0" prefWidth="68.0" text="0" />
-      <Button fx:id="point" layoutX="428.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickPoint" prefHeight="59.0" prefWidth="68.0" text="." />
-      <Button fx:id="clear" layoutX="274.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickClear" prefHeight="59.0" prefWidth="68.0" text="C" textAlignment="RIGHT" />
+      <ListView fx:id="listData" layoutX="14.0" layoutY="14.0" prefHeight="383.0" prefWidth="248.0" style="-fx-background-color: #1b3a4b;" />
+      <Button fx:id="dataX" layoutX="472.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickX" prefHeight="47.0" prefWidth="49.0" style="-fx-background-color: darkorchid;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="dataY" layoutX="525.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickY" prefHeight="47.0" prefWidth="49.0" style="-fx-background-color: darkorchid;" text="Y" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="parentaiseOuvrante" layoutX="274.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickParentaiseOuvrante" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="(" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="parentaiseFermante" layoutX="351.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickParenthaiseFermante" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text=")" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="division" layoutX="428.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickDivision" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="/" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="multiplication" layoutX="506.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickMultiplication" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="*" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="sept" layoutX="274.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickSept" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="7" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="huit" layoutX="353.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickHuit" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="8" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="neuf" layoutX="428.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickNeuf" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="9" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="soustraction" layoutX="506.0" layoutY="135.0" mnemonicParsing="false" onAction="#onClickSoustraction" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="-" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="quatre" layoutX="274.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickQuatre" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="4" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="cinq" layoutX="353.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickCinq" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="5" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="six" layoutX="428.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickSix" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="6" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="addition" layoutX="506.0" layoutY="201.0" mnemonicParsing="false" onAction="#onClickAddition" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="+" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="un" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickUn" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="1" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="deux" layoutX="351.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickDeux" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="2" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="trois" layoutX="428.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClickTrois" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="3" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="entrer" layoutX="506.0" layoutY="269.0" mnemonicParsing="false" onAction="#onClickEntrer" prefHeight="125.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="Entrer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="zero" layoutX="351.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickZero" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="point" layoutX="428.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickPoint" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="." textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="clear" layoutX="274.0" layoutY="336.0" mnemonicParsing="false" onAction="#onClickClear" prefHeight="59.0" prefWidth="68.0" style="-fx-background-color: darkorchid;" text="C" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <Pane fx:id="panneau" layoutX="274.0" layoutY="14.0" prefHeight="47.0" prefWidth="192.0" style="-fx-background-color: black;">
          <children>
             <TextField fx:id="textPanneau" layoutY="1.0" prefHeight="47.0" prefWidth="192.0" style="-fx-background-color: black; -fx-text-inner-color: Lime green;" />

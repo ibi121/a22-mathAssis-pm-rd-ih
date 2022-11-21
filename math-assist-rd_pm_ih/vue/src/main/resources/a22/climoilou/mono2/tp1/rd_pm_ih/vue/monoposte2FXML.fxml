@@ -10,52 +10,52 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane fx:id="splitPanePrincipal" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
+<SplitPane fx:id="splitPanePrincipal" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ADB9E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
    <items>
-      <Pane fx:id="paneGauche" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+      <Pane fx:id="paneGauche" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ADB9E3;">
          <children>
-            <VBox prefHeight="400.0" prefWidth="296.0">
+            <VBox prefHeight="400.0" prefWidth="296.0" style="-fx-background-color: #1b3a4b;">
                <children>
-                  <ListView id="listViewSerie" fx:id="listViewSeries" onMouseClicked="#refreshTable" prefHeight="754.0" prefWidth="296.0" />
+                  <ListView id="listViewSerie" fx:id="listViewSeries" onMouseClicked="#refreshTable" prefHeight="754.0" prefWidth="296.0" style="-fx-background-color: #1b3a4b;" />
                </children>
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="paneDroit" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+      <Pane fx:id="paneDroit" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ADB#ACDDE79E3;">
          <children>
-            <VBox fx:id="vBox1" alignment="TOP_CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="100.0" prefWidth="297.0" style="-fx-background-color: yellow; -fx-border-color: darkblue;">
+            <VBox fx:id="vBox1" alignment="TOP_CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="100.0" prefWidth="297.0" style="-fx-background-color: #006466;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Générateurs de série">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Générateurs de série">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                   <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Aléatoire" />
-                        <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: purple; -fx-text-fill: white;" text="Expression" />
+                        <Button fx:id="btnRandom" mnemonicParsing="false" onAction="#randomSerie" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="Aléatoire" />
+                        <Button fx:id="btnFonctions" mnemonicParsing="false" onAction="#editeurEquations" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="Expression" />
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </HBox>
                </children></VBox>
-            <VBox alignment="TOP_CENTER" layoutY="99.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: green;">
+            <VBox alignment="TOP_CENTER" layoutY="99.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: #006466;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des séries">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des séries">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                   <HBox alignment="CENTER" prefHeight="95.0" prefWidth="296.0" spacing="25.0">
                      <children>
-                        <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Modificateur" />
-                        <Button fx:id="btnTraceur" mnemonicParsing="false" onAction="#traceurSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Traceur">
+                        <Button fx:id="btnValiderSerie" mnemonicParsing="false" onAction="#validerLaSerie" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="Modificateur" />
+                        <Button fx:id="btnTraceur" mnemonicParsing="false" onAction="#traceurSerie" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="Traceur">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnSupprimer" alignment="CENTER" mnemonicParsing="false" onAction="#supprimerSerie" style="-fx-background-color: purple; -fx-text-fill: white;" text="Supprimer">
+                        <Button fx:id="btnSupprimer" alignment="CENTER" mnemonicParsing="false" onAction="#supprimerSerie" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="Supprimer">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -64,25 +64,25 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutY="199.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: blue;">
+            <VBox alignment="TOP_CENTER" layoutY="199.0" prefHeight="100.0" prefWidth="296.0" style="-fx-background-color: #006466;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fonctions personelles">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fonctions personelles">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button fx:id="btnFonctionRD" mnemonicParsing="false" onAction="#creationTableauValeurs" style="-fx-background-color: purple; -fx-text-fill: white;" text="RD" />
-                        <Button mnemonicParsing="false" onAction="#tronqueur" style="-fx-background-color: purple; -fx-text-fill: white;" text="PM" />
-                        <Button fx:id="FunctionIbrahim" mnemonicParsing="false" onAction="#OuvrirCommentaire" style="-fx-background-color: purple; -fx-text-fill: white;" text="IH" />
+                        <Button fx:id="btnFonctionRD" mnemonicParsing="false" onAction="#creationTableauValeurs" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="RD" />
+                        <Button mnemonicParsing="false" onAction="#tronqueur" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="PM" />
+                        <Button fx:id="FunctionIbrahim" mnemonicParsing="false" onAction="#OuvrirCommentaire" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="IH" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="50.0" style="-fx-background-color: red; -fx-border-color: brown;">
+            <HBox fx:id="hBox1" alignment="CENTER" layoutY="299.0" prefHeight="100.0" prefWidth="296.0" spacing="50.0" style="-fx-background-color: #006466;">
                <children>
-                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" style="-fx-background-color: purple; -fx-text-fill: white;" text="A Propos">
+                  <Button fx:id="btnAPropos" mnemonicParsing="false" onAction="#aPropos" style="-fx-background-color: darkorchid; -fx-text-fill: white;" text="A Propos">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

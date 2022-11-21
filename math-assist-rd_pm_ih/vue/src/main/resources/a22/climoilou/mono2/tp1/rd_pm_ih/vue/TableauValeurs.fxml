@@ -12,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="266.0" prefWidth="802.0" style="-fx-background-color: wheat;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.TableauDesValeursController">
+<AnchorPane prefHeight="266.0" prefWidth="802.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.TableauDesValeursController">
    <children>
       <VBox alignment="CENTER" prefHeight="248.0" prefWidth="770.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="31.0" prefWidth="770.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Série :" wrappingWidth="64.0">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Série :" wrappingWidth="64.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -56,7 +56,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnChangeData" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#creationSerie" prefHeight="34.0" prefWidth="227.0" style="-fx-background-color: darkorange;" text="Enregistrer la nouvelle série">
+                  <Button fx:id="btnChangeData" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#creationSerie" prefHeight="34.0" prefWidth="227.0" style="-fx-background-color: darkorchid;" text="Enregistrer la nouvelle série" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
