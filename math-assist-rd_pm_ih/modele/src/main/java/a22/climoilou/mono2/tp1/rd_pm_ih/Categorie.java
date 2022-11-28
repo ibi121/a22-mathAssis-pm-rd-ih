@@ -3,6 +3,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -15,9 +16,12 @@ public class Categorie {
 
     private String nom;
 
-    @ManyToOne
-    @JoinColumn(name = "sous_categorie_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "Categorie_id")
     private Categorie sousCategorie;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Categorie> sousCatgerorie1;
 
     public Categorie(String nom, Categorie sousCategorie) {
         this.nom = nom;
