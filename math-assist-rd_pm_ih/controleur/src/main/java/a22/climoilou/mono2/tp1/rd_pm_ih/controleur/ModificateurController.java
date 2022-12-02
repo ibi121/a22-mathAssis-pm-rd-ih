@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @FxmlView("../vue/Modificateur.fxml")
@@ -253,7 +254,7 @@ public class ModificateurController implements Fonctionnalite {
         listData.getItems().addAll(serie.getDonnees());
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
         Parent root = (Pane) controllerAndView.getView().get();
@@ -270,4 +271,5 @@ public class ModificateurController implements Fonctionnalite {
     public String getNom() {
         return "Modificateur";
     }
+
 }

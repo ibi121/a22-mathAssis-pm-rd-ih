@@ -167,7 +167,7 @@ public class EditeurEquationsController implements Fonctionnalite {
         return "Editeur  de fonctions";
     }
 
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(EditeurEquationsController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

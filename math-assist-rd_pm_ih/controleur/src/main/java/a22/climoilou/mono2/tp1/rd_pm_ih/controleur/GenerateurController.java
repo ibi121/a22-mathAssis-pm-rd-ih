@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
+
 @Component
 @Scope("prototype")
 @FxmlView("../vue/Generateur.fxml")
@@ -99,7 +101,7 @@ public class GenerateurController implements Fonctionnalite {
 
     }
 
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(GenerateurController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

@@ -12,6 +12,8 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @FxmlView("../vue/StatistiquesFXML.fxml")
 public class StatistiquesController implements Fonctionnalite{
@@ -26,7 +28,7 @@ public class StatistiquesController implements Fonctionnalite{
         return "Statistiques";
     }
 
-    public void setStage(ConfigurableApplicationContext context) {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(StatistiquesController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

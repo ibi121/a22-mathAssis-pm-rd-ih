@@ -90,4 +90,8 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
     public String getNom() {
         return "Tronqueur";
     }
+
+    public void setStage(ConfigurableApplicationContext c, Serie s,  List<Serie> series) throws IOException {
+
+    }
 }

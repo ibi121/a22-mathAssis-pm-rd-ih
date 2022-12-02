@@ -1,6 +1,7 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 //import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
+import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,11 +17,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @Scope("prototype")
 @FxmlView("../vue/AProposFXML.fxml")
-public class AProposController{
+public class AProposController implements Fonctionnalite{
 
     @FXML
     private Text aPropos;
@@ -61,7 +63,7 @@ public class AProposController{
         presenteParText = new Text();
     }
 
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(AProposController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

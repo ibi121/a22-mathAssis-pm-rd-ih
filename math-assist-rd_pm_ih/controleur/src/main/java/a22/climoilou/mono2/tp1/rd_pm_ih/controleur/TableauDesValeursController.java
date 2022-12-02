@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.sound.midi.Soundbank;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class TableauDesValeursController implements Fonctionnalite {
         return "Tableau des valeurs";
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie) {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(TableauDesValeursController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

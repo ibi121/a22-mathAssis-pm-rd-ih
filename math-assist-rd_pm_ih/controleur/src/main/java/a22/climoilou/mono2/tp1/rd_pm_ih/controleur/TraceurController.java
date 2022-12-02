@@ -30,7 +30,7 @@ public class TraceurController implements TraceurI, Fonctionnalite {
         this.traceurGraphique = traceurGraphique;
     }
 
-    public void setStage(ConfigurableApplicationContext context, List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s, List<Serie> series) throws IOException {
         setSerieGraphique(series);
         setNomSerie(series);
         FxWeaver fxWeaver = context.getBean(FxWeaver.class);
@@ -75,5 +75,6 @@ public class TraceurController implements TraceurI, Fonctionnalite {
     public String getNom() {
         return "Traceur";
     }
+
 }
 

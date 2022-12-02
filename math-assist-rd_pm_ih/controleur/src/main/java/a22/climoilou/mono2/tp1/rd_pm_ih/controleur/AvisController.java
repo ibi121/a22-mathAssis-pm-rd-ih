@@ -1,5 +1,6 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Utilisateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UserRepository;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UtilisateurService;
@@ -25,7 +26,7 @@ import java.util.List;
 @Component
 @Scope("prototype")
 @FxmlView("../vue/Review.fxml")
-public class AvisController {
+public class AvisController implements Fonctionnalite {
 
 
     @FXML
@@ -95,7 +96,7 @@ public class AvisController {
 
 
 
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(AvisController.class);
         Parent root2 = (SplitPane) controllerAndView2.getView().get();
@@ -105,5 +106,10 @@ public class AvisController {
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 
+    }
+
+    @Override
+    public String getNom() {
+        return "Avis";
     }
 }

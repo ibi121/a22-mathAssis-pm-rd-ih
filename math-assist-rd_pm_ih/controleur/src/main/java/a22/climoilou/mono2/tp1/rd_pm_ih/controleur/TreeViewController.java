@@ -31,7 +31,7 @@ public class TreeViewController implements Fonctionnalite {
     private TreeView<String> treeViewCategories;
 
     @FXML
-    public void setStage(ConfigurableApplicationContext context) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
 
         FxWeaver fxWeaver = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView = fxWeaver.load(TreeViewController.class);
@@ -74,7 +74,7 @@ public class TreeViewController implements Fonctionnalite {
     }
     @Override
     public String getNom() {
-        return null;
+        return "TreeView";
     }
 }
 
