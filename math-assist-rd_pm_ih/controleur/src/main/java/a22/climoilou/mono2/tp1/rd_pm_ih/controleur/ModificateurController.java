@@ -170,7 +170,7 @@ public class ModificateurController implements Fonctionnalite {
                     serie.setDateDerniereModification(LocalDateTime.now());
                     serieService.SaveSerie(serie);
                 }));
-                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+                listData.refresh();
             } else if (expressionXY != null) {
                 listData.getSelectionModel().getSelectedItems().forEach((data -> {
                     data.setY(expressionXY(modif, data.getX(), data.getY()).calculate());
@@ -178,7 +178,7 @@ public class ModificateurController implements Fonctionnalite {
                     serie.setDateDerniereModification(LocalDateTime.now());
                     serieService.SaveSerie(serie);
                 }));
-                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+                listData.refresh();
             } else if (expressionX != null) {
                 listData.getSelectionModel().getSelectedItems().forEach((data -> {
                     data.setY(expressionX(modif, data.getX()).calculate());
@@ -186,7 +186,7 @@ public class ModificateurController implements Fonctionnalite {
                     serie.setDateDerniereModification(LocalDateTime.now());
                     serieService.SaveSerie(serie);
                 }));
-                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+                listData.refresh();
             } else if (expressionY != null) {
                 listData.getSelectionModel().getSelectedItems().forEach((data -> {
                     data.setY(expressionY(modif, data.getY()).calculate());
@@ -194,7 +194,7 @@ public class ModificateurController implements Fonctionnalite {
                     serie.setDateDerniereModification(LocalDateTime.now());
                     serieService.SaveSerie(serie);
                 }));
-                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+                listData.refresh();
             } else if (expression.checkSyntax()) {
                 listData.getSelectionModel().getSelectedItems().forEach((data -> {
                     data.setY(expression.calculate());
@@ -202,7 +202,7 @@ public class ModificateurController implements Fonctionnalite {
                     serie.setDateDerniereModification(LocalDateTime.now());
                     serieService.SaveSerie(serie);
                 }));
-                listData.getSelectionModel().clearAndSelect(listData.getEditingIndex());
+                listData.refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Expression non valide");
