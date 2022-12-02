@@ -24,6 +24,7 @@ public class Categorie {
         this.sousCategorie = sousCategorie;
     }
 
+
     public Categorie() {
 
     }

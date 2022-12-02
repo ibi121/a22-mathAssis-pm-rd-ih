@@ -28,6 +28,7 @@ public class MainController {
     @FXML
     public Button btnSupprimer;
     public Button FunctionIbrahim;
+
     @FXML
     private Button btnAPropos;
 
@@ -62,9 +63,15 @@ public class MainController {
 
     private TronqueurController tronqueurController;
 
+
+
+    private TreeViewController treeViewController;
+
     private TableauDesValeursController tableauDesValeursController;
 
     private AvisController avisController;
+
+    private StatistiquesController statistiquesController;
 
     private SerieService bd;
 
@@ -89,6 +96,11 @@ public class MainController {
     void aPropos(ActionEvent event) throws IOException {
         btnAPropos.setText(aProposController.getNom());
         aProposController.setStage(this.context);
+    }
+
+    @FXML
+    void getStatistiques(ActionEvent event) {
+        statistiquesController.setStage(this.context);
     }
 
     @FXML
@@ -128,6 +140,11 @@ public class MainController {
             alert.setContentText("Veuillez selectionner une ou plusieurs series de la liste.");
             alert.show();
         }
+    }
+
+    @FXML
+    void creationTreeView(ActionEvent event) throws IOException {
+        this.treeViewController.setStage(context);
     }
 
     @FXML
@@ -217,6 +234,7 @@ public class MainController {
 
     }
 
+
     @FXML
     public void refreshTable(MouseEvent mouseEvent) {
         List<Serie> listView = new ArrayList<>();
@@ -291,7 +309,15 @@ public class MainController {
         this.tableauDesValeursController = tableauDesValeursController;
     }
 
+    @Autowired
+    public void setTreeViewController(TreeViewController treeViewController) {
+        this.treeViewController = treeViewController;
+    }
 
+    @Autowired
+    public void setStatistiquesController(StatistiquesController statistiquesController){
+        this.statistiquesController =  statistiquesController;
+    }
 
 }
 
