@@ -6,6 +6,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurGraphique;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurI;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -25,21 +26,39 @@ public class TraceurController implements TraceurI, Fonctionnalite {
     private List<HashMap<Double, Double>> serieGraphique;
     private TraceurGraphique traceurGraphique;
 
+    private Stage secondaryStage;
+
     @Autowired
     public void setTraceurGraphique(TraceurGraphique traceurGraphique) {
         this.traceurGraphique = traceurGraphique;
     }
 
     public void setStage(ConfigurableApplicationContext context, Serie s, List<Serie> series) throws IOException {
-        setSerieGraphique(series);
-        setNomSerie(series);
-        FxWeaver fxWeaver = context.getBean(FxWeaver.class);
-        FxControllerAndView controllerAndView = fxWeaver.load(TraceurGraphique.class);
-        Parent root = (AnchorPane) controllerAndView.getView().get();
-        Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Traceur de séries");
-        secondaryStage.setScene(new Scene(root));
-        secondaryStage.show();
+        if (series != null) {
+            if (secondaryStage == null) {
+                setNomSerie(series);
+                setSerieGraphique(series);
+                FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+                FxControllerAndView controllerAndView = fxWeaver.load(TraceurGraphique.class);
+                Parent root = (AnchorPane) controllerAndView.getView().get();
+                secondaryStage = new Stage();
+                secondaryStage.setTitle("Traceur de séries");
+                secondaryStage.setScene(new Scene(root));
+                secondaryStage.show();
+
+            } else {
+                setNomSerie(series);
+                setSerieGraphique(series);
+                secondaryStage.show();
+                traceurGraphique.resetGraphique();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificateur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une serie de la liste");
+            alert.show();
+        }
     }
     public List<HashMap<Double, Double>> getSeries() {
         return serieGraphique;
