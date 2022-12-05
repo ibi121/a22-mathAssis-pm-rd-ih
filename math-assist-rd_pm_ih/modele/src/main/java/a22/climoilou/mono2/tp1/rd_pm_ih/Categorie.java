@@ -3,6 +3,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,14 +19,14 @@ public class Categorie {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "Categorie_id")
-    private Categorie sousCategorie;
+    private Categorie categorieParent;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Categorie> sousCatgerorie1;
+    private List<Categorie> sousCategorie;
 
-    public Categorie(String nom, Categorie sousCategorie) {
+    public Categorie(String nom) {
         this.nom = nom;
-        this.sousCategorie = sousCategorie;
+        this.sousCategorie = new ArrayList<>();
     }
 
 
@@ -33,14 +34,21 @@ public class Categorie {
 
     }
 
-    public Categorie getSousCategorie() {
+    public Categorie getCategorieParent() {
+        return categorieParent;
+    }
+
+    public void setCategorieParent(Categorie sousCategorie) {
+        this.categorieParent = sousCategorie;
+    }
+
+    public List<Categorie> getSousCategorie() {
         return sousCategorie;
     }
 
-    public void setSousCategorie(Categorie sousCategorie) {
+    public void setSousCategorie(List<Categorie> sousCategorie) {
         this.sousCategorie = sousCategorie;
     }
-
 
     public String getNom() {
         return nom;
@@ -63,7 +71,7 @@ public class Categorie {
         return "Categorie{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", sousCategorie=" + sousCategorie +
+                ", sousCategorie=" + categorieParent +
                 '}';
     }
 
