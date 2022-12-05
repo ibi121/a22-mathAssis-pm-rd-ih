@@ -42,6 +42,8 @@ public class ModificateurController implements Fonctionnalite {
     private SerieService serieService;
     private DataService dataService;
 
+    private Stage secondaryStage;
+
     @Autowired
     public void setSerieService(SerieService serieService) {
         this.serieService = serieService;
@@ -154,7 +156,7 @@ public class ModificateurController implements Fonctionnalite {
 
     @FXML
     void onClickEntrer(ActionEvent event) {
-        if(listData.getSelectionModel().getSelectedItems().size() > 0) {
+        if (listData.getSelectionModel().getSelectedItems().size() > 0) {
             String modif = textPanneau.getText();
             Function f1 = valideFonction(modif);
             Expression expression = new Expression(modif);
@@ -218,17 +220,19 @@ public class ModificateurController implements Fonctionnalite {
         }
     }
 
-    private Expression expressionX (String modif, double x) {
+    private Expression expressionX(String modif, double x) {
         Argument argX = new Argument("x", x);
         Expression e = new Expression(modif, argX);
         return e.checkSyntax() ? e : null;
     }
-    private Expression expressionY (String modif, double y) {
+
+    private Expression expressionY(String modif, double y) {
         Argument argY = new Argument("y", y);
         Expression e = new Expression(modif, argY);
         return e.checkSyntax() ? e : null;
     }
-    private Expression expressionXY (String modif, double x, double y) {
+
+    private Expression expressionXY(String modif, double x, double y) {
         Argument argX = new Argument("x", x);
         Argument argY = new Argument("y", y);
         Expression e = new Expression(modif, argX, argY);
@@ -251,20 +255,33 @@ public class ModificateurController implements Fonctionnalite {
     }
 
     public void remplirList(Serie serie) {
+        listData.getItems().clear();
         listData.getItems().addAll(serie.getDonnees());
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
-        FxWeaver fxWeaver = context.getBean(FxWeaver.class);
-        FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
-        Parent root = (Pane) controllerAndView.getView().get();
-        Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Modification de séries");
-        secondaryStage.setScene(new Scene(root));
-        secondaryStage.setResizable(false);
-        secondaryStage.show();
-        this.serie = serie;
-        remplirList(serie);
+    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
+        if (serie != null) {
+            if (secondaryStage == null) {
+                FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+                FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
+                Parent root = (Pane) controllerAndView.getView().get();
+                secondaryStage = new Stage();
+                secondaryStage.setTitle("Modification de séries");
+                secondaryStage.setScene(new Scene(root));
+                secondaryStage.setResizable(false);
+                secondaryStage.show();
+                remplirList(serie);
+            } else {
+                secondaryStage.show();
+                remplirList(serie);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificateur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner une serie de la liste");
+            alert.show();
+        }
     }
 
     @Override

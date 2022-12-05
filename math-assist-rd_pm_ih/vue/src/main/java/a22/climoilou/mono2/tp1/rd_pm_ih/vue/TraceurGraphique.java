@@ -1,9 +1,13 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.vue;
 
+import javafx.event.Event;
+import javafx.event.EventDispatchChain;
+import javafx.event.EventDispatcher;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -43,6 +47,31 @@ public class TraceurGraphique {
     public void initialize() {
         graphiqueSerie.prefWidthProperty().bind(iAmGroot.widthProperty());
         graphiqueSerie.prefHeightProperty().bind(iAmGroot.heightProperty());
+        ajoutSeries();
+    }
+
+    @FXML
+    void modifieY(MouseEvent event) {
+        event.getTarget().buildEventDispatchChain(new EventDispatchChain() {
+            @Override
+            public EventDispatchChain append(EventDispatcher eventDispatcher) {
+                return null;
+            }
+
+            @Override
+            public EventDispatchChain prepend(EventDispatcher eventDispatcher) {
+                return null;
+            }
+
+            @Override
+            public Event dispatchEvent(Event event) {
+                return null;
+            }
+        });
+    }
+
+    public void resetGraphique() {
+        graphiqueSerie.getData().clear();
         ajoutSeries();
     }
 
