@@ -92,6 +92,7 @@ public class MainController {
                 public void handle(ActionEvent event) {
                     try {
                         ouvrirFenetre(event, f);
+
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

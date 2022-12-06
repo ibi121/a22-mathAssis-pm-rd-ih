@@ -4,6 +4,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Utilisateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UserRepository;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UtilisateurService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -106,6 +107,8 @@ public class AvisController implements Fonctionnalite {
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 1);
     }
 
     @Override

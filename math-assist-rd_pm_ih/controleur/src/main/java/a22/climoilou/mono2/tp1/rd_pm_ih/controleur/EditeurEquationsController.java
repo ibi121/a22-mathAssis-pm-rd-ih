@@ -5,6 +5,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Equations;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -179,6 +180,8 @@ public class EditeurEquationsController implements Fonctionnalite {
         secondaryStage.setScene(scene2);
         secondaryStage.show();
 
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 25);
     }
 
 

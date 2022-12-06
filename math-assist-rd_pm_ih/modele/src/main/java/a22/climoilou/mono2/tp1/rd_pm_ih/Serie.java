@@ -42,6 +42,18 @@ public class Serie {
     @CollectionTable
     private List<Data> donnees;
 
+    @OneToOne
+    @JoinColumn(name = "categorie_id")
+    private Categorie categorie;
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public Serie() {
     }
 
@@ -49,6 +61,16 @@ public class Serie {
 
         this.nomSerie = nomSerie;
 
+        donnees = new ArrayList<>();
+        dateCreation = LocalDateTime.now();
+        dateDerniereModification = dateCreation;
+        nomAuteur = "inconnu(e)";
+    }
+
+    public Serie(String nomSerie, Categorie categorie) {
+
+        this.nomSerie = nomSerie;
+        this.categorie = categorie;
         donnees = new ArrayList<>();
         dateCreation = LocalDateTime.now();
         dateDerniereModification = dateCreation;

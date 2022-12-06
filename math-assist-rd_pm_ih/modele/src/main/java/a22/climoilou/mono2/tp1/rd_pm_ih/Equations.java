@@ -16,11 +16,28 @@ public class Equations {
 
     private String equation;
 
+    @OneToOne
+    @JoinColumn(name = "categorie_id")
+    private Categorie categorie;
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public Equations() {
     }
 
     public Equations(String equation) {
         this.equation = equation;
+    }
+
+    public Equations(String equation, Categorie categorie) {
+        this.equation = equation;
+        this.categorie = categorie;
     }
 
     public Equations(Long id, String equation) {
