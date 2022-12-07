@@ -1,14 +1,11 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Tronqueur {
     private Serie serie;
 
-    public Tronqueur(String nomNouvelleSerie, HashMap<Double, Double> nouvelleSerie) {
+    public Tronqueur(String nomNouvelleSerie, SortedMap<Double, Double> nouvelleSerie) {
         setSerie(nomNouvelleSerie, nouvelleSerie);
     }
 
@@ -16,7 +13,7 @@ public class Tronqueur {
         return serie;
     }
 
-    private void setSerie(String nomNouvelleSerie, HashMap<Double, Double> nouvelleSerie) {
+    private void setSerie(String nomNouvelleSerie, SortedMap<Double, Double> nouvelleSerie) {
         this.serie = new Serie(nomNouvelleSerie);
         List<Data> listData = new ArrayList<>();
         for (Map.Entry<Double, Double> set : nouvelleSerie.entrySet()) {
