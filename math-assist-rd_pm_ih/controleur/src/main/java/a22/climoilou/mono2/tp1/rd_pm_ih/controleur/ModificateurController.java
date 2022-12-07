@@ -269,12 +269,9 @@ public class ModificateurController implements Fonctionnalite {
                 secondaryStage.setTitle("Modification de séries");
                 secondaryStage.setScene(new Scene(root));
                 secondaryStage.setResizable(false);
-                secondaryStage.show();
-                remplirList(serie);
-            } else {
-                secondaryStage.show();
-                remplirList(serie);
             }
+            secondaryStage.show();
+            remplirList(serie);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Modificateur information");

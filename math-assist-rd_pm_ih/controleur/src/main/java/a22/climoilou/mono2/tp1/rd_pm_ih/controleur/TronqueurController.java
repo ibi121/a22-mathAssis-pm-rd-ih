@@ -8,44 +8,62 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVue;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVueI;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class TronqueurController implements TronqueurVueI, Fonctionnalite {
 
     private List<String> nomSeries;
 
-    private List<HashMap<Double, Double>> listSeries;
+    private List<SortedMap<Double, Double>> listSeries;
 
     private Stage secondaryStage;
 
     private SerieService serieService;
 
-    public void setStage(ConfigurableApplicationContext context, List<Serie> series) throws IOException {
-        setSeries(series);
-        setNomSerie(series);
-        FxWeaver fxWeaver = context.getBean(FxWeaver.class);
-        FxControllerAndView controllerAndView = fxWeaver.load(TronqueurVue.class);
-        Parent root = (AnchorPane) controllerAndView.getView().get();
-        secondaryStage = new Stage();
-        secondaryStage.setTitle("Tronqueur de séries");
-        secondaryStage.setScene(new Scene(root));
-        secondaryStage.setResizable(false);
-        secondaryStage.show();
+    private TronqueurVue tronqueurVue;
+
+    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
+        if (series.size() > 1) {
+            if (secondaryStage == null) {
+                setSeries(series);
+                setNomSerie(series);
+                FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+                FxControllerAndView controllerAndView = fxWeaver.load(TronqueurVue.class);
+                Parent root = (AnchorPane) controllerAndView.getView().get();
+                secondaryStage = new Stage();
+                secondaryStage.setTitle("Tronqueur de séries");
+                secondaryStage.setScene(new Scene(root));
+                secondaryStage.setResizable(false);
+                secondaryStage.show();
+            } else {
+                setSeries(series);
+                setNomSerie(series);
+                tronqueurVue.reset();
+                secondaryStage.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Tronqueur information");
+            alert.setHeaderText("Selection");
+            alert.setContentText("Veuillez selectionner deux series de la liste");
+            alert.show();
+        }
     }
 
-    public List<HashMap<Double, Double>> getSeries() {
+    public List<SortedMap<Double, Double>> getSeries() {
         return listSeries;
     }
 
@@ -55,10 +73,11 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
     public void setSeries(List<Serie> series) {
         listSeries = new ArrayList<>();
         for (Serie serie : series) {
-            HashMap<Double, Double> map = new HashMap<>();
+            SortedMap<Double, Double> map = new TreeMap<>();
             for (Data data : serie.getDonnees()) {
                 map.put(data.getX(), data.getY());
             }
+
             listSeries.add(map);
         }
     }
@@ -68,7 +87,7 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
     }
 
     @Override
-    public void envoieNouvelleSerie(String nomNouvelleSerie, HashMap<Double, Double> nouvelleSerie) {
+    public void envoieNouvelleSerie(String nomNouvelleSerie, SortedMap<Double, Double> nouvelleSerie) {
         Tronqueur tronqueur = new Tronqueur(nomNouvelleSerie, nouvelleSerie);
         serieService.SaveSerie(tronqueur.getSerie());
         secondaryStage.close();
@@ -86,12 +105,18 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
         this.serieService = serieService;
     }
 
+    @Autowired
+    public void setTronqueurVue(@Lazy TronqueurVue tronqueurVue) {
+        this.tronqueurVue = tronqueurVue;
+    }
+
+    @Override
+    public void close() {
+        secondaryStage.hide();
+    }
+
     @Override
     public String getNom() {
         return "Tronqueur";
-    }
-
-    public void setStage(ConfigurableApplicationContext c, Serie s,  List<Serie> series) throws IOException {
-
     }
 }

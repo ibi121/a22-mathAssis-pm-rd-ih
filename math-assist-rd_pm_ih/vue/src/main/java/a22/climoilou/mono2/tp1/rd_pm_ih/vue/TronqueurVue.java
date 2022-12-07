@@ -11,15 +11,13 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @FxmlView("../vue/Tronqueur.fxml")
 public class TronqueurVue {
 
-    private HashMap<Double, Double> nouvelleSerie;
+    private SortedMap<Double, Double> nouvelleSerie;
 
     @FXML
     private ListView<String> listNouvelleSerie;
@@ -48,9 +46,9 @@ public class TronqueurVue {
 
     @FXML
     void afficherNouvelleSerie(ActionEvent event) {
-        nouvelleSerie = new HashMap<>();
-        HashMap<Double, Double> serie1 = tronqueurVueI.getSeries().get(0);
-        HashMap<Double, Double> serie2 = tronqueurVueI.getSeries().get(1);
+        nouvelleSerie = new TreeMap<>();
+        SortedMap<Double, Double> serie1 = tronqueurVueI.getSeries().get(0);
+        SortedMap<Double, Double> serie2 = tronqueurVueI.getSeries().get(1);
         int min = Math.min(serie1.size(), serie2.size());
         for (double i = 0; i < min; i++) {
             nouvelleSerie.put(i, ((serie1.get(i) + serie2.get(i)) / 2));
@@ -63,6 +61,7 @@ public class TronqueurVue {
         try {
             if (!nouvelleSerie.isEmpty() && !nomNouvelleSerie.getText().isEmpty()) {
                 tronqueurVueI.envoieNouvelleSerie(nomNouvelleSerie.getText(), nouvelleSerie);
+                tronqueurVueI.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Tronqueur information");
@@ -79,6 +78,16 @@ public class TronqueurVue {
         }
     }
 
+    public void reset() {
+        nomSerie1.setText(tronqueurVueI.getNomSeries().get(0));
+        nomSerie2.setText(tronqueurVueI.getNomSeries().get(1));
+        listSerie1.getItems().clear();
+        listSerie2.getItems().clear();
+        ajoutSerie(listSerie1, tronqueurVueI.getSeries().get(0));
+        ajoutSerie(listSerie2, tronqueurVueI.getSeries().get(1));
+        listNouvelleSerie.getItems().clear();
+    }
+
     @FXML
     public void initialize() {
         nomSerie1.setText(tronqueurVueI.getNomSeries().get(0));
@@ -91,7 +100,7 @@ public class TronqueurVue {
         listNouvelleSerie.setMouseTransparent(true);
     }
 
-    private void ajoutSerie(ListView<String> listSerie, HashMap<Double, Double> series) {
+    private void ajoutSerie(ListView<String> listSerie, SortedMap<Double, Double> series) {
         if (this.tronqueurVueI != null) {
             listSerie.getItems().clear();
             for (Map.Entry<Double, Double> set : series.entrySet()) {

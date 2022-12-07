@@ -54,9 +54,9 @@ public class TraceurController implements TraceurI, Fonctionnalite {
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Modificateur information");
+            alert.setTitle("Traceur information");
             alert.setHeaderText("Selection");
-            alert.setContentText("Veuillez selectionner une serie de la liste");
+            alert.setContentText("Veuillez selectionner au moins une serie de la liste");
             alert.show();
         }
     }
