@@ -5,9 +5,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="349.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AProposController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="270.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AProposController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="349.0" spacing="25.0">
+      <VBox alignment="CENTER" prefHeight="286.0" prefWidth="266.0" spacing="10.0">
          <children>
             <Text fx:id="aPropos" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="À propos" textAlignment="CENTER" wrappingWidth="97.6708984375">
                <font>
@@ -42,7 +42,7 @@
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <Text fx:id="aProposNoms" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Patrick Messier, Ibrahim Hamitouche &amp; Rose Duval">
+            <Text fx:id="aProposNoms" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Patrick Messier, Ibrahim Hamitouche &amp; Rose Duval" textAlignment="CENTER" wrappingWidth="131.60211181640625">
                <font>
                   <Font size="14.0" />
                </font></Text>

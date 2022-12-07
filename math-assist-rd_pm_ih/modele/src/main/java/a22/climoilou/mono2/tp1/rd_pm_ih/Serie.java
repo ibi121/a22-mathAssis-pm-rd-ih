@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Serie {
+public class Serie implements TreeItemI{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,38 +46,17 @@ public class Serie {
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
 
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
     public Serie() {
     }
 
     public Serie(String nomSerie) {
 
         this.nomSerie = nomSerie;
-
         donnees = new ArrayList<>();
         dateCreation = LocalDateTime.now();
         dateDerniereModification = dateCreation;
         nomAuteur = "inconnu(e)";
     }
-
-    public Serie(String nomSerie, Categorie categorie) {
-
-        this.nomSerie = nomSerie;
-        this.categorie = categorie;
-        donnees = new ArrayList<>();
-        dateCreation = LocalDateTime.now();
-        dateDerniereModification = dateCreation;
-        nomAuteur = "inconnu(e)";
-    }
-
-
 
     public LocalDateTime getDateCreation() {
         return dateCreation;
@@ -120,6 +99,14 @@ public class Serie {
         this.dateDerniereModification = LocalDateTime.now();
     }
 
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public void addData(Data... donnees) {
         for (Data donnee : donnees) {
             this.donnees.add(donnee);
@@ -141,6 +128,7 @@ public class Serie {
     public void setNomSerie(String nomSerie) {
         this.nomSerie = nomSerie;
     }
+
 
     @Override
     public String toString() {
@@ -164,4 +152,8 @@ public class Serie {
     }
 
 
+    @Override
+    public String getNom() {
+        return this.nomSerie;
+    }
 }

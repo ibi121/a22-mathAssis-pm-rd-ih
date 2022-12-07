@@ -4,6 +4,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 //import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -89,6 +90,9 @@ public class TableauDesValeursController implements Fonctionnalite {
             tableau.add(dataY, i + 1, 0);
             tableau.add(dataX, i + 1, 1);
         }
+
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
 
     }
 

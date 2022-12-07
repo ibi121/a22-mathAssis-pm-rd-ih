@@ -10,6 +10,7 @@ public class WindowAnimationService extends ScheduledService<WindowAnimationServ
     private Location endroitSouhaite;
     private Location endroitActuel;
 
+    private double tailleIncrement = -5;
     private double locationIncrement = 5;
 
 
@@ -29,6 +30,8 @@ public class WindowAnimationService extends ScheduledService<WindowAnimationServ
 
                 endroitActuel.x = intrapole(endroitSouhaite.x, endroitActuel.x);
                 endroitActuel.y = intrapole(endroitSouhaite.y, endroitActuel.y);
+                endroitActuel.largeur = intrapole(endroitSouhaite.largeur, endroitActuel.largeur);
+                endroitActuel.longueur = intrapole(endroitSouhaite.longueur, endroitActuel.longueur);
 
                 if(endroitActuel.equals(endroitSouhaite)){
                     this.cancel();
@@ -56,9 +59,15 @@ public class WindowAnimationService extends ScheduledService<WindowAnimationServ
         private double x;
         private double y;
 
-        public Location(double x, double y) {
+        private double largeur;
+
+        private double longueur;
+
+        public Location(double x, double y, double largeur, double longueur) {
             this.x = x;
             this.y = y;
+            this.largeur = largeur;
+            this.longueur = longueur;
         }
 
         public double getX() {
@@ -75,6 +84,22 @@ public class WindowAnimationService extends ScheduledService<WindowAnimationServ
 
         public void setY(double y) {
             this.y = y;
+        }
+
+        public double getLargeur() {
+            return largeur;
+        }
+
+        public void setLargeur(double largeur) {
+            this.largeur = largeur;
+        }
+
+        public double getLongueur() {
+            return longueur;
+        }
+
+        public void setLongueur(double longueur) {
+            this.longueur = longueur;
         }
 
         @Override

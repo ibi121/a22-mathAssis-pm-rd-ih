@@ -2,6 +2,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurGraphique;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurI;
 import javafx.scene.Parent;
@@ -59,6 +60,9 @@ public class TraceurController implements TraceurI, Fonctionnalite {
             alert.setContentText("Veuillez selectionner une serie de la liste");
             alert.show();
         }
+
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
     }
     public List<HashMap<Double, Double>> getSeries() {
         return serieGraphique;

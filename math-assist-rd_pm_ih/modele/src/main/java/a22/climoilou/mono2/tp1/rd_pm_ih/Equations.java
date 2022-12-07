@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Component
-public class Equations {
+public class Equations implements TreeItemI{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -80,5 +80,15 @@ public class Equations {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String getNom() {
+        return this.equation;
+    }
+
+    @Override
+    public String toString() {
+        return "Equation : " + this.equation;
     }
 }

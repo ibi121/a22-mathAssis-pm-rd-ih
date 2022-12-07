@@ -2,6 +2,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 //import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -74,6 +75,9 @@ public class AProposController implements Fonctionnalite{
         secondaryStage.sizeToScene();
         secondaryStage.resizableProperty().set(false);
         secondaryStage.show();
+
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 500, secondaryStage.getWidth(), secondaryStage.getHeight());
     }
 
     public String getNom() {

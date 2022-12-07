@@ -18,9 +18,9 @@ public class Generateur {
     private List<Serie> seriesCrees;
 
     private List<Data> valeurs;
+    private Categorie categorie;
 
-
-    public Generateur(int nombreMinimum, int nombreMaximum, int nombreValeurs, int nbrSeries, String nomSerie, String nomAuteur) {
+    public Generateur(int nombreMinimum, int nombreMaximum, int nombreValeurs, int nbrSeries, String nomSerie, String nomAuteur, Categorie c) {
         this.nombreMinimum = nombreMinimum;
         this.nombreMaximum = nombreMaximum;
         this.nombreValeurs = nombreValeurs;
@@ -29,6 +29,7 @@ public class Generateur {
         this.nomAuteur = nomAuteur;
         this.seriesCrees = new ArrayList<>();
         this.valeurs = new ArrayList<>();
+        this.categorie = c;
     }
 
     public int getNombreMinimum() {
@@ -87,6 +88,22 @@ public class Generateur {
         this.valeurs = valeurs;
     }
 
+    public String getNomAuteur() {
+        return nomAuteur;
+    }
+
+    public void setNomAuteur(String nomAuteur) {
+        this.nomAuteur = nomAuteur;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public void creationValeurs() {
         int yAleatoire = 0;
         for (int i = 0; i < this.nombreValeurs; i++) {
@@ -100,7 +117,7 @@ public class Generateur {
         Serie s = new Serie(this.nomSerie);
         s.setNomAuteur(this.nomAuteur);
         s.setDonnees(this.valeurs);
-
+        s.setCategorie(this.categorie);
         this.seriesCrees.add(s);
     }
 
@@ -112,6 +129,10 @@ public class Generateur {
                 ", nombreValeurs=" + nombreValeurs +
                 ", nbrSeries=" + nbrSeries +
                 ", nomSerie='" + nomSerie + '\'' +
+                ", nomAuteur='" + nomAuteur + '\'' +
+                ", seriesCrees=" + seriesCrees +
+                ", valeurs=" + valeurs +
+                ", categorie=" + categorie +
                 '}';
     }
 }

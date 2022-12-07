@@ -1,20 +1,21 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Categorie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Equations;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,6 +35,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Component
@@ -54,6 +56,19 @@ public class EditeurEquationsController implements Fonctionnalite {
     @FXML
     private SerieService serieService;
 
+    @FXML
+    private Spinner<Categorie> spinnerCategorieEquation;
+
+    @FXML
+    private CategorieService bdCategorie;
+
+    private List<Categorie> categoriesEnBD;
+
+    @Autowired
+    public void setBdCategorie(CategorieService bd) {
+        this.bdCategorie = bd;
+    }
+
 
     @Autowired
     public void setEquationService(EquationService equationService) {
@@ -72,6 +87,23 @@ public class EditeurEquationsController implements Fonctionnalite {
         ) {
             this.listViewFonctions.getItems().add(e.getEquation());
         }
+
+        categoriesEnBD = new ArrayList<>();
+
+        categoriesEnBD = bdCategorie.GetAllSousCatgeorie();
+
+
+        ObservableList<Categorie> categories = FXCollections.observableArrayList(//
+                categoriesEnBD);
+
+        SpinnerValueFactory<Categorie> valueFactory = //
+                new SpinnerValueFactory.ListSpinnerValueFactory<Categorie>(categories);
+
+        valueFactory.setValue(categories.get(0));
+
+        spinnerCategorieEquation.setValueFactory(valueFactory);
+
+
     }
 
     @FXML
@@ -89,6 +121,7 @@ public class EditeurEquationsController implements Fonctionnalite {
             alert.show();
         } else {
             Equations equations = new Equations(equation);
+            equations.setCategorie(spinnerCategorieEquation.getValue());
             listViewFonctions.getItems().add(equation);
 
             equationService.SaveEquation(equations);
@@ -156,6 +189,7 @@ public class EditeurEquationsController implements Fonctionnalite {
             s.setNomSerie(equation);
             s.setNomAuteur("inconnue");
             s.setDateCreation(LocalDateTime.now());
+            s.setCategorie(spinnerCategorieEquation.getValue());
             serieService.SaveSerie(s);
         }
 
@@ -181,7 +215,7 @@ public class EditeurEquationsController implements Fonctionnalite {
         secondaryStage.show();
 
         UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1, 25);
+        ui.deplacerFenetre(secondaryStage, 1, 200, 600, 425);
     }
 
 

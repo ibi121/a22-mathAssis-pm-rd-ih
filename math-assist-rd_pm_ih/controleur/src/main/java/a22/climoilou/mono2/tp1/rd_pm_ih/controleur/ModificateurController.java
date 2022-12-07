@@ -4,6 +4,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.DataService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -282,6 +283,9 @@ public class ModificateurController implements Fonctionnalite {
             alert.setContentText("Veuillez selectionner une serie de la liste");
             alert.show();
         }
+
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
     }
 
     @Override

@@ -2,6 +2,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController;
 import a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -39,6 +40,8 @@ public class ApplicationFX extends Application {
         fxController.setContext(this.context);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setX(500);
+        primaryStage.setY(1);
         primaryStage.setResizable(false);
         primaryStage.show();
     }

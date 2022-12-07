@@ -11,10 +11,10 @@ import java.util.List;
 @Service
 public class CategorieService {
 
-    private CatgeorieRepository catgeorieRepository;
+    private CategorieRepository catgeorieRepository;
 
     @Autowired
-    public void setCatgeorieRepository(CatgeorieRepository catgeorieRepository) {
+    public void setCatgeorieRepository(CategorieRepository catgeorieRepository) {
         this.catgeorieRepository = catgeorieRepository;
     }
 

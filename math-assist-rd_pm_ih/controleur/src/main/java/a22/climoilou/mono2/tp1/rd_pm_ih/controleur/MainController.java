@@ -92,13 +92,22 @@ public class MainController {
                 public void handle(ActionEvent event) {
                     try {
                         ouvrirFenetre(event, f);
-
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }
             });
         }
+
+        Button btnSupprimer = new Button("Supprimer Série");
+        btnSupprimer.setStyle("-fx-background-color: darkorchid; -fx-text-fill: white");
+        vBoxBtn.getChildren().add(btnSupprimer);
+        btnSupprimer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                supprimerSerie();
+            }
+        });
 
     }
 
@@ -112,11 +121,10 @@ public class MainController {
     /**
      * Prends un ou des elements de la liste de serie et les supprime de ls BD
      *
-     * @param actionEvent
      */
 
     @FXML
-    public void supprimerSerie(ActionEvent actionEvent) throws IOException {
+    public void supprimerSerie()  {
 
         Alert alert = new Alert(Alert.AlertType.NONE);
 

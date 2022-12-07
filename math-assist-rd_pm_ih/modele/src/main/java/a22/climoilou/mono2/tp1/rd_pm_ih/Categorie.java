@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Component
 @Entity
-public class Categorie {
+public class Categorie implements TreeItemI {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -46,8 +46,8 @@ public class Categorie {
         return sousCategorie;
     }
 
-    public void setSousCategorie(List<Categorie> sousCategorie) {
-        this.sousCategorie = sousCategorie;
+    public void setSousCategorie(Categorie sousCategorie) {
+        this.sousCategorie.add(sousCategorie);
     }
 
     public String getNom() {
@@ -68,11 +68,7 @@ public class Categorie {
 
     @Override
     public String toString() {
-        return "Categorie{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", sousCategorie=" + categorieParent +
-                '}';
+        return nom;
     }
 
     @Override

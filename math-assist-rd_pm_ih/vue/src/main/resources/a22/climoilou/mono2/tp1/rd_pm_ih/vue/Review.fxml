@@ -12,50 +12,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AvisController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.AvisController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <VBox layoutX="3.0" layoutY="1.0" prefHeight="400.0" prefWidth="175.0">
+            <VBox layoutX="3.0" layoutY="1.0" prefHeight="326.0" prefWidth="513.0">
                <children>
-                  <ListView fx:id="listViewComments" prefHeight="402.0" prefWidth="175.0" style="-fx-background-color: #1b3a4b;" />
+                  <ListView fx:id="listViewComments" prefHeight="329.0" prefWidth="385.0" style="-fx-background-color: #1b3a4b;" />
                </children>
             </VBox>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="334.0" style="-fx-background-color: #006466;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="363.0" style="-fx-background-color: #006466;">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="32.0" layoutY="-5.0" prefHeight="407.0" prefWidth="314.0">
+            <VBox alignment="TOP_CENTER" layoutY="-5.0" prefHeight="414.0" prefWidth="361.0" spacing="5.0">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez laisser une commentaire sur notre application :o)" textAlignment="CENTER" textOrigin="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" top="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </Text>
                   <Label text="Prenom" textFill="WHITE" />
                   <TextField fx:id="fieldPrenom" maxWidth="200.0" minWidth="200.0" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextField>
                   <Label text="Nom" textFill="WHITE" />
                   <TextField fx:id="fieldNom" maxWidth="200.0" minWidth="200.0" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextField>
                   <Label text="Courriel" textFill="WHITE" />
                   <TextField fx:id="fieldCourriel" maxWidth="200.0" minWidth="200.0" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets bottom="40.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextField>
                   <Label text="Commentaire :" textFill="WHITE" />
                   <TextArea fx:id="fieldCommentaire" prefHeight="84.0" prefWidth="351.0">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextArea>
                   <Button fx:id="bouttonSauvegarderAvis" mnemonicParsing="false" onAction="#SauvegarderAvis" style="-fx-background-color: darkorchid;" text="Sauvegarder mon avis" textFill="WHITE" />

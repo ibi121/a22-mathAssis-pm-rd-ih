@@ -1,13 +1,21 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.Categorie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -21,6 +29,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,6 +43,9 @@ public class GenerateurController implements Fonctionnalite {
     private Generateur generateur;
     @FXML
     private SerieService bd;
+
+    @FXML
+    private CategorieService bdCategorie;
     @FXML
     private Text textMinimum;
 
@@ -70,9 +82,21 @@ public class GenerateurController implements Fonctionnalite {
     @FXML
     private TextField inputTextNomSerie;
 
+    @FXML
+    private Spinner<Categorie> inputCategorie;
+
+    private Categorie categorieSerie;
+
+    private List<Categorie> categoriesEnBD;
+
     @Autowired
     public void setBd(SerieService bd) {
         this.bd = bd;
+    }
+
+    @Autowired
+    public void setBdCategorie(CategorieService bd) {
+        this.bdCategorie = bd;
     }
 
     @FXML
@@ -83,11 +107,38 @@ public class GenerateurController implements Fonctionnalite {
         this.inputTextNombreSeries.setText("1");
         this.inputTextNomSerie.setText("Série aléatoire avec valeurs par défaut");
         this.inputTextNomAuteur.setText("inconnue");
+
+        //ToDo Aller chercher toutes categories en BD
+
+        categoriesEnBD = new ArrayList<>();
+
+        categoriesEnBD = bdCategorie.GetAllSousCatgeorie();
+
+
+        ObservableList<Categorie> categories = FXCollections.observableArrayList(//
+                categoriesEnBD);
+
+        SpinnerValueFactory<Categorie> valueFactory = //
+                new SpinnerValueFactory.ListSpinnerValueFactory<Categorie>(categories);
+
+        valueFactory.setValue(categories.get(0));
+
+        inputCategorie.setValueFactory(valueFactory);
+
+
     }
     @FXML
     void valider(ActionEvent event) throws IOException {
+
+        for (Categorie c: categoriesEnBD
+        ) {
+            if (c.getNom().equals(inputCategorie.getValue().getNom())){
+                categorieSerie = c;
+            }
+        }
+
         generateur = new Generateur(Integer.parseInt(inputTextMin.getText()), Integer.parseInt(inputTextMax.getText()),
-                    Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText(), inputTextNomAuteur.getText());
+                    Integer.parseInt(inputTextNombreValeurs.getText()), Integer.parseInt(inputTextNombreSeries.getText()), inputTextNomSerie.getText(), inputTextNomAuteur.getText(), categorieSerie);
 
 
         generateur.creationValeurs();
@@ -95,6 +146,7 @@ public class GenerateurController implements Fonctionnalite {
 
         for (Serie serie : generateur.getSeriesCrees()) {
             bd.SaveSerie(serie);
+            System.out.println(serie.getCategorie().getNom());
         }
 
 
@@ -112,6 +164,9 @@ public class GenerateurController implements Fonctionnalite {
         secondaryStage.setTitle(getNom());
         secondaryStage.setScene(scene2);
         secondaryStage.show();
+
+        UIAnimation ui = new UIAnimation();
+        ui.deplacerFenetre(secondaryStage, 1150, 1, 350, 450);
 
     }
 

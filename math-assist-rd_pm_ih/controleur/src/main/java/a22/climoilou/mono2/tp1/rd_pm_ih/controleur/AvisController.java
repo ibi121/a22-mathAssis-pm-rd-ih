@@ -108,7 +108,7 @@ public class AvisController implements Fonctionnalite {
         secondaryStage.show();
 
         UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1, 1);
+        ui.deplacerFenetre(secondaryStage, 1, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
     }
 
     @Override
