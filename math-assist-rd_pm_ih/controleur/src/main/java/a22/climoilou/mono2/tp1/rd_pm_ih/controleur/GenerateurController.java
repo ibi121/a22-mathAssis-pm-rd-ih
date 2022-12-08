@@ -46,23 +46,12 @@ public class GenerateurController implements Fonctionnalite {
 
     @FXML
     private CategorieService bdCategorie;
-    @FXML
-    private Text textMinimum;
-
-    @FXML
-    private Text textNombreValeurs;
 
     @FXML
     private TextField inputTextMin;
 
     @FXML
-    private Text textNomSerie;
-
-    @FXML
     private TextField inputTextMax;
-
-    @FXML
-    private Text textMaximum;
 
     @FXML
     private TextField inputTextNombreSeries;
@@ -146,10 +135,7 @@ public class GenerateurController implements Fonctionnalite {
 
         for (Serie serie : generateur.getSeriesCrees()) {
             bd.SaveSerie(serie);
-            System.out.println(serie.getCategorie().getNom());
         }
-
-
 
     }
 
