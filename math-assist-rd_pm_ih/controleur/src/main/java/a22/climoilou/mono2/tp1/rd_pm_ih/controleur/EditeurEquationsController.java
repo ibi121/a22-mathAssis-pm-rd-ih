@@ -1,9 +1,6 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
-import a22.climoilou.mono2.tp1.rd_pm_ih.Categorie;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Equations;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.*;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
@@ -202,7 +199,7 @@ public class EditeurEquationsController implements Fonctionnalite {
         return "Editeur  de fonctions";
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(EditeurEquationsController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

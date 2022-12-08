@@ -2,11 +2,14 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 //import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -64,7 +67,7 @@ public class AProposController implements Fonctionnalite{
         presenteParText = new Text();
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(AProposController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

@@ -3,8 +3,10 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 //import a22.climoilou.mono2.tp1.rd_pm_ih.origine.Fonctionnalite;
+import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -63,6 +66,7 @@ public class TableauDesValeursController implements Fonctionnalite {
     public String getNom() {
         return "Tableau des valeurs";
     }
+
 
     public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);

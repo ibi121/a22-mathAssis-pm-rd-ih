@@ -3,6 +3,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Categorie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Generateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
@@ -13,10 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -139,7 +137,7 @@ public class GenerateurController implements Fonctionnalite {
 
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie s,  List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(GenerateurController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();
@@ -152,7 +150,7 @@ public class GenerateurController implements Fonctionnalite {
         secondaryStage.show();
 
         UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1150, 1, 350, 450);
+        ui.deplacerFenetre(secondaryStage, 1150, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
 
     }
 

@@ -2,13 +2,16 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Tronqueur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVue;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVueI;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -35,7 +38,7 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
 
     private TronqueurVue tronqueurVue;
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         if (series.size() > 1) {
             if (secondaryStage == null) {
                 setSeries(series);

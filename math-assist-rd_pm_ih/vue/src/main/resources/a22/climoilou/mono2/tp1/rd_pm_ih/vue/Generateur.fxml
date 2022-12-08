@@ -10,79 +10,83 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="393.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="317.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.GenerateurController">
    <children>
-      <VBox alignment="CENTER" layoutX="67.0" prefHeight="400.0" prefWidth="262.0" spacing="2.0">
+      <VBox alignment="CENTER" layoutX="-3.0" prefHeight="402.0" prefWidth="320.0" spacing="4.0">
          <children>
-            <Text fx:id="textMinimum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum">
+            <Text fx:id="textMinimum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextMin" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextMin" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fx:id="textMaximum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum">
+            <Text fx:id="textMaximum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextMax" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextMax" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fx:id="textNombreValeurs" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de valeurs">
+            <Text fx:id="textNombreValeurs" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de valeurs" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextNombreValeurs" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextNombreValeurs" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fx:id="textNombreSeries" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de séries">
+            <Text fx:id="textNombreSeries" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de séries" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextNombreSeries" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextNombreSeries" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fx:id="textNomSerie" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la série">
+            <Text fx:id="textNomSerie" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la série" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextNomSerie" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextNomSerie" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'auteur">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'auteur" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="inputTextNomAuteur" alignment="CENTER_RIGHT">
+            <TextField fx:id="inputTextNomAuteur" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Spinner fx:id="inputCategorie" prefHeight="16.0" prefWidth="262.0" />
-            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="264.0">
+            <Spinner fx:id="inputCategorie" prefHeight="16.0" prefWidth="262.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Spinner>
+            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="264.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="btnValider" mnemonicParsing="false" onAction="#valider" prefHeight="14.0" prefWidth="116.0" style="-fx-background-color: darkorchid;" text="Ajouter la série" textFill="WHITE">
+                  <Button fx:id="btnValider" mnemonicParsing="false" onAction="#valider" prefHeight="14.0" prefWidth="116.0" style="-fx-background-color: darkorchid;" text="Ajouter la série" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font></Button>

@@ -2,17 +2,16 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.DataService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -260,7 +259,7 @@ public class ModificateurController implements Fonctionnalite {
         listData.getItems().addAll(serie.getDonnees());
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         if (serie != null) {
             if (secondaryStage == null) {
                 FxWeaver fxWeaver = context.getBean(FxWeaver.class);

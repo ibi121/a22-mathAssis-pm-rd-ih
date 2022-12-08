@@ -1,15 +1,22 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
-import a22.climoilou.mono2.tp1.rd_pm_ih.Categorie;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Equations;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
+import a22.climoilou.mono2.tp1.rd_pm_ih.*;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TreeItem;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -31,22 +38,29 @@ public class StatistiquesController implements Fonctionnalite {
     @FXML
     private Text textEquationsTotal;
 
-    @FXML
-    private EquationService equationService;
-
-    @FXML
-    private CategorieService categorieService;
-
-    @FXML
-    private VBox conteneurTextEquationSerieMemeCat;
-    @FXML
-    private SerieService serieService;
 
     private List<Serie> listeSeriesEnBd;
 
     private List<Equations> listeEquationsEnBd;
 
     private List<Categorie> listeDeCategorie;
+
+    @FXML
+    private VBox conteneurTextEquationSerieMemeCat;
+
+
+    @FXML
+    private Spinner<Categorie> choixCategorie;
+
+
+    @FXML
+    private Text textNbSousCat;
+
+    private EquationService equationService;
+    private CategorieService categorieService;
+
+    private SerieService serieService;
+
 
     @Autowired
     public void setCategorieService(CategorieService categorieService) {
@@ -65,88 +79,56 @@ public class StatistiquesController implements Fonctionnalite {
 
     @FXML
     private void initialize() {
-        textEquationsTotal.setText(String.valueOf(calculNombreEquationTotal()));
-
+        Recursives recursives = new Recursives();
         listeSeriesEnBd = new ArrayList<>();
         listeEquationsEnBd = new ArrayList<>();
         listeSeriesEnBd.addAll(serieService.GetAllSerie());
         listeEquationsEnBd.addAll(equationService.GetAllEquations());
+        listeDeCategorie = new ArrayList<>();
+        listeDeCategorie.addAll(categorieService.GetAllSousCatgeorie());
+
+        textEquationsTotal.setText(String.valueOf(recursives.calculNombreEquationTotal(listeEquationsEnBd)));
+
         for (Categorie c : categorieService.GetAllSousCatgeorie()
         ) {
-            Text text = new Text();
-            text.setText(c.getNom() + " : " + String.valueOf(calculNombreEquationEtSerieMemeCategorie(c)));
+            Text text = new Text(c.getNom() + " : " + String.valueOf(recursives.calculNombreEquationEtSerieMemeCategorie(listeSeriesEnBd, listeEquationsEnBd,c)));
+            text.setStyle("-fx-fill: white");
+
             conteneurTextEquationSerieMemeCat.getChildren().add(text);
         }
 
-        listeDeCategorie = new ArrayList<>();
+        ObservableList<Categorie> categories = FXCollections.observableArrayList(//
+                listeDeCategorie);
 
-        listeDeCategorie.addAll(categorieService.GetAllSousCatgeorie());
+        SpinnerValueFactory<Categorie> valueFactory = //
+                new SpinnerValueFactory.ListSpinnerValueFactory<Categorie>(categories);
+
+        valueFactory.setValue(categories.get(0));
+
+        choixCategorie.setValueFactory(valueFactory);
+
+        textNbSousCat.setText(String.valueOf(recursives.CalculerNombreDeSousCategorie(categories.get(0), 0)));
+
+        choixCategorie.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
 
 
-        System.out.println(CalculerNombreDeSousCategoriePureRec(listeDeCategorie.get(1), 0));
+                Categorie categorie = null;
 
-    }
+                for (Categorie c: listeDeCategorie
+                ) {
+                    if (c.getNom().equals(choixCategorie.getValue().getNom())){
+                        categorie = c;
+                    }
+                }
 
-    private int calculNombreEquationTotal() {
-        return calculNombreEquationTotalPureRec(0);
-    }
-
-    private int calculNombreEquationTotalPureRec(int position) {
-        int retVal = 0;
-
-        if (position != equationService.GetAllEquations().size()) {
-            retVal = 1 + calculNombreEquationTotalPureRec(position + 1);
-        }
-
-        return retVal;
-    }
-
-    private int calculNombreEquationEtSerieMemeCategorie(Categorie c) {
-        int retVal = 0;
-
-        retVal += calculNombreEquationEtSerieMemeCategoriePureRec(c, 0, 0);
-
-        return retVal;
-    }
-
-    private int calculNombreEquationEtSerieMemeCategoriePureRec(Categorie c, int positionSerie, int positionEquation) {
-        int retVal = 0;
-
-        if (positionSerie < listeSeriesEnBd.size()) {
-
-            if (!listeSeriesEnBd.get(positionSerie).getCategorie().getNom().equals(c.getNom())) {
-                retVal = calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie + 1, positionEquation);
+                textNbSousCat.setText(String.valueOf(recursives.CalculerNombreDeSousCategorie(categorie, 0)));
             }
-            if (listeSeriesEnBd.get(positionSerie).getCategorie().getNom().equals(c.getNom())) {
-                retVal = 1 + calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie + 1, positionEquation);
-            }
-        }
-
-        if (positionSerie == listeSeriesEnBd.size() && positionEquation < listeEquationsEnBd.size()) {
-            if (!listeEquationsEnBd.get(positionEquation).getCategorie().getNom().equals(c.getNom())) {
-                retVal = calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie, positionEquation + 1);
-            }
-            if (listeEquationsEnBd.get(positionEquation).getCategorie().getNom().equals(c.getNom())) {
-                retVal = 1 + calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie, positionEquation + 1);
-            }
-        }
+        });
 
 
-        return retVal;
-    }
 
-    private int CalculerNombreDeSousCategoriePureRec(Categorie categorie, int index) {
-        int nmbr = 0;
-        if (!(categorie.getSousCategorie().isEmpty())) {
-            nmbr += 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(index), 0);
-            if (categorie.getSousCategorie().size() > 1) {
-                nmbr += 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(index), 0);
-                index++;
-            }
-        } else {
-            return nmbr;
-        }
-        return nmbr;
     }
 
     @Override
@@ -154,7 +136,7 @@ public class StatistiquesController implements Fonctionnalite {
         return "Statistiques";
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie s, List<Serie> series) {
+    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(StatistiquesController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();
@@ -167,6 +149,6 @@ public class StatistiquesController implements Fonctionnalite {
         secondaryStage.show();
 
         UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
+        ui.deplacerFenetre(secondaryStage, 1, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
     }
 }

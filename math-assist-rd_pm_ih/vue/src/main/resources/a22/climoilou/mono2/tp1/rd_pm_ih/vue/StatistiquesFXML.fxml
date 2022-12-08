@@ -4,60 +4,66 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="392.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.StatistiquesController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.StatistiquesController">
    <children>
-      <HBox layoutX="2.0" layoutY="-1.0" prefHeight="400.0" prefWidth="249.0">
+      <VBox prefHeight="326.0" prefWidth="280.0" style="-fx-background-color: #1b3a4b;">
          <children>
-            <VBox prefHeight="400.0" prefWidth="187.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" prefHeight="83.0" prefWidth="282.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="48.0" prefWidth="188.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'équations total" textAlignment="CENTER" />
-                              <Text fx:id="textEquationsTotal" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                           </children>
-                        </VBox>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'équations total" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="textEquationsTotal" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
                      </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="97.0" prefWidth="189.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de sous catégories pour :" />
-                              <Spinner fx:id="choixCategorie" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="90.0" prefWidth="202.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Équations et séries dans la même catégorie" />
-                              <VBox fx:id="conteneurTextEquationSerieMemeCat" prefHeight="200.0" prefWidth="100.0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="83.0" prefWidth="190.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de sous catégories pour :" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Spinner fx:id="choixCategorie" />
+                        <Text fx:id="textNbSousCat" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="87.0" prefWidth="293.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Équations et séries dans la même catégorie" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <VBox fx:id="conteneurTextEquationSerieMemeCat" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <VBox layoutX="237.0" layoutY="-1.0" prefHeight="399.0" prefWidth="222.0" />
+      </VBox>
    </children>
 </AnchorPane>
