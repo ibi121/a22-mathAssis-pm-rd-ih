@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <SplitPane fx:id="splitPanePrincipal" dividerPositions="0.6892842366570129" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="485.0" style="-fx-background-color: #ADB9E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
    <items>
-      <Pane fx:id="paneGauche" prefHeight="561.0" prefWidth="346.0" style="-fx-background-color: #ADB9E3;">
+      <Pane fx:id="paneGauche" prefHeight="441.0" prefWidth="5.0" style="-fx-background-color: #ADB9E3;">
          <children>
-            <VBox prefHeight="448.0" prefWidth="485.0" style="-fx-background-color: #1b3a4b;">
-               <children>
-                  <ListView id="listViewSerie" fx:id="listViewSeries" onMouseClicked="#refreshTable" prefHeight="448.0" prefWidth="493.0" style="-fx-background-color: #1b3a4b;" />
-               </children>
-            </VBox>
+            <VBox prefHeight="448.0" prefWidth="485.0" style="-fx-background-color: #1b3a4b;" />
+            <fx:include source="TreeViewFXML.fxml" />
          </children>
       </Pane>
       <Pane fx:id="paneDroit" prefHeight="408.0" prefWidth="208.0" style="-fx-background-color: #1b3a4b; ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400): ;">

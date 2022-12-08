@@ -62,11 +62,6 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        for (Serie s : bd.GetAllSerie()) {
-            this.listViewSeries.getItems().add(s);
-        }
-        listViewSeries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         //initialisation des boutons
 
         ArrayList<Fonctionnalite> fonctionnalites = new ArrayList<>();

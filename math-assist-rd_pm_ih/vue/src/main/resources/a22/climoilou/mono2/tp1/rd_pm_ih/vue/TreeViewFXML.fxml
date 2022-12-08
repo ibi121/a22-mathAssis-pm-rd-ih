@@ -5,11 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="310.0" style="-fx-background-color: #1b3a4b;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.TreeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="333.0" style="-fx-background-color: #1b3a4b;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.TreeViewController">
    <children>
-      <TreeView fx:id="treeViewCategories" layoutX="3.0" layoutY="26.0" prefHeight="370.0" prefWidth="302.0" style="-fx-background-color: #1b3a4b;" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-3.0" prefHeight="27.0" prefWidth="310.0" text="Visualisation de toto" textAlignment="CENTER" textFill="WHITE">
+      <TreeView fx:id="treeViewCategories" layoutX="-3.0" layoutY="26.0" prefHeight="410.0" prefWidth="340.0" style="-fx-background-color: #1b3a4b;" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-3.0" prefHeight="27.0" prefWidth="310.0" text="Séries et équations par catégorie" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
