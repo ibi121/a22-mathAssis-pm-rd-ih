@@ -83,7 +83,7 @@ public class StatistiquesController implements Fonctionnalite {
         listeDeCategorie.addAll(categorieService.GetAllSousCatgeorie());
 
 
-        CalculerNombreDeSousCategoriePureRec(listeDeCategorie.get(0));
+        System.out.println(CalculerNombreDeSousCategoriePureRec(listeDeCategorie.get(1), 0));
 
     }
 
@@ -117,16 +117,16 @@ public class StatistiquesController implements Fonctionnalite {
             if (!listeSeriesEnBd.get(positionSerie).getCategorie().getNom().equals(c.getNom())) {
                 retVal = calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie + 1, positionEquation);
             }
-            if(listeSeriesEnBd.get(positionSerie).getCategorie().getNom().equals(c.getNom())){
+            if (listeSeriesEnBd.get(positionSerie).getCategorie().getNom().equals(c.getNom())) {
                 retVal = 1 + calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie + 1, positionEquation);
             }
         }
 
-        if(positionSerie == listeSeriesEnBd.size() && positionEquation < listeEquationsEnBd.size()){
+        if (positionSerie == listeSeriesEnBd.size() && positionEquation < listeEquationsEnBd.size()) {
             if (!listeEquationsEnBd.get(positionEquation).getCategorie().getNom().equals(c.getNom())) {
                 retVal = calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie, positionEquation + 1);
             }
-            if(listeEquationsEnBd.get(positionEquation).getCategorie().getNom().equals(c.getNom())){
+            if (listeEquationsEnBd.get(positionEquation).getCategorie().getNom().equals(c.getNom())) {
                 retVal = 1 + calculNombreEquationEtSerieMemeCategoriePureRec(c, positionSerie, positionEquation + 1);
             }
         }
@@ -135,10 +135,16 @@ public class StatistiquesController implements Fonctionnalite {
         return retVal;
     }
 
-    private int CalculerNombreDeSousCategoriePureRec(Categorie categorie){
+    private int CalculerNombreDeSousCategoriePureRec(Categorie categorie, int index) {
         int nmbr = 0;
-        if(categorie.getSousCategorie() != null){
-            nmbr = 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(0));
+        if (!(categorie.getSousCategorie().isEmpty())) {
+            nmbr += 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(index), 0);
+            if (categorie.getSousCategorie().size() > 1) {
+                nmbr += 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(index), 0);
+                index++;
+            }
+        } else {
+            return nmbr;
         }
         return nmbr;
     }
