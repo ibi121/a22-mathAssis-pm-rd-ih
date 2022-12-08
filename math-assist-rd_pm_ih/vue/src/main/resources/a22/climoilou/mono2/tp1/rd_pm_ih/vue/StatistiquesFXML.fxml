@@ -39,7 +39,7 @@
                         <VBox alignment="CENTER" prefHeight="90.0" prefWidth="202.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Équations et séries dans la même catégorie" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <VBox fx:id="conteneurTextEquationSerieMemeCat" prefHeight="200.0" prefWidth="100.0" />
                            </children>
                         </VBox>
                      </children>
