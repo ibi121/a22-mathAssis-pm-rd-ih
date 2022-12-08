@@ -30,9 +30,7 @@ public class MainController {
 
     @FXML
     private VBox vBoxBtn;
-
     private ConfigurableApplicationContext context;
-
     private AProposController aProposController;
     private GenerateurController generateurController;
     private ModificateurController modificateurController;
@@ -42,18 +40,12 @@ public class MainController {
     private TableauDesValeursController tableauDesValeursController;
     private AvisController avisController;
     private StatistiquesController statistiquesController;
-
     private TreeViewBinaireController treeViewBinaireController;
     private SerieService serieService;
-
     private ArrayList<String> fichierLignes;
-
     private ArrayList<String> fichierString;
-
     private ArrayList<Categorie> categories;
-
     private CategorieService categorieService;
-
     private EquationService equationService;
 
     @FXML
