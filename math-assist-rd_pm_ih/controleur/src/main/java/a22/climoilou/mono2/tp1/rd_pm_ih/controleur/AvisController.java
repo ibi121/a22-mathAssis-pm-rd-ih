@@ -78,7 +78,6 @@ public class AvisController implements Fonctionnalite {
                 alert.setContentText("Attention, vous n'avez pas remplis tous les champs du formulaire :o)");
                 alert.show();
             }
-
         }
 
         BD.SauvegarderUtilisateur(new Utilisateur(prenom, nom, courriel, commentaire));

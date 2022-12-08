@@ -46,6 +46,8 @@ public class StatistiquesController implements Fonctionnalite {
 
     private List<Equations> listeEquationsEnBd;
 
+    private List<Categorie> listeDeCategorie;
+
     @Autowired
     public void setCategorieService(CategorieService categorieService) {
         this.categorieService = categorieService;
@@ -75,6 +77,13 @@ public class StatistiquesController implements Fonctionnalite {
             text.setText(c.getNom() + " : " + String.valueOf(calculNombreEquationEtSerieMemeCategorie(c)));
             conteneurTextEquationSerieMemeCat.getChildren().add(text);
         }
+
+        listeDeCategorie = new ArrayList<>();
+
+        listeDeCategorie.addAll(categorieService.GetAllSousCatgeorie());
+
+
+        CalculerNombreDeSousCategoriePureRec(listeDeCategorie.get(0));
 
     }
 
@@ -124,6 +133,14 @@ public class StatistiquesController implements Fonctionnalite {
 
 
         return retVal;
+    }
+
+    private int CalculerNombreDeSousCategoriePureRec(Categorie categorie){
+        int nmbr = 0;
+        if(categorie.getSousCategorie() != null){
+            nmbr = 1 + CalculerNombreDeSousCategoriePureRec(categorie.getSousCategorie().get(0));
+        }
+        return nmbr;
     }
 
     @Override
