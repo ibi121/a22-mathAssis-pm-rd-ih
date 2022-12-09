@@ -281,7 +281,7 @@ public class ModificateurController implements Fonctionnalite {
         }
 
         UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
+        ui.deplacerFenetre(secondaryStage, 1, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
     }
 
     @Override

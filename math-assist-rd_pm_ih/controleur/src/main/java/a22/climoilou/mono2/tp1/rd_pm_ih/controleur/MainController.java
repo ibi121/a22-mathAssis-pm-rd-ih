@@ -43,14 +43,13 @@ public class MainController {
     private StatistiquesController statistiquesController;
     private TreeViewBinaireController treeViewBinaireController;
     private SerieService serieService;
-    private ArrayList<String> fichierLignes;
-    private ArrayList<String> fichierString;
     private ArrayList<Categorie> categories;
     private CategorieService categorieService;
     private EquationService equationService;
 
     @FXML
     private TreeView<TreeItemI> treeViewCategories;
+
     @Autowired
     public void setSerieService(SerieService serieService) {
         this.serieService = serieService;
@@ -78,11 +77,12 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        fichierLignes = lectureFichierLignes();
-        fichierString = lectureFichierStrings();
-        creationDesCategories();
-        createTreeView();
+//        fichierLignes = lectureFichierLignes();
+//        fichierString = lectureFichierStrings();
+        //creationDesCategories();
+//        createTreeView();
         //lectureFichierLignes();
+        lectureFichierStrings();
 
         //initialisation des boutons
 
@@ -155,11 +155,11 @@ public class MainController {
             alert.showAndWait().ifPresent(reponse -> {
                 if (reponse == ButtonType.OK) {
                     for (TreeItem<TreeItemI> item : listeItems) {
-                        if(item.getValue() instanceof Serie){
+                        if (item.getValue() instanceof Serie) {
                             serieService.SupprimerSerie((Serie) item.getValue());
-                        }else if(item.getValue() instanceof Equations){
+                        } else if (item.getValue() instanceof Equations) {
                             equationService.SupprimerEquations((Equations) item.getValue());
-                        }else {
+                        } else {
                             alert.setAlertType(Alert.AlertType.WARNING);
                             alert.setContentText("attention vous ne pouvez pas supprimer une cetégorie'!");
                             alert.show();
@@ -169,7 +169,7 @@ public class MainController {
             });
         }
 
-        createTreeView();
+            lectureFichierStrings();
 
     }
 
@@ -214,7 +214,7 @@ public class MainController {
             ) {
                 liste.add((Serie) i.getValue());
             }
-        }else {
+        } else {
             return null;
         }
 
@@ -266,61 +266,33 @@ public class MainController {
         this.treeViewBinaireController = treeViewBinaireController;
     }
 
-    private void creationDesCategories() {
-        this.categories = new ArrayList<>();
-        Categorie root = new Categorie("");
+//    private void creationDesCategories() {
+//        this.categories = new ArrayList<>();
+//        Categorie root = new Categorie("");
+//
+//        for (int i = 0; i < this.fichierString.size(); i++) {
+//
+//            if (this.categories.isEmpty()) {
+//                root.setNom(fichierString.get(i));
+//                this.categories.add(root);
+//            } else {
+//                if (root.getNom().equals(fichierString.get(i))) {
+//                    if (root.getSousCategorie().isEmpty()) {
+//                        Categorie c = new Categorie(this.fichierString.get(i + 1));
+//                        root.setSousCategorie(c);
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//        System.out.println(root.toString());
+//
+//    }
 
-        for (int i = 0; i < this.fichierString.size(); i++) {
-
-            if (this.categories.isEmpty()) {
-                root.setNom(fichierString.get(i));
-                this.categories.add(root);
-            } else {
-                if (root.getNom().equals(fichierString.get(i))) {
-                    if (root.getSousCategorie().isEmpty()) {
-                        Categorie c = new Categorie(this.fichierString.get(i + 1));
-                        root.setSousCategorie(c);
-                    }
-                }
-            }
-
-        }
-
-        System.out.println(root.toString());
-
-    }
-
-    public void createTreeView() {
+    public void createTreeView(TreeItem root) {
 
         Recursives recursives = new Recursives();
-
-        Categorie categorie1 = new Categorie("Categorie1");
-        Categorie categorie2 = new Categorie("Categorie2");
-        Categorie categorie3 = new Categorie("Categorie3");
-        Categorie categorieA = new Categorie("CategorieA");
-        Categorie categorieB = new Categorie("CategorieB");
-
-        categorie2.setSousCategorie(categorieA);
-        categorie1.setSousCategorie(categorie2);
-        categorie3.setSousCategorie(categorieB);
-        categorie1.setSousCategorie(categorie3);
-
-        //categorieService.saveCategorie(categorie1);
-
-
-        TreeItem root = new TreeItem<>(categorie1);
-
-        TreeItem sousCat2 = new TreeItem<>(categorie2);
-
-        TreeItem sousCat3 = new TreeItem(categorie3);
-
-        TreeItem sousCatA = new TreeItem(categorieA);
-
-        TreeItem sousCatB = new TreeItem(categorieB);
-
-        sousCat2.getChildren().add(sousCatA);
-        sousCat3.getChildren().add(sousCatB);
-        root.getChildren().addAll(sousCat2, sousCat3);
 
         for (Serie s : serieService.GetAllSerie()
         ) {
@@ -337,10 +309,6 @@ public class MainController {
         }
 
 
-        root.setExpanded(true);
-        this.treeViewCategories.setRoot(root);
-
-        this.treeViewCategories.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     }
 
@@ -372,7 +340,9 @@ public class MainController {
         return categoriesLignes;
     }
 
-    private ArrayList<String> lectureFichierStrings() {
+    private void lectureFichierStrings() {
+        List<Categorie> listeDeCategorie = new ArrayList<>();
+        List<TreeItem> listeDarbre = new ArrayList<>();
         ArrayList<String> categoriesElements = new ArrayList<>();
         try {
             // Le fichier d'entrée
@@ -381,39 +351,55 @@ public class MainController {
 
 
             //Si il y a une prochaine ligne
-          if(scanner.hasNextLine()){
-              String root = scanner.nextLine();
-              Categorie c1 = new Categorie(root);
-              String prochaineLigne = scanner.nextLine();
+            while (scanner.hasNextLine()) {
 
-              if(prochaineLigne.contains(root)){
-                 List<String> listeDeStringSansCrochet = List.of(prochaineLigne.split("/"));
+                if (scanner.hasNext()) {
+                    //String prochaineLigne = scanner.nextLine();
+                    int indexParent = 0;
+                    int indexEnfant = 0;
 
-                  for (int i = 0; i < listeDeStringSansCrochet.size(); i++) {
-                      if(listeDeStringSansCrochet.get(0).equals(c1.getNom())){
-                          c1.setSousCategorie(new Categorie(String.valueOf(listeDeStringSansCrochet.get(1))));
-                          if(!(listeDeStringSansCrochet.get(i).equals(c1.getSousCategorie().get(0).getNom()))){
-                              System.out.println("j'ai la meme sous cat");
-                          }
-
-                      }
-
-                  }
+                    List<String> listeDeStringSansCrochet = List.of(scanner.nextLine().split("/"));
+                    Categorie c = new Categorie(listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 1));
+                    TreeItem<TreeItemI> iAmRoot = new TreeItem<>(c);
+                    listeDeCategorie.add(c);
+                    listeDarbre.add(iAmRoot);
 
 
+                    if (listeDeStringSansCrochet.size() != 1) {
+                        String parent = listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 2);
+                        String enfant = listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 1);
 
-                  System.out.println(c1.getSousCategorie().toString());
-              }
+                        for (int i = 0; i < listeDeCategorie.size(); i++) {
+                            if (listeDeCategorie.get(i).getNom().equals(parent)) {
+                                indexParent = i;
+                            }
 
-          }
+                            if (listeDeCategorie.get(i).getNom().equals(enfant)) {
+                                indexEnfant = i;
+                            }
+                        }
+
+                        listeDeCategorie.get(indexParent).setSousCategorie(listeDeCategorie.get(indexEnfant));
+                        listeDarbre.get(indexParent).getChildren().add(listeDarbre.get(indexEnfant));
+
+                        listeDarbre.get(0).setExpanded(true);
+                        this.treeViewCategories.setRoot(listeDarbre.get(0));
+
+                        this.treeViewCategories.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+                    }
+
+                }
+
+
+            }
+            createTreeView(listeDarbre.get(0));
+
 
             scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        return categoriesElements;
     }
 
 }
