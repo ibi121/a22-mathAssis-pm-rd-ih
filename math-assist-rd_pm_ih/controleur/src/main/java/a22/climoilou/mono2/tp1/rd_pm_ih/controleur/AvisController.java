@@ -5,6 +5,7 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Utilisateur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UserRepository;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.UtilisateurService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.ProgressBarServiceIbrahim;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,6 +38,7 @@ public class AvisController implements Fonctionnalite {
     private UtilisateurService BD;
     private boolean isClear = false;
 
+
     @Autowired
     public void setBD(UtilisateurService BD) {
         this.BD = BD;
@@ -58,6 +60,24 @@ public class AvisController implements Fonctionnalite {
 
     @FXML
     public TextArea fieldCommentaire;
+
+    @FXML
+    public ProgressBar progressBarAffiche;
+
+    private ProgressBarServiceIbrahim serviceProgressBar;
+
+    @FXML
+    void initialize() {
+        serviceProgressBar = new ProgressBarServiceIbrahim();
+        for (Utilisateur util : BD.GetAllUtilisateur()) {
+            this.listViewComments.getItems().add(util);
+        }
+        this.listViewComments.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        progressBarAffiche.setVisible(false);
+
+    }
+
 
     @FXML
     public void SauvegarderAvis(ActionEvent actionEvent) {
@@ -83,33 +103,26 @@ public class AvisController implements Fonctionnalite {
                 alert.setContentText("Attention, vous n'avez pas remplis tous les champs du formulaire :o)");
                 alert.show();
                 isClear = false;
-            }else {
+            } else {
                 isClear = true;
             }
         }
-            if(isClear){
-                BD.SauvegarderUtilisateur(new Utilisateur(prenom, nom, courriel, commentaire));
-                this.listViewComments.refresh();
-            }
+        if (isClear) {
+            this.serviceProgressBar.start();
+            BD.SauvegarderUtilisateur(new Utilisateur(prenom, nom, courriel, commentaire));
+            this.listViewComments.refresh();
+            this.progressBarAffiche.setVisible(true);
+            this.progressBarAffiche.progressProperty().bind(this.serviceProgressBar.progressProperty());
 
-
-    }
-
-    @FXML
-    void initialize(){
-
-        for (Utilisateur util:BD.GetAllUtilisateur()) {
-            this.listViewComments.getItems().add(util);
+            System.out.println(this.serviceProgressBar.isRunning());
         }
-        this.listViewComments.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
 
     }
 
 
-
-    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(AvisController.class);
         Parent root2 = (SplitPane) controllerAndView2.getView().get();

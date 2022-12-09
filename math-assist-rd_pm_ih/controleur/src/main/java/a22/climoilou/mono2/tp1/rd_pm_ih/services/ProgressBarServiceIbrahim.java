@@ -3,9 +3,9 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.services;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-public class progressBarServiceIbrahim extends Service<Integer> {
+public class ProgressBarServiceIbrahim extends Service<Void> {
     @Override
-    protected Task<Integer> createTask() {
+    protected Task<Void> createTask() {
         return new Task() {
             @Override
             protected Object call() throws Exception {
