@@ -85,9 +85,6 @@ public class MainController {
     @FXML
     private void initialize() {
         lectureFichierStrings();
-
-        //initialisation des boutons
-
         ArrayList<Fonctionnalite> fonctionnalites = new ArrayList<>();
         fonctionnalites.add(aProposController);
         fonctionnalites.add(avisController);
@@ -343,12 +340,10 @@ public class MainController {
     private void lectureFichierStrings() {
         List<Categorie> listeDeCategorie = new ArrayList<>();
         List<TreeItem> listeDarbre = new ArrayList<>();
-        ArrayList<String> categoriesElements = new ArrayList<>();
         try {
             // Le fichier d'entrée
             FileInputStream file = new FileInputStream("categories.txt");
             Scanner scanner = new Scanner(file);
-
 
             //Si il y a une prochaine ligne
             while (scanner.hasNextLine()) {
@@ -363,7 +358,6 @@ public class MainController {
                     TreeItem<TreeItemI> iAmRoot = new TreeItem<>(c);
                     listeDeCategorie.add(c);
                     listeDarbre.add(iAmRoot);
-
 
                     if (listeDeStringSansCrochet.size() != 1) {
                         String parent = listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 2);
@@ -386,16 +380,10 @@ public class MainController {
                         this.treeViewCategories.setRoot(listeDarbre.get(0));
 
                         this.treeViewCategories.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
                     }
-
                 }
-
-
             }
             createTreeView(listeDarbre.get(0));
-
-
             scanner.close();
         } catch (IOException e) {
             e.printStackTrace();

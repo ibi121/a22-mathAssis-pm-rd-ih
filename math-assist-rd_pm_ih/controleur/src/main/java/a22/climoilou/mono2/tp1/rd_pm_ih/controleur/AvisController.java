@@ -35,6 +35,7 @@ public class AvisController implements Fonctionnalite {
     @FXML
     public ListView<Utilisateur> listViewComments;
     private UtilisateurService BD;
+    private boolean isClear = false;
 
     @Autowired
     public void setBD(UtilisateurService BD) {
@@ -58,6 +59,7 @@ public class AvisController implements Fonctionnalite {
     @FXML
     public TextArea fieldCommentaire;
 
+    @FXML
     public void SauvegarderAvis(ActionEvent actionEvent) {
 
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -74,15 +76,22 @@ public class AvisController implements Fonctionnalite {
         listeDeString.add(courriel);
         listeDeString.add(commentaire);
 
-        for (String s: listeDeString) {
-            if(s.isEmpty()){
+
+        for (int i = 0; i < listeDeString.size(); i++) {
+            if (listeDeString.get(i).isEmpty()) {
                 alert.setAlertType(Alert.AlertType.WARNING);
                 alert.setContentText("Attention, vous n'avez pas remplis tous les champs du formulaire :o)");
                 alert.show();
+                isClear = false;
+            }else {
+                isClear = true;
             }
         }
+            if(isClear){
+                BD.SauvegarderUtilisateur(new Utilisateur(prenom, nom, courriel, commentaire));
+                this.listViewComments.refresh();
+            }
 
-        BD.SauvegarderUtilisateur(new Utilisateur(prenom, nom, courriel, commentaire));
 
     }
 
@@ -93,6 +102,8 @@ public class AvisController implements Fonctionnalite {
             this.listViewComments.getItems().add(util);
         }
         this.listViewComments.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
 
     }
 
