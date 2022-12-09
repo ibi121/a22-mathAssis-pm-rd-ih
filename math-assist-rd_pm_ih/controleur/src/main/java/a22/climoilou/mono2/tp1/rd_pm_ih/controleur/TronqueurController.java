@@ -39,7 +39,7 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
     private TronqueurVue tronqueurVue;
 
     public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
-        if (series.size() > 1) {
+        if (series != null && series.size() > 1) {
             if (secondaryStage == null) {
                 setSeries(series);
                 setNomSerie(series);

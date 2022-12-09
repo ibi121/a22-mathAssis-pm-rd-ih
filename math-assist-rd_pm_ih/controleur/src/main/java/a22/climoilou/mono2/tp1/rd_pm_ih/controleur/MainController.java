@@ -210,11 +210,17 @@ public class MainController {
         List<Serie> liste = new ArrayList<>();
 
         if (listeItem.size() != 0) {
-            for (TreeItem<TreeItemI> i : listeItem
-            ) {
-                liste.add((Serie) i.getValue());
+            for (TreeItem<TreeItemI> i : listeItem) {
+                if (i.getValue() instanceof Serie) {
+                    liste.add((Serie) i.getValue());
+                } else {
+                    liste.clear();
+                    break;
+                }
             }
-        } else {
+        }
+
+        if (liste.size() == 0) {
             return null;
         }
 
