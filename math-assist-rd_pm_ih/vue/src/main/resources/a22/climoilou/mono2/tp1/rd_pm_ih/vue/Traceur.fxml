@@ -11,7 +11,7 @@
           <NumberAxis side="BOTTOM" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="y" side="LEFT" />
+          <NumberAxis fx:id="y" side="LEFT" lowerBound="-50" upperBound="150" />
         </yAxis>
       </LineChart>
    </children>
