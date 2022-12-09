@@ -51,6 +51,7 @@ public class TraceurGraphique {
     public void initialize() {
         graphiqueSerie.prefWidthProperty().bind(iAmGroot.widthProperty());
         graphiqueSerie.prefHeightProperty().bind(iAmGroot.heightProperty());
+        y.setAutoRanging(false);
         ajoutSeries();
     }
 
@@ -77,11 +78,8 @@ public class TraceurGraphique {
                         Point2D point = new Point2D(e.getX(), e.getY());
                         double yAxis = y.screenToLocal(point).getY();
                         Number yNum = y.getValueForDisplay(yAxis);
-                        if (yNum.doubleValue() < -200 || yNum.doubleValue() > -200) {
-                            datanew.setYValue(yNum);
-                            datanew.getNode().setStyle("-fx-fill: red");
-                        }
-
+                        datanew.setYValue(yNum);
+                        datanew.getNode().setStyle("-fx-fill: red");
                     });
                     series.getData().add(datanew);
                 }

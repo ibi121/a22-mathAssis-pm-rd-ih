@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class TraceurController implements TraceurI, Fonctionnalite {
@@ -52,7 +53,7 @@ public class TraceurController implements TraceurI, Fonctionnalite {
                 secondaryStage.show();
 
                 UIAnimation ui = new UIAnimation();
-                ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
+                ui.deplacerFenetre(secondaryStage, 1, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
 
             } else {
                 setNomSerie(series);
@@ -93,10 +94,10 @@ public class TraceurController implements TraceurI, Fonctionnalite {
     }
 
     public void setNomSerie(List<Serie> series) {
-        nomSeries = new ArrayList<>();
-        for (Serie serie : series) {
-            this.nomSeries.add(serie.getNomSerie());
-        }
+        nomSeries = series.stream().map(Serie::getNom).collect(Collectors.toList());
+//        for (Serie serie : series) {
+//            this.nomSeries.add(serie.getNomSerie());
+//        }
     }
 
     @Override
