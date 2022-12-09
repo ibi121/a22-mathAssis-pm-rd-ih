@@ -262,6 +262,7 @@ public class ModificateurController implements Fonctionnalite {
     public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         if (serie != null) {
             if (secondaryStage == null) {
+                this.serie = serie;
                 FxWeaver fxWeaver = context.getBean(FxWeaver.class);
                 FxControllerAndView controllerAndView = fxWeaver.load(ModificateurController.class);
                 Parent root = (Pane) controllerAndView.getView().get();
@@ -270,12 +271,13 @@ public class ModificateurController implements Fonctionnalite {
                 secondaryStage.setScene(new Scene(root));
                 secondaryStage.setResizable(false);
                 UIAnimation ui = new UIAnimation();
-                ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
+                ui.deplacerFenetre(secondaryStage, 950, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
             }
+            this.serie = serie;
             secondaryStage.show();
             remplirList(serie);
             UIAnimation ui = new UIAnimation();
-            ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400);
+            ui.deplacerFenetre(secondaryStage, 950, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Modificateur information");
@@ -283,9 +285,6 @@ public class ModificateurController implements Fonctionnalite {
             alert.setContentText("Veuillez selectionner une serie de la liste");
             alert.show();
         }
-
-        UIAnimation ui = new UIAnimation();
-        ui.deplacerFenetre(secondaryStage, 1, 1, secondaryStage.getWidth(), secondaryStage.getHeight());
     }
 
     @Override

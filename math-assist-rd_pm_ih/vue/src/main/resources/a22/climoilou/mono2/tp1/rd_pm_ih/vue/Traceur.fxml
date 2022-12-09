@@ -11,7 +11,7 @@
           <NumberAxis side="BOTTOM" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="y" onDragDetected="#modifieY" side="LEFT" />
+          <NumberAxis fx:id="y" side="LEFT" />
         </yAxis>
       </LineChart>
    </children>
