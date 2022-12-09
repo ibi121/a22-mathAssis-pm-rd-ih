@@ -340,6 +340,7 @@ public class MainController {
     private void lectureFichierStrings() {
         List<Categorie> listeDeCategorie = new ArrayList<>();
         List<TreeItem> listeDarbre = new ArrayList<>();
+
         try {
             // Le fichier d'entrée
             FileInputStream file = new FileInputStream("categories.txt");
@@ -357,6 +358,7 @@ public class MainController {
                     Categorie c = new Categorie(listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 1));
                     TreeItem<TreeItemI> iAmRoot = new TreeItem<>(c);
                     listeDeCategorie.add(c);
+                    //categorieService.saveCategorie(c);
                     listeDarbre.add(iAmRoot);
 
                     if (listeDeStringSansCrochet.size() != 1) {
@@ -371,6 +373,7 @@ public class MainController {
                             if (listeDeCategorie.get(i).getNom().equals(enfant)) {
                                 indexEnfant = i;
                             }
+
                         }
 
                         listeDeCategorie.get(indexParent).setSousCategorie(listeDeCategorie.get(indexEnfant));
@@ -380,6 +383,12 @@ public class MainController {
                         this.treeViewCategories.setRoot(listeDarbre.get(0));
 
                         this.treeViewCategories.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+                        this.treeViewCategories.setCellFactory((a) -> {
+                            CustomTreeCell retCell = new CustomTreeCell();
+                            return retCell;
+                        });
+
                     }
                 }
             }
