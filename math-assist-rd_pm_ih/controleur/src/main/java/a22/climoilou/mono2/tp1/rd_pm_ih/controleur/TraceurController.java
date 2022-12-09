@@ -3,6 +3,7 @@ package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
 import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
 import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
+import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.services.UIAnimation;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurGraphique;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TraceurI;
@@ -20,6 +21,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +33,16 @@ public class TraceurController implements TraceurI, Fonctionnalite {
     private List<HashMap<Double, Double>> serieGraphique;
     private TraceurGraphique traceurGraphique;
 
+    private List<Serie> serieOrigine;
+
     private Stage secondaryStage;
+
+    private SerieService serieService;
+
+    @Autowired
+    public void setSerieService(SerieService serieService) {
+        this.serieService = serieService;
+    }
 
     @Autowired
     public void setTraceurGraphique(TraceurGraphique traceurGraphique) {
@@ -44,6 +55,7 @@ public class TraceurController implements TraceurI, Fonctionnalite {
             if (secondaryStage == null) {
                 setNomSerie(series);
                 setSerieGraphique(series);
+                serieOrigine = series;
                 FxWeaver fxWeaver = context.getBean(FxWeaver.class);
                 FxControllerAndView controllerAndView = fxWeaver.load(TraceurGraphique.class);
                 Parent root = (AnchorPane) controllerAndView.getView().get();
@@ -58,6 +70,7 @@ public class TraceurController implements TraceurI, Fonctionnalite {
             } else {
                 setNomSerie(series);
                 setSerieGraphique(series);
+                serieOrigine = series;
                 secondaryStage.show();
                 traceurGraphique.resetGraphique();
             }
@@ -93,11 +106,16 @@ public class TraceurController implements TraceurI, Fonctionnalite {
         return nomSeries;
     }
 
+    @Override
+    public void setNewData(double x, double y, int indexSerie) {
+        //System.out.println(x + " " + y + " " + indexSerie);
+        serieOrigine.get(indexSerie).getDonnees().get((int)x).setY(y);
+        serieOrigine.get(indexSerie).setDateDerniereModification(LocalDateTime.now());
+        serieService.SaveSerie(serieOrigine.get(indexSerie));
+    }
+
     public void setNomSerie(List<Serie> series) {
         nomSeries = series.stream().map(Serie::getNom).collect(Collectors.toList());
-//        for (Serie serie : series) {
-//            this.nomSeries.add(serie.getNomSerie());
-//        }
     }
 
     @Override

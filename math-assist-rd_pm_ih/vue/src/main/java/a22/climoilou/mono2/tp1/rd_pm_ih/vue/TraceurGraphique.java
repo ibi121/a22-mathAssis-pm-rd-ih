@@ -6,6 +6,7 @@ import javafx.event.EventDispatchChain;
 import javafx.event.EventDispatcher;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -74,12 +75,19 @@ public class TraceurGraphique {
                 for (Map.Entry<Double, Double> set : serie.entrySet()) {
                     Data<Number, Number> datanew = new XYChart.Data<Number, Number>(set.getKey(), set.getValue());
                     datanew.setNode(new Rectangle(8, 8));
+                    datanew.getNode().setCursor(Cursor.HAND);
+                    int finalI = i;
                     datanew.getNode().setOnMouseDragged(e -> {
                         Point2D point = new Point2D(e.getX(), e.getY());
                         double yAxis = y.screenToLocal(point).getY();
                         Number yNum = y.getValueForDisplay(yAxis);
                         datanew.setYValue(yNum);
                         datanew.getNode().setStyle("-fx-fill: red");
+
+                    });
+                    datanew.getNode().setOnMouseReleased(e -> {
+                        datanew.getNode().setStyle("-fx-fill: blue");
+                        traceurI.setNewData(datanew.getXValue().doubleValue(), datanew.getYValue().doubleValue(), finalI - 1);
                     });
                     series.getData().add(datanew);
                 }

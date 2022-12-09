@@ -7,4 +7,6 @@ public interface TraceurI {
     public List<HashMap<Double, Double>> getSeries();
 
     public List<String> getNomSeries();
+
+    public void setNewData(double x, double y, int i);
 }
