@@ -4,9 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <SplitPane fx:id="splitPanePrincipal" dividerPositions="0.6892842366570129" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="448.0" prefWidth="485.0" style="-fx-background-color: #ADB9E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.MainController">
    <items>
@@ -19,9 +21,23 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <TreeView fx:id="treeViewCategories" onMouseClicked="#refreshTable" prefHeight="406.0" prefWidth="486.0" style="-fx-background-color: #1b3a4b;" />
+                  <HBox prefHeight="21.0" prefWidth="486.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé dans l'application : " wrappingWidth="213.3367214202881">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="textTempsPasse" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="120.22615242004395">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <TreeView fx:id="treeViewCategories" layoutY="21.0" onMouseClicked="#refreshTable" prefHeight="427.0" prefWidth="485.0" style="-fx-background-color: #1b3a4b;" />
          </children>
       </Pane>
       <Pane fx:id="paneDroit" prefHeight="408.0" prefWidth="208.0" style="-fx-background-color: #1b3a4b; ui.deplacerFenetre(secondaryStage, 1, 1, 400, 400): ;">

@@ -4,6 +4,9 @@ import a22.climoilou.mono2.tp1.rd_pm_ih.*;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.CategorieService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.EquationService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.services.TempsPasseDansAppService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -31,6 +35,9 @@ public class MainController {
 
     @FXML
     private VBox vBoxBtn;
+
+    @FXML
+    private Text textTempsPasse;
     private ConfigurableApplicationContext context;
     private AProposController aProposController;
     private GenerateurController generateurController;
@@ -77,11 +84,6 @@ public class MainController {
 
     @FXML
     private void initialize() {
-//        fichierLignes = lectureFichierLignes();
-//        fichierString = lectureFichierStrings();
-        //creationDesCategories();
-//        createTreeView();
-        //lectureFichierLignes();
         lectureFichierStrings();
 
         //initialisation des boutons
@@ -126,8 +128,52 @@ public class MainController {
             }
         });
 
+        tempsPasseDansApp();
+
     }
 
+    private void tempsPasseDansApp(){
+        TempsPasseDansAppService service = new TempsPasseDansAppService();
+
+        service.valueProperty().addListener((c, o, n) -> {
+            String temps = "";
+            int numberOfHours;
+            int numberOfMinutes;
+            int numberOfSeconds;
+
+            numberOfHours = (n % 86400) / 3600;
+            numberOfMinutes = ((n % 86400) % 3600) / 60;
+            numberOfSeconds = ((n % 86400) % 3600) % 60;
+
+            if (numberOfHours < 10) {
+                temps += "0" + numberOfHours;
+            }else if(numberOfHours < 60) {
+                temps += numberOfHours;
+            }
+
+            temps += ":";
+
+            if (numberOfMinutes < 10) {
+                temps += "0" + numberOfMinutes;
+            }else if (numberOfMinutes < 60) {
+                temps += numberOfMinutes;
+            }
+
+            temps += ":";
+
+            if (numberOfSeconds < 10) {
+                temps += "0" + numberOfSeconds;
+            }else if (numberOfSeconds < 60) {
+                temps += numberOfSeconds;
+            }
+
+            textTempsPasse.setText(temps);
+            service.setLastValue(n);
+
+        });
+        service.start();
+
+    }
 
     @Autowired
     public void setAvisController(AvisController avisController) {
@@ -169,7 +215,7 @@ public class MainController {
             });
         }
 
-            lectureFichierStrings();
+        lectureFichierStrings();
 
     }
 
@@ -272,30 +318,6 @@ public class MainController {
         this.treeViewBinaireController = treeViewBinaireController;
     }
 
-//    private void creationDesCategories() {
-//        this.categories = new ArrayList<>();
-//        Categorie root = new Categorie("");
-//
-//        for (int i = 0; i < this.fichierString.size(); i++) {
-//
-//            if (this.categories.isEmpty()) {
-//                root.setNom(fichierString.get(i));
-//                this.categories.add(root);
-//            } else {
-//                if (root.getNom().equals(fichierString.get(i))) {
-//                    if (root.getSousCategorie().isEmpty()) {
-//                        Categorie c = new Categorie(this.fichierString.get(i + 1));
-//                        root.setSousCategorie(c);
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        System.out.println(root.toString());
-//
-//    }
-
     public void createTreeView(TreeItem root) {
 
         Recursives recursives = new Recursives();
@@ -315,36 +337,8 @@ public class MainController {
         }
 
 
-
     }
 
-
-    private ArrayList<String> lectureFichierLignes() {
-        ArrayList<String> categoriesLignes = new ArrayList<>();
-        try {
-            // Le fichier d'entrée
-            FileInputStream file = new FileInputStream("categories.txt");
-            Scanner scanner = new Scanner(file);
-
-            //scanner.useDelimiter("/|\\r?\\n");
-
-
-            //Si il y a une prochaine ligne
-            while (scanner.hasNextLine()) {
-
-                String ligne = scanner.nextLine();
-
-                categoriesLignes.add(ligne);
-            }
-
-            scanner.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        return categoriesLignes;
-    }
 
     private void lectureFichierStrings() {
         List<Categorie> listeDeCategorie = new ArrayList<>();
