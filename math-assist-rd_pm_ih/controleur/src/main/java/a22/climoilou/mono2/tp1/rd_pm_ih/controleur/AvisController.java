@@ -114,13 +114,15 @@ public class AvisController implements Fonctionnalite {
             this.progressBarAffiche.setVisible(true);
             this.progressBarAffiche.progressProperty().bind(this.serviceProgressBar.progressProperty());
 
-            System.out.println(this.serviceProgressBar.isRunning());
+         this.progressBarAffiche.progressProperty().addListener((a, o, n) -> {
+             if(a.getValue().doubleValue() == 0.99){
+                 System.out.println("fini");
+                 this.progressBarAffiche.setVisible(false);
+             }
+         });
         }
 
-
-
     }
-
 
     public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
