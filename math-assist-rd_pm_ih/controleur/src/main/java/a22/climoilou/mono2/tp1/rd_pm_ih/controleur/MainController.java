@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,6 +82,7 @@ public class MainController {
         fichierString = lectureFichierStrings();
         creationDesCategories();
         createTreeView();
+        //lectureFichierLignes();
 
         //initialisation des boutons
 
@@ -138,7 +140,6 @@ public class MainController {
 
     @FXML
     public void supprimerItem() {
-
         Alert alert = new Alert(Alert.AlertType.NONE);
 
         ObservableList<TreeItem<TreeItemI>> listeItems = this.treeViewCategories.getSelectionModel().getSelectedItems();
@@ -356,6 +357,7 @@ public class MainController {
 
             //Si il y a une prochaine ligne
             while (scanner.hasNextLine()) {
+
                 String ligne = scanner.nextLine();
 
                 categoriesLignes.add(ligne);
@@ -377,15 +379,33 @@ public class MainController {
             FileInputStream file = new FileInputStream("categories.txt");
             Scanner scanner = new Scanner(file);
 
-            scanner.useDelimiter("/|\\r?\\n");
-
 
             //Si il y a une prochaine ligne
-            while (scanner.hasNext()) {
-                String element = scanner.next();
+          if(scanner.hasNextLine()){
+              String root = scanner.nextLine();
+              Categorie c1 = new Categorie(root);
+              String prochaineLigne = scanner.nextLine();
 
-                categoriesElements.add(element);
-            }
+              if(prochaineLigne.contains(root)){
+                 List<String> listeDeStringSansCrochet = List.of(prochaineLigne.split("/"));
+
+                  for (int i = 0; i < listeDeStringSansCrochet.size(); i++) {
+                      if(listeDeStringSansCrochet.get(0).equals(c1.getNom())){
+                          c1.setSousCategorie(new Categorie(String.valueOf(listeDeStringSansCrochet.get(1))));
+                          if(!(listeDeStringSansCrochet.get(i).equals(c1.getSousCategorie().get(0).getNom()))){
+                              System.out.println("j'ai la meme sous cat");
+                          }
+
+                      }
+
+                  }
+
+
+
+                  System.out.println(c1.getSousCategorie().toString());
+              }
+
+          }
 
             scanner.close();
         } catch (IOException e) {
