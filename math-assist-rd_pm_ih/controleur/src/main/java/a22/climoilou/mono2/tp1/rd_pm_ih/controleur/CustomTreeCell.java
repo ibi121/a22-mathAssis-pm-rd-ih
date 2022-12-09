@@ -27,17 +27,13 @@ public class CustomTreeCell extends TreeCell<TreeItemI> {
                 leaf.setText(item.getNom());
                 leaf.setStyle("-fx-text-fill: green");
             }else if(getTreeItem().getValue() instanceof Serie){
-                leaf.setText(item.getNom());
+                leaf.setText("Série: " + item.getNom());
                 leaf.setStyle("-fx-text-fill: red");
             } else if (getTreeItem().getValue() instanceof Equations) {
-                leaf.setText(item.getNom());
-                leaf.setStyle("-fx-text-fill: orange");
+                leaf.setText("Équation: " + item.getNom());
+                leaf.setStyle("-fx-text-fill: darkOrchid");
             }
             setGraphic(leaf);
         }
-
-
     }
-
-
 }
