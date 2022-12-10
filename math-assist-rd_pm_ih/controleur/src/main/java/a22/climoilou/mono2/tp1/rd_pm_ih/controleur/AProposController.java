@@ -27,44 +27,8 @@ import java.util.List;
 @Scope("prototype")
 @FxmlView("../vue/AProposFXML.fxml")
 public class AProposController implements Fonctionnalite{
-
-    @FXML
-    private Text aPropos;
-
-    @FXML
-    private Text aProposProf;
-
-    @FXML
-    private Text aProposCegep;
-
-    @FXML
-    private Text aProposEquipe;
-
-    @FXML
-    private Text aProposProduit;
-
-    @FXML
-    private Text aProposNoms;
-
-    @FXML
-    private Text presenteAText;
-
-    @FXML
-    private Text aProposAnnee;
-
-    @FXML
-    private Text presenteParText;
-
     public void initialize(){
-        aPropos = new Text();
-        aProposProf = new Text();
-        aProposCegep = new Text();
-        aProposEquipe = new Text();
-        aProposProduit = new Text();
-        aProposNoms = new Text();
-        presenteAText = new Text();
-        aProposAnnee = new Text();
-        presenteParText = new Text();
+
     }
 
     public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {

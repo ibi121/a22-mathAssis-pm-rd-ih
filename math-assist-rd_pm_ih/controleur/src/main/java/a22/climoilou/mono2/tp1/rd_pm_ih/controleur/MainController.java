@@ -378,6 +378,10 @@ public class MainController {
                         listeDeCategorie.get(indexParent).setSousCategorie(listeDeCategorie.get(indexEnfant));
                         listeDarbre.get(indexParent).getChildren().add(listeDarbre.get(indexEnfant));
 
+                        for (TreeItem item:listeDarbre
+                             ) {
+                            item.setExpanded(true);
+                        }
 
                         listeDarbre.get(0).setExpanded(true);
                         this.treeViewCategories.setRoot(listeDarbre.get(0));
@@ -406,6 +410,7 @@ public class MainController {
             e.printStackTrace();
         }
     }
+
 
 }
 

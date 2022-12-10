@@ -34,6 +34,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Scope("prototype")
@@ -79,11 +80,8 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     private void initialize() {
-
-        for (Equations e : equationService.GetAllEquations()
-        ) {
-            this.listViewFonctions.getItems().add(e.getEquation());
-        }
+        /**TODO Écrire dans excel stream à Rose*/
+        this.listViewFonctions.getItems().addAll(equationService.GetAllEquations().stream().map(Equations::getEquation).collect(Collectors.toList()));
 
         categoriesEnBD = new ArrayList<>();
 
@@ -122,8 +120,6 @@ public class EditeurEquationsController implements Fonctionnalite {
             listViewFonctions.getItems().add(equation);
 
             equationService.SaveEquation(equations);
-
-            System.out.println(equationService.GetAllEquations());
         }
 
     }
@@ -132,12 +128,12 @@ public class EditeurEquationsController implements Fonctionnalite {
     void effacerEquation(ActionEvent event) {
         String itemDelete = listViewFonctions.getSelectionModel().getSelectedItem();
 
-        if(itemDelete == null){
+        if (itemDelete == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Aucune equation selectionnee");
             alert.setContentText("Pour supprimer une fonction, vous devez la sélectionner!");
             alert.show();
-        }else{
+        } else {
             listViewFonctions.getItems().remove(itemDelete);
             for (Equations e : equationService.GetAllEquations()
             ) {
@@ -146,7 +142,6 @@ public class EditeurEquationsController implements Fonctionnalite {
                 }
             }
         }
-
 
 
     }
@@ -189,9 +184,6 @@ public class EditeurEquationsController implements Fonctionnalite {
             s.setCategorie(spinnerCategorieEquation.getValue());
             serieService.SaveSerie(s);
         }
-
-
-        System.out.println(s.getDonnees());
     }
 
     @Override
@@ -199,7 +191,7 @@ public class EditeurEquationsController implements Fonctionnalite {
         return "Editeur  de fonctions";
     }
 
-    public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
+    public void setStage(ConfigurableApplicationContext context, Serie serie, List<Serie> series) throws IOException {
         FxWeaver fxWeaver2 = context.getBean(FxWeaver.class);
         FxControllerAndView controllerAndView2 = fxWeaver2.load(EditeurEquationsController.class);
         Parent root2 = (Pane) controllerAndView2.getView().get();

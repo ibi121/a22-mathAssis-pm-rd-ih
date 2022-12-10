@@ -105,12 +105,14 @@ public class Generateur {
     }
 
     public void creationValeurs() {
-        int yAleatoire = 0;
-        for (int i = 0; i < this.nombreValeurs; i++) {
-            yAleatoire = (int) (Math.random() * (this.nombreMaximum - this.nombreMinimum)) + this.nombreMinimum;
 
-            this.valeurs.add(new Data(i, yAleatoire));
+        for (int i = 0; i < this.nombreValeurs; i++) {
+            this.valeurs.add(new Data(i, getRandom()));
         }
+    }
+
+    private int getRandom(){
+        return  (int) (Math.random() * (this.nombreMaximum - this.nombreMinimum)) + this.nombreMinimum;
     }
 
     public void creationSeries() {

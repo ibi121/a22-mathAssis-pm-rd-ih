@@ -47,12 +47,9 @@ public class TreeViewBinaireController implements Fonctionnalite{
         List<Categorie> categories = new ArrayList<>();
         List<TreeItem> treeItems = new ArrayList<>();
 
-        for (Categorie c:categorieService.GetAllSousCatgeorie()
-             ) {
-            categories.add(c);
-            TreeItem treeItem = new TreeItem(c);
-            treeItems.add(treeItem);
-        }
+        /**TODO Ajouter au excel pour le stream à Rose*/
+        categories = categorieService.GetAllSousCatgeorie().stream().collect(Collectors.toList());
+        treeItems = categorieService.GetAllSousCatgeorie().stream().map(TreeItem::new).collect(Collectors.toList());
 
         for (int i = 0; i < categories.size(); i++) {
             if(!categories.get(i).getSousCategorie().isEmpty()){
@@ -71,7 +68,11 @@ public class TreeViewBinaireController implements Fonctionnalite{
             }
         }
 
-        treeItems.get(0).setExpanded(true);
+        for (TreeItem item:treeItems
+        ) {
+            item.setExpanded(true);
+        }
+
         this.treeViewBinaire.setRoot(treeItems.get(0));
         this.treeViewBinaire.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 

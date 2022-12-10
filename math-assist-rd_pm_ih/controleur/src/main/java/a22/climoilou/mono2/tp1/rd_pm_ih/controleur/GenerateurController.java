@@ -55,16 +55,7 @@ public class GenerateurController implements Fonctionnalite {
     private TextField inputTextNombreSeries;
 
     @FXML
-    private Pane mainPane;
-
-    @FXML
     private TextField inputTextNombreValeurs;
-
-    @FXML
-    private Text textNombreSeries;
-
-    @FXML
-    private Button btnValider;
 
     @FXML
     private TextField inputTextNomSerie;
@@ -94,8 +85,6 @@ public class GenerateurController implements Fonctionnalite {
         this.inputTextNombreSeries.setText("1");
         this.inputTextNomSerie.setText("Série aléatoire avec valeurs par défaut");
         this.inputTextNomAuteur.setText("inconnue");
-
-        //ToDo Aller chercher toutes categories en BD
 
         categoriesEnBD = new ArrayList<>();
 
@@ -131,9 +120,8 @@ public class GenerateurController implements Fonctionnalite {
         generateur.creationValeurs();
         generateur.creationSeries();
 
-        for (Serie serie : generateur.getSeriesCrees()) {
-            bd.SaveSerie(serie);
-        }
+
+        generateur.getSeriesCrees().stream().forEach(bd::SaveSerie);
 
     }
 

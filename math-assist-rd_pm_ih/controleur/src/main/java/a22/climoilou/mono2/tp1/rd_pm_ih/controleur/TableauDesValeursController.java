@@ -43,8 +43,6 @@ public class TableauDesValeursController implements Fonctionnalite {
 
     @FXML
     public TextField nomSerie;
-    @FXML
-    private Button btnChangeData;
 
     private SerieService serieService;
 
@@ -110,6 +108,7 @@ public class TableauDesValeursController implements Fonctionnalite {
         for (int i = 0, j = 0; i < textFieldsDataX.size() && j < textFieldsDataY.size(); i++,j++) {
             donneesSerieInput.add(new Data(Double.parseDouble(textFieldsDataX.get(i)), Double.parseDouble(textFieldsDataY.get(j))));
         }
+
 
         serie.setDonnees(donneesSerieInput);
         serie.setNomAuteur("inconnue");

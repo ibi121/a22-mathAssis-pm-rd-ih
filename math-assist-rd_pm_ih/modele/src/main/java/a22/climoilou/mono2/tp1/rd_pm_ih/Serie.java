@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -108,9 +109,7 @@ public class Serie implements TreeItemI{
     }
 
     public void addData(Data... donnees) {
-        for (Data donnee : donnees) {
-            this.donnees.add(donnee);
-        }
+        this.donnees = Arrays.stream(donnees).toList();
     }
 
     public void setId(Long id) {
