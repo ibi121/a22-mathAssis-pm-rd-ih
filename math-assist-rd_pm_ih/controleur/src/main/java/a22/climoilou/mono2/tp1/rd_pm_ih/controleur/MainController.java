@@ -129,7 +129,7 @@ public class MainController {
 
     }
 
-    private void tempsPasseDansApp(){
+    private void tempsPasseDansApp() {
         TempsPasseDansAppService service = new TempsPasseDansAppService();
 
         service.valueProperty().addListener((c, o, n) -> {
@@ -144,7 +144,7 @@ public class MainController {
 
             if (numberOfHours < 10) {
                 temps += "0" + numberOfHours;
-            }else if(numberOfHours < 60) {
+            } else if (numberOfHours < 60) {
                 temps += numberOfHours;
             }
 
@@ -152,7 +152,7 @@ public class MainController {
 
             if (numberOfMinutes < 10) {
                 temps += "0" + numberOfMinutes;
-            }else if (numberOfMinutes < 60) {
+            } else if (numberOfMinutes < 60) {
                 temps += numberOfMinutes;
             }
 
@@ -160,7 +160,7 @@ public class MainController {
 
             if (numberOfSeconds < 10) {
                 temps += "0" + numberOfSeconds;
-            }else if (numberOfSeconds < 60) {
+            } else if (numberOfSeconds < 60) {
                 temps += numberOfSeconds;
             }
 
@@ -358,7 +358,6 @@ public class MainController {
                     Categorie c = new Categorie(listeDeStringSansCrochet.get(listeDeStringSansCrochet.size() - 1));
                     TreeItem<TreeItemI> iAmRoot = new TreeItem<>(c);
                     listeDeCategorie.add(c);
-                    //categorieService.saveCategorie(c);
                     listeDarbre.add(iAmRoot);
 
                     if (listeDeStringSansCrochet.size() != 1) {
@@ -379,6 +378,7 @@ public class MainController {
                         listeDeCategorie.get(indexParent).setSousCategorie(listeDeCategorie.get(indexEnfant));
                         listeDarbre.get(indexParent).getChildren().add(listeDarbre.get(indexEnfant));
 
+
                         listeDarbre.get(0).setExpanded(true);
                         this.treeViewCategories.setRoot(listeDarbre.get(0));
 
@@ -392,6 +392,14 @@ public class MainController {
                     }
                 }
             }
+
+/*
+            for (Categorie c : listeDeCategorie
+            ) {
+                categorieService.saveCategorie(c);
+            }
+*/
+
             createTreeView(listeDarbre.get(0));
             scanner.close();
         } catch (IOException e) {
