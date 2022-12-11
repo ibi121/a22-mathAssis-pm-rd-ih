@@ -2,12 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVue">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #006466;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVue">
    <children>
       <ListView fx:id="listSerie1" layoutX="14.0" layoutY="43.0" prefHeight="364.0" prefWidth="175.0" />
       <ListView fx:id="listNouvelleSerie" layoutX="237.0" layoutY="43.0" prefHeight="364.0" prefWidth="175.0" />
@@ -25,7 +26,8 @@
          </font>
       </Text>
       <TextField fx:id="nomNouvelleSerie" alignment="CENTER" layoutX="250.0" layoutY="10.0" promptText="Nouvelle serie" />
-      <Button fx:id="tronquerBtn" layoutX="225.0" layoutY="415.0" mnemonicParsing="false" onAction="#afficherNouvelleSerie" style="-fx-background-color: darkorchid;" text="Tronquer" textFill="WHITE" />
-      <Button fx:id="creerBtn" layoutX="375.0" layoutY="415.0" mnemonicParsing="false" onAction="#creerNouvelleSerie" style="-fx-background-color: darkorchid;" text="Creer" textFill="WHITE" />
+      <Button fx:id="tronquerBtn" layoutX="214.0" layoutY="454.0" mnemonicParsing="false" onAction="#afficherNouvelleSerie" style="-fx-background-color: darkorchid;" text="Tronquer" textFill="WHITE" />
+      <Button fx:id="creerBtn" layoutX="377.0" layoutY="454.0" mnemonicParsing="false" onAction="#creerNouvelleSerie" style="-fx-background-color: darkorchid;" text="Creer" textFill="WHITE" />
+      <ProgressBar fx:id="progressBar" layoutX="175.0" layoutY="418.0" prefHeight="18.0" prefWidth="300.0" progress="0.0" visible="false" />
    </children>
 </AnchorPane>

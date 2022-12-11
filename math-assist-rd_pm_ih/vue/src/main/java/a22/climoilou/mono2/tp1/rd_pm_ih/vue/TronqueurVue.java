@@ -1,12 +1,10 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.vue;
 
+import a22.climoilou.mono2.tp1.rd_pm_ih.vue.services.TronqueurBarService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.services.TronqueurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +44,9 @@ public class TronqueurVue {
 
     private TronqueurVueI tronqueurVueI;
 
+    @FXML
+    private ProgressBar progressBar;
+
     @Autowired
     public void setTronqueurVueI(TronqueurVueI tronqueurVueI) {
         this.tronqueurVueI = tronqueurVueI;
@@ -56,13 +57,10 @@ public class TronqueurVue {
         listNouvelleSerie.getItems().clear();
         nouvelleSerie = new TreeMap<>();
         TronqueurService tronqueurService = new TronqueurService(tronqueurVueI.getSeries().get(0), tronqueurVueI.getSeries().get(1));
-        /*SortedMap<Double, Double> serie1 = tronqueurVueI.getSeries().get(0);
-        SortedMap<Double, Double> serie2 = tronqueurVueI.getSeries().get(1);
-        int min = Math.min(serie1.size(), serie2.size());
-        for (double i = 0; i < min; i++) {
-            nouvelleSerie.put(i, ((serie1.get(i) + serie2.get(i)) / 2));
-        }
-        ajoutSerie(listNouvelleSerie, nouvelleSerie);*/
+        TronqueurBarService tronqueurBarService = new TronqueurBarService();
+        tronqueurBarService.setOnGoing(true);
+
+        progressBar.progressProperty().bind(tronqueurBarService.progressProperty());
 
         disableUI();
 
@@ -72,6 +70,8 @@ public class TronqueurVue {
 
         tronqueurService.setOnSucceeded((e) -> {
             enableUI();
+            progressBar.progressProperty().unbind();
+            tronqueurBarService.cancel();
             nouvelleSerie = tronqueurService.getValue();
         });
 
@@ -117,9 +117,6 @@ public class TronqueurVue {
         ajoutSerie(listSerie1, tronqueurVueI.getSeries().get(0));
         ajoutSerie(listSerie2, tronqueurVueI.getSeries().get(1));
         listNouvelleSerie.getItems().clear();
-        listSerie1.setMouseTransparent(true);
-        listSerie2.setMouseTransparent(true);
-        listNouvelleSerie.setMouseTransparent(true);
     }
 
     private void ajoutSerie(ListView<String> listSerie, SortedMap<Double, Double> series) {
@@ -132,11 +129,13 @@ public class TronqueurVue {
     }
 
     private void disableUI() {
+        progressBar.setVisible(true);
         creerBtn.setDisable(true);
         tronquerBtn.setDisable(true);
     }
 
     private void enableUI() {
+        progressBar.setVisible(false);
         creerBtn.setDisable(false);
         tronquerBtn.setDisable(false);
     }
