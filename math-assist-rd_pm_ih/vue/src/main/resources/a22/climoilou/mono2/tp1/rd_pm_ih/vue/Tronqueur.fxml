@@ -25,7 +25,7 @@
          </font>
       </Text>
       <TextField fx:id="nomNouvelleSerie" alignment="CENTER" layoutX="250.0" layoutY="10.0" promptText="Nouvelle serie" />
-      <Button layoutX="225.0" layoutY="415.0" mnemonicParsing="false" onAction="#afficherNouvelleSerie" style="-fx-background-color: darkorchid;" text="Tronquer" textFill="WHITE" />
-      <Button layoutX="375.0" layoutY="415.0" mnemonicParsing="false" onAction="#creerNouvelleSerie" style="-fx-background-color: darkorchid;" text="Creer" textFill="WHITE" />
+      <Button fx:id="tronquerBtn" layoutX="225.0" layoutY="415.0" mnemonicParsing="false" onAction="#afficherNouvelleSerie" style="-fx-background-color: darkorchid;" text="Tronquer" textFill="WHITE" />
+      <Button fx:id="creerBtn" layoutX="375.0" layoutY="415.0" mnemonicParsing="false" onAction="#creerNouvelleSerie" style="-fx-background-color: darkorchid;" text="Creer" textFill="WHITE" />
    </children>
 </AnchorPane>

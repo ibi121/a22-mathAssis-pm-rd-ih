@@ -1,17 +1,13 @@
 package a22.climoilou.mono2.tp1.rd_pm_ih.controleur;
 
-import a22.climoilou.mono2.tp1.rd_pm_ih.Data;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Serie;
-import a22.climoilou.mono2.tp1.rd_pm_ih.TreeItemI;
-import a22.climoilou.mono2.tp1.rd_pm_ih.Tronqueur;
+import a22.climoilou.mono2.tp1.rd_pm_ih.*;
 import a22.climoilou.mono2.tp1.rd_pm_ih.repositories.SerieService;
+import a22.climoilou.mono2.tp1.rd_pm_ih.vue.services.TronqueurService;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVue;
 import a22.climoilou.mono2.tp1.rd_pm_ih.vue.TronqueurVueI;
-import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -36,11 +32,14 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
 
     private SerieService serieService;
 
+    private Categorie categorie;
+
     private TronqueurVue tronqueurVue;
 
     public void setStage(ConfigurableApplicationContext context, Serie serie,  List<Serie> series) throws IOException {
         if (series != null && series.size() > 1) {
             if (secondaryStage == null) {
+                categorie = series.get(0).getCategorie();
                 setSeries(series);
                 setNomSerie(series);
                 FxWeaver fxWeaver = context.getBean(FxWeaver.class);
@@ -52,6 +51,7 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
                 secondaryStage.setResizable(false);
                 secondaryStage.show();
             } else {
+                categorie = series.get(0).getCategorie();
                 setSeries(series);
                 setNomSerie(series);
                 tronqueurVue.reset();
@@ -91,16 +91,13 @@ public class TronqueurController implements TronqueurVueI, Fonctionnalite {
 
     @Override
     public void envoieNouvelleSerie(String nomNouvelleSerie, SortedMap<Double, Double> nouvelleSerie) {
-        Tronqueur tronqueur = new Tronqueur(nomNouvelleSerie, nouvelleSerie);
+        Tronqueur tronqueur = new Tronqueur(nomNouvelleSerie, nouvelleSerie, categorie);
         serieService.SaveSerie(tronqueur.getSerie());
         secondaryStage.close();
     }
 
     public void setNomSerie(List<Serie> series) {
-        nomSeries = new ArrayList<>();
-        for (Serie serie : series) {
-            this.nomSeries.add(serie.getNomSerie());
-        }
+        nomSeries = series.stream().map(Serie::getNom).collect(Collectors.toList());
     }
 
     @Autowired
