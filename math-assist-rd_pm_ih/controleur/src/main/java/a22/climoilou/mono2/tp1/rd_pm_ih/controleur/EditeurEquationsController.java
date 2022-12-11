@@ -80,7 +80,6 @@ public class EditeurEquationsController implements Fonctionnalite {
 
     @FXML
     private void initialize() {
-        /**TODO Écrire dans excel stream à Rose*/
         this.listViewFonctions.getItems().addAll(equationService.GetAllEquations().stream().map(Equations::getEquation).collect(Collectors.toList()));
 
         categoriesEnBD = new ArrayList<>();

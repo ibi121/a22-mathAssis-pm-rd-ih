@@ -47,7 +47,7 @@ public class TreeViewBinaireController implements Fonctionnalite{
         List<Categorie> categories = new ArrayList<>();
         List<TreeItem> treeItems = new ArrayList<>();
 
-        /**TODO Ajouter au excel pour le stream à Rose*/
+
         categories = categorieService.GetAllSousCatgeorie().stream().collect(Collectors.toList());
         treeItems = categorieService.GetAllSousCatgeorie().stream().map(TreeItem::new).collect(Collectors.toList());
 
