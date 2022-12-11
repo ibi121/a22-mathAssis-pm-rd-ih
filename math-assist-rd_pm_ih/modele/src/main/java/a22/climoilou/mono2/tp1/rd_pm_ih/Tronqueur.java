@@ -19,9 +19,6 @@ public class Tronqueur {
         List<Data> listData = nouvelleSerie.entrySet().stream().map(doubleDoubleEntry -> {
             return new Data(doubleDoubleEntry.getKey(), doubleDoubleEntry.getValue());
         }).collect(Collectors.toList());
-//        for (Map.Entry<Double, Double> set : nouvelleSerie.entrySet()) {
-//            listData.add(new Data(set.getKey(), set.getValue()));
-//        }
         this.serie.setDonnees(listData);
         this.serie.setCategorie(categorie);
     }

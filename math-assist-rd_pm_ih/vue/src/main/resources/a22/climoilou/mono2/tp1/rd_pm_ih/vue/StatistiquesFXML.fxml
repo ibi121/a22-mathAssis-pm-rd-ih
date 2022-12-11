@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a22.climoilou.mono2.tp1.rd_pm_ih.controleur.StatistiquesController">
    <children>
-      <VBox prefHeight="326.0" prefWidth="280.0" style="-fx-background-color: #1b3a4b;">
+      <VBox prefHeight="500.0" prefWidth="280.0" style="-fx-background-color: #1b3a4b;">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
@@ -63,6 +63,25 @@
                   </VBox>
                </children>
             </HBox>
+            <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="280.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Serie avec au moins... de Data:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nmbSerieText" maxWidth="150.0" prefHeight="26.0" prefWidth="172.0" text="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fx:id="nmbSerieReponse" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

@@ -118,4 +118,20 @@ public class Recursives {
 
         return CalculerNombreDeSousCategoriePureRec(categorie, i);
     }
+
+    public int calculDataDansSerie(List<Serie> listeSeriesEnBd, int n) {
+        return calculDataDansSerieRec(listeSeriesEnBd, n, 0);
+    }
+
+    private int calculDataDansSerieRec(List<Serie> listeSeriesEnBd, int n, int index) {
+        int retVal = 0;
+        if (listeSeriesEnBd.size() > index) {
+            if (listeSeriesEnBd.get(index).getDonnees().size() >= n) {
+                retVal += 1 + calculDataDansSerieRec(listeSeriesEnBd, n, ++index);
+            } else {
+                retVal += calculDataDansSerieRec(listeSeriesEnBd, n, ++index);
+            }
+        }
+        return retVal;
+    }
 }

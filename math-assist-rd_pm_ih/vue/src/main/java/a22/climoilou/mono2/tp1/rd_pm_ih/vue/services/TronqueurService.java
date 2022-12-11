@@ -30,7 +30,7 @@ public class TronqueurService extends Service<SortedMap<Double, Double>> {
                 for (double i = 0; i < minSize; i += 1) {
                     nouvelleSerie.put(i, ((serie1.get(i) + serie2.get(i)) / 2));
                     updateMessage("x = " + i + " : y = " + (serie1.get(i) + serie2.get(i)) / 2);
-                    SlowHelper.slow(1000);
+                    SlowHelper.slowRandom(500, 1000);
                 }
 
                 return nouvelleSerie;

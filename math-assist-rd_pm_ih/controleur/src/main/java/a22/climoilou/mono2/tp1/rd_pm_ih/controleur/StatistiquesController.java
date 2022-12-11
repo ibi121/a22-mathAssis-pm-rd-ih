@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
@@ -55,6 +56,12 @@ public class StatistiquesController implements Fonctionnalite {
 
     @FXML
     private Text textNbSousCat;
+
+    @FXML
+    private TextField nmbSerieText;
+
+    @FXML
+    private Text nmbSerieReponse;
 
     private EquationService equationService;
     private CategorieService categorieService;
@@ -108,6 +115,15 @@ public class StatistiquesController implements Fonctionnalite {
         choixCategorie.setValueFactory(valueFactory);
 
         textNbSousCat.setText(String.valueOf(recursives.CalculerNombreDeSousCategorie(categories.get(0), 0)));
+
+        nmbSerieText.textProperty().addListener((a, o, n) -> {
+            try {
+                int passedNumber = Integer.parseInt(n);
+                nmbSerieReponse.setText(recursives.calculDataDansSerie(listeSeriesEnBd, passedNumber) + "");
+            } catch (NumberFormatException e) {
+                nmbSerieReponse.setText("Veuillez entrer un chiffre");
+            }
+        });
 
         choixCategorie.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
